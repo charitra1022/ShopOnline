@@ -46,14 +46,16 @@
 {% block main-content %}
 <!-- 1st Product Slider -->
 <div class="m-3">
-    <h2>Bottom Wear</h2>
+    <h2>Mobiles</h2>
     <!-- Slider 1 -->
     <div class="owl-carousel" id="slider1">
-
+        {% for b in mobiles %}
         <a href="{% url 'product-detail' %}" class="btn">
-            <div class="item"><img src="{% static 'app/images/product/1.jpg' %}" alt="" height="200px"><span
-                    class="fw-bold">Product 1</span><br><span class="fs-5">Rs. 500</span></div>
+            <div class="item"><img src="{{b.product_image}}" alt="" height="200px"><span
+                    class="fw-bold">{{b.title}}</span><br><span class="fs-5">Rs. {{b.discounted_price}}</span></div>
         </a>
+        {% endfor %}
+        
     </div>
 </div>
 <!-- End 1st Product Slider -->
