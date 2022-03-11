@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.shortcuts import render
 from django.views import View
 
@@ -6,9 +7,6 @@ from .models import Product
 
 # from .models import Cart, Customer, OrderPlaced
 
-
-# def home(request):
-#  return render(request, 'app/home.html')
 
 class ProductView(View):
     def get(self, request):
@@ -25,8 +23,10 @@ class ProductView(View):
         return render(request, 'app/home.html', categories)
 
 
-def product_detail(request):
-    return render(request, 'app/productdetail.html')
+class ProductDetailView(View):
+    def get(self, request, pk):
+        product = Product.objects.get(pk=pk)
+        return render(request, 'app/productdetail.html', {'product': product})
 
 
 def add_to_cart(request):
@@ -53,8 +53,12 @@ def change_password(request):
     return render(request, 'app/changepassword.html')
 
 
-def mobile(request):
-    return render(request, 'app/mobile.html')
+def mobile(request, data=None):
+    if data==None:
+        mobiles = Product.objects.filter(category='M')
+    elif str(data).lower()=='samsung' or str(data).lower()=='redmi':
+        mobiles = Product.objects.filter(category='M').filter(brand=data)
+    return render(request, 'app/mobile.html', {'mobiles': mobiles})
 
 
 def login(request):

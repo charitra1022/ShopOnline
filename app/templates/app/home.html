@@ -44,21 +44,21 @@
 {% endblock livesale %}
 
 {% block main-content %}
-<!-- 1st Product Slider -->
+<!-- Start Category: Mobiles -->
 <div class="m-3">
     <h2>Mobiles</h2>
     <!-- Slider 1 -->
     <div class="owl-carousel" id="slider1">
         {% for b in mobiles %}
-        <a href="{% url 'product-detail' %}" class="btn">
-            <div class="item"><img src="{{b.product_image}}" alt="" height="200px"><span
-                    class="fw-bold">{{b.title}}</span><br><span class="fs-5">Rs. {{b.discounted_price}}</span></div>
+        <a href="{% url 'product-detail' b.id %}" class="btn">
+            <div class="item"><img src="{{b.product_image.url}}" alt="" height="200px"><span
+                    class="fw-bold">{{b.title}}</span><br><span class="fs-5">₹ {{b.discounted_price}}</span></div>
         </a>
         {% endfor %}
         
     </div>
 </div>
-<!-- End 1st Product Slider -->
+<!-- End Category: Mobiles -->
 
 <!-- Payment Info Section -->
 <div class="container my-5">
@@ -95,37 +95,6 @@
 </div>
 <!-- End Payment Info Section -->
 
-<!-- 2nd Product Slider -->
-<div class="mx-3">
-    <h2>Trending Deals</h2>
-    <!-- Slider 2 -->
-    <div class="owl-carousel" id="slider2">
-        <div class="item"><img src="{% static 'app/images/product/12.jpg' %}" alt="" height="200px"><span
-                class="fw-bold">Product 1</span><br><span class="fs-5">Rs. 500</span></div>
-        <div class="item"><img src="{% static 'app/images/product/11.jpg' %}" alt="" height="200px"><span
-                class="fw-bold">Product 2</span><br><span class="fs-5">Rs. 300</span></div>
-        <div class="item"><img src="{% static 'app/images/product/10.jpg' %}" alt="" height="200px"><span
-                class="fw-bold">Product 3</span><br><span class="fs-5">Rs. 100</span></div>
-        <div class="item"><img src="{% static 'app/images/product/9.jpg' %}" alt="" height="200px"><span
-                class="fw-bold">Product 4</span><br><span class="fs-5">Rs. 700</span></div>
-        <div class="item"><img src="{% static 'app/images/product/8.jpg' %}" alt="" height="200px"><span
-                class="fw-bold">Product 5</span><br><span class="fs-5">Rs. 500</span></div>
-        <div class="item"><img src="{% static 'app/images/product/11.jpg' %}" alt="" height="200px"><span
-                class="fw-bold">Product 6</span><br><span class="fs-5">Rs. 400</span></div>
-        <div class="item"><img src="{% static 'app/images/product/5.jpg' %}" alt="" height="200px"><span
-                class="fw-bold">Product 7</span><br><span class="fs-5">Rs. 500</span></div>
-        <div class="item"><img src="{% static 'app/images/product/11.jpg' %}" alt="" height="200px"><span
-                class="fw-bold">Product 8</span><br><span class="fs-5">Rs. 300</span></div>
-        <div class="item"><img src="{% static 'app/images/product/12.jpg' %}" alt="" height="200px"><span
-                class="fw-bold">Product 9</span><br><span class="fs-5">Rs. 600</span></div>
-        <div class="item"><img src="{% static 'app/images/product/7.jpg' %}" alt="" height="200px"><span
-                class="fw-bold">Product 10</span><br><span class="fs-5">Rs. 900</span></div>
-        <div class="item"><img src="{% static 'app/images/product/6.jpg' %}" alt="" height="200px"><span
-                class="fw-bold">Product 11</span><br><span class="fs-5">Rs. 100</span></div>
-        <div class="item"><img src="{% static 'app/images/product/10.jpg' %}" alt="" height="200px"><span
-                class="fw-bold">Product 12</span><br><span class="fs-5">Rs. 200</span></div>
-    </div>
-</div>
-<!-- End 2nd Product Slider -->
+<!-- Product 2 slider -->
 {% endblock main-content %}
 
