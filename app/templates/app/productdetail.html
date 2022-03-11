@@ -1,4 +1,9 @@
 {% extends 'app/base.html' %} {% load static %} {% block title %}{{product.title}}{% endblock title %} {% block main-content %}
+<style>
+    pre{
+        font-family: 'Roboto', sans-serif;
+    }
+</style>
 <div class="container my-5">
   <div class="row">
     <div class="col-sm-6 text-center align-self-center">
@@ -11,13 +16,13 @@
     <div class="col-sm-5 offset-sm-1">
       <h2>{{product.title}}</h2>
       <hr />
-      <p>
-        {{product.description}}
-      </p>
+      <p><pre>{{product.description}}</pre></p>
       <br />
       <h4>
         ₹ {{product.discounted_price}}
-        <small class="fw-light text-decoration-line-through">{{product.selling_price}}</small>
+        <small class="fw-light text-decoration-line-through"
+          >{{product.selling_price}}</small
+        >
       </h4>
       <br />
       <a href="{% url 'add-to-cart' %}" class="btn btn-primary shadow px-5 py-2"
