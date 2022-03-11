@@ -5,6 +5,6 @@ An E-commerce site
 python manage.py flush
 
 # Recreate database
-python manage.py makemigrations
-python manage.py migrate
-python manage.py createsuperuser
+### python manage.py makemigrations
+### python manage.py migrate
+### python manage.py createsuperuser
