@@ -71,10 +71,6 @@ def mobile(request, data=None):
     return render(request, 'app/mobile.html', {'mobiles': mobiles})
 
 
-def login(request):
-    return render(request, 'app/login.html')
-
-
 class CustomerRegistrationView(View):
     def get(self, request):
         form = CustomerRegistrationForm()
