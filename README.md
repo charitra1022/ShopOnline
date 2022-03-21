@@ -1,6 +1,20 @@
 # ShopOnline
 An E-commerce site
 
+# How to run the project?
+## 1. Get the project
+*Follow any one of the two methods listed below*
+1. Download the **.zip**, and extract it into a folder in your desktop, or,
+2. Clone the repo in your desktop.
+
+## 2. Installations
+1. Install **Python 3** onto your computer (python_version>=**3.6**)
+2. Install **django** by running `pip install django`.
+
+## 3. Running the project
+Run the following command in the terminal with project folder as the working directory
+`python manage.py runserver`
+
 # Reset Database
 python manage.py flush
 
