@@ -15,10 +15,15 @@ An E-commerce site
 Run the following command in the terminal with project folder as the working directory
 `python manage.py runserver`
 
-# Reset Database
+
+
+# Advanced Operations!!
+## Note: *Stay if you don't know what is happening!*
+
+### Reset Database
 python manage.py flush
 
-# Recreate database
-### python manage.py makemigrations
-### python manage.py migrate
-### python manage.py createsuperuser
+### Recreate database
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
