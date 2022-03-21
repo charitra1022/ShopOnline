@@ -1,40 +1,173 @@
-{% extends 'app/base.html' %} 
-{% load static %} 
-{% block title %}Login{% endblock title %} 
-{% block main-content %}
-<div class="container">
-  <div class="row my-3">
-    <div class="col-sm-6 offset-sm-3">
-      <h3>Login</h3>
-      <hr />
-      <form action="" method="post" novalidate class="shadow p-5">
-        {% csrf_token %}
-        {% for fm in form %}
-          <div class="form-group">
-            {{fm.label_tag}} {{fm}} 
-            <small class="text-danger">{{fm.errors|striptags}}</small><br/>
-          </div>
-        
-        {% endfor %}
-        {% comment %} <small><a href="{% url 'password_reset' %}">Forgot Password ?</a></small> <br /> {% endcomment %}
-        <input type="submit" class="btn btn-primary mt-4" value="Login" />
-        <br />
-        <div class="text-center text-primary fw-bold">
-          <small
-            >New to ShopOnline ?
-            <a href="{% url 'customerregistration' %}" class="text-danger"
-              >Create an Account</a
-            >
-          </small>
-        </div>
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        {% if form.non_field_errors %}
-          {% for error in form.non_field_errors %}
-            <p class="alert alert-danger my-3">{{error}}</p>          
-          {% endfor %}
-        {% endif %}
-      </form>
-    </div>
-  </div>
-</div>
-{% endblock main-content %}
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+
+    <!--FontAwesome CSS-->
+    <link rel="stylesheet" href="{% static 'app/css/all.min.css' %}" />
+
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="{% static 'app/css/login-register.css' %}" />
+
+    <title>ShopOnline | LogIn</title>
+  </head>
+  <body>
+    <main>
+      <!-- Start Main Container -->
+      <div class="main-container">
+        <!-- Start Card Container -->
+        <div class="card-container">
+          <!-- Illustration -->
+          <div class="illustration-img js-tilt" data-tilt>
+            <img src="{% static 'app/images/illustrations/login_illustration.png' %}" alt="login illustration" />
+          </div>
+
+          <!-- Start Form -->
+          <form action="" method="post" class="form validate-form">
+            {% csrf_token %}
+            <span class="form-title">Sign In</span>
+
+            <!-- Username Input -->
+            <div
+              class="wrap-input validate-input"
+              data-validate="Username is required"
+            >
+              <input
+                type="text"
+                class="form-input"
+                name="username"
+                placeholder="Username"
+                required
+              />
+              <span class="focus-input"></span>
+              <span class="symbol-input">
+                <i class="fa fa-user" aria-hidden="true"></i>
+              </span>
+            </div>
+
+            <!-- Password Input -->
+            <div
+              class="wrap-input validate-input"
+              data-validate="Password is required"
+            >
+              <input
+                type="password"
+                class="form-input"
+                name="password"
+                placeholder="Password"
+                required
+              />
+              <span class="focus-input"></span>
+              <span class="symbol-input">
+                <i class="fa fa-lock" aria-hidden="true"></i>
+              </span>
+            </div>
+
+            <!-- Show Password checkbox -->
+            <div class="container-form-showpassword">
+              <div onclick="togglePW()">
+                <input type="checkbox" onclick="togglePW()" />
+                <span>Show Password</span>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="container-form-btn">
+              <button class="form-btn">Log In</button>
+            </div>
+
+            <!-- Forgot Password Link div -->
+            <div class="text-center p-t-12">
+              <a class="txt1" href="#">Forgot Username / Password? </a>
+            </div>
+
+            <!-- Create Account Link div -->
+            <div class="text-center p-t-50">
+              <span class="txt1">Don't have an Account?</span>
+              <a class="txt1" href="#">
+                Create one here
+                <i class="fa fa-arrow-right m-l-5" aria-hidden="true"></i>
+              </a>
+            </div>
+          </form>
+          <!-- End Form -->
+        </div>
+        <!-- End Card Container -->
+      </div>
+      <!-- End Main Container -->
+    </main>
+
+    <!-- Start Footer -->
+    <footer class="container-fluid bg-dark text-center p-2 mt-5">
+      <small class="text-white"
+        >Copyright &copy;
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        &nbsp;&nbsp; Designed By Charitra Agarwal
+      </small>
+      <img
+        src="{% static 'app/images/payment.png' %}"
+        alt=""
+        srcset=""
+        class="img-fluid"
+        height="2px"
+      />
+    </footer>
+    <!-- End Footer -->
+
+    <!-- Jquery -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Tilt Js -->
+    <script src="https://unpkg.com/tilt.js@1.1.13/dest/tilt.jquery.min.js"></script>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- FontAwesome Script -->
+    <script src="{% static 'app/js/all.min.js' %}"></script>
+
+    <script>
+      $(".js-tilt").tilt({
+        scale: 1.1,
+      });
+
+      function togglePW() {
+        var inputBox = document.querySelector("input[name=password]");
+        var checkBox = document.querySelector(
+          ".container-form-showpassword input[type=checkbox]"
+        );
+
+        if (!checkBox.checked) {
+          inputBox.setAttribute("type", "text");
+          checkBox.checked = true;
+        } else {
+          inputBox.setAttribute("type", "password");
+          checkBox.checked = false;
+        }
+      }
+    </script>
+  </body>
+</html>
