@@ -30,51 +30,44 @@
       <div class="main-container">
         <!-- Start Card Container -->
         <div class="card-container">
+          
           <!-- Illustration -->
           <div class="illustration-img js-tilt" data-tilt>
             <img src="{% static 'app/images/illustrations/login_illustration.png' %}" alt="login illustration" />
           </div>
 
+
           <!-- Start Form -->
-          <form action="" method="post" class="form validate-form">
-            {% csrf_token %}
+          <form action="" method="post" class="form" novalidate>
             <span class="form-title">Sign In</span>
 
-            <!-- Username Input -->
-            <div
-              class="wrap-input validate-input"
-              data-validate="Username is required"
-            >
-              <input
-                type="text"
-                class="form-input"
-                name="username"
-                placeholder="Username"
-                required
-              />
-              <span class="focus-input"></span>
-              <span class="symbol-input">
-                <i class="fa fa-user" aria-hidden="true"></i>
-              </span>
-            </div>
+            {% csrf_token %}
 
-            <!-- Password Input -->
-            <div
-              class="wrap-input validate-input"
-              data-validate="Password is required"
-            >
-              <input
-                type="password"
-                class="form-input"
-                name="password"
-                placeholder="Password"
-                required
-              />
-              <span class="focus-input"></span>
-              <span class="symbol-input">
-                <i class="fa fa-lock" aria-hidden="true"></i>
-              </span>
-            </div>
+            <!-- Start For loop-->
+            {% for f in form %}
+
+              <!-- Input Field -->
+              <div class="wrap-input validate-input">
+                {{f}}
+                
+                <span class="focus-input"></span>
+                <span class="symbol-input">
+                  {% if 'username' in f.id_for_label %}
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                  {% else %}
+                    {% if 'password' in f.id_for_label %}
+                      <i class="fa fa-lock" aria-hidden="true"></i>
+                    {% endif %}
+                  {% endif %}
+                </span>
+              </div>
+              
+              <!-- Input Field Errors -->
+              <div class="form-error">
+                <small class="form-error text-danger">{{fm.errors|striptags}}</small>
+              </div>
+            {% endfor %}
+            <!-- End For loop-->
 
             <!-- Show Password checkbox -->
             <div class="container-form-showpassword">
@@ -86,31 +79,40 @@
 
             <!-- Submit Button -->
             <div class="container-form-btn">
-              <button class="form-btn">Log In</button>
+              <input type="submit" class="form-btn" value="Log In" />
             </div>
 
             <!-- Forgot Password Link div -->
             <div class="text-center p-t-12">
-              <a class="txt1" href="#">Forgot Username / Password? </a>
+              <a class="txt1" href="{% url 'changepassword' %}">Forgot Username / Password? </a>
             </div>
 
             <!-- Create Account Link div -->
             <div class="text-center p-t-50">
               <span class="txt1">Don't have an Account?</span>
-              <a class="txt1" href="#">
+              <a class="txt1" href="{% url 'customerregistration' %}">
                 Create one here
                 <i class="fa fa-arrow-right m-l-5" aria-hidden="true"></i>
               </a>
             </div>
+
+            <!-- Form Errors -->
+            {% if form.non_field_errors %}
+              {% for error in form.non_field_errors %}
+                <p class="alert alert-danger my-3">{{error}}</p>          
+              {% endfor %}
+            {% endif %}
+
           </form>
           <!-- End Form -->
+
         </div>
         <!-- End Card Container -->
       </div>
       <!-- End Main Container -->
     </main>
 
-    <!-- Start Footer -->
+    <!-- Start Footer 
     <footer class="container-fluid bg-dark text-center p-2 mt-5">
       <small class="text-white"
         >Copyright &copy;
