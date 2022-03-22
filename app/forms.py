@@ -5,11 +5,11 @@ from django.utils.translation import gettext, gettext_lazy as _
 from django.contrib.auth import password_validation
 
 class CustomerRegistrationForm(UserCreationForm):
-    password1 = forms.CharField(label='Enter Password', widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    password1 = forms.CharField(label='Enter Password', widget=forms.PasswordInput(attrs={'class':'form-input', 'placeholder':'New Password'}))
 
-    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput(attrs={'class':'form-input', 'placeholder':'Confirm Password'}))
 
-    email = forms.CharField(required=True, widget=forms.EmailInput(attrs={'class':'form-control'}))
+    email = forms.CharField(required=True, widget=forms.EmailInput(attrs={'class':'form-input', 'placeholder':'Email'}))
 
     class Meta:
         model = User
@@ -18,7 +18,7 @@ class CustomerRegistrationForm(UserCreationForm):
             'email': 'Email'
         }
         widgets = {
-            'username': forms.TextInput(attrs={'class':'form-control'})
+            'username': forms.TextInput(attrs={'class':'form-input', 'placeholder':'Username'})
         }
 
 class LoginForm(AuthenticationForm):

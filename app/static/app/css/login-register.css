@@ -1,22 +1,22 @@
 /* Fonts */
 @font-face {
   font-family: Poppins-Regular;
-  src: local(Poppins-regular),  url('../fonts/poppins/Poppins-Regular.ttf');
+  src: local(Poppins-regular), url("../fonts/poppins/Poppins-Regular.ttf");
 }
 
 @font-face {
   font-family: Poppins-Bold;
-  src: local(Poppins-bold),  url('../fonts/poppins/Poppins-Bold.ttf');
+  src: local(Poppins-bold), url("../fonts/poppins/Poppins-Bold.ttf");
 }
 
 @font-face {
   font-family: Poppins-Medium;
-  src: local(Poppins-medium),  url('../fonts/poppins/Poppins-Medium.ttf');
+  src: local(Poppins-medium), url("../fonts/poppins/Poppins-Medium.ttf");
 }
 
 @font-face {
   font-family: Montserrat-Bold;
-  src: local(Montserrat-bold),  url('../fonts/montserrat/Montserrat-Bold.ttf');
+  src: local(Montserrat-bold), url("../fonts/montserrat/Montserrat-Bold.ttf");
 }
 
 /* Universal Styles */
@@ -335,6 +335,8 @@ a.txt1 {
 
 .illustration-img {
   width: 400px;
+  display: flex;
+  align-items: center;
 }
 
 .illustration-img img {
