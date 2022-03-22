@@ -22,8 +22,9 @@ class CustomerRegistrationForm(UserCreationForm):
         }
 
 class LoginForm(AuthenticationForm):
-    username = UsernameField(widget=forms.TextInput(attrs={'autofocus':True, 'class':'form-control'}))
-    password = forms.CharField(label=_("Password"), strip=False, widget=forms.PasswordInput(attrs={'autocomplete':'current-password', 'class':'form-control'}))
+    username = UsernameField(widget=forms.TextInput(attrs={'autofocus':True, 'class':'form-input', 'placeholder':'Username'}))
+    
+    password = forms.CharField(label=_("Password"), strip=False, widget=forms.PasswordInput(attrs={'autocomplete':'current-password', 'class':'form-input', 'placeholder':'Password'}))
 
 class UserPasswordChangeForm(PasswordChangeForm):
     old_password = forms.CharField(label=_("Old password"), strip=False, widget=forms.PasswordInput(attrs={"autocomplete": "current-password", "autofocus": True, 'class':'form-control'}))
