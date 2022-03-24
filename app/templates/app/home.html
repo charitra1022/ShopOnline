@@ -96,7 +96,9 @@
                   Electronics
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="{% url 'mobile' %}">Mobile</a></li>
+                  <li><a class="dropdown-item" href="#">Mobile</a></li>
+                  {% comment %} <li><a class="dropdown-item" href="{% url 'mobile' %}">Mobile</a></li> {% endcomment %}
+
                   <li><a class="dropdown-item" href="#">Laptop</a></li>
 
                   <!-- <li><hr class="dropdown-divider" /></li>
@@ -140,14 +142,21 @@
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   
-                    <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+
+                    <li><a class="dropdown-item" href="#">Orders</a></li>
+
+                    <li><a class="dropdown-item" href="#">Change Password</a></li>
+
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
+                    
+                    {% comment %} <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
 
                     <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
 
                     <li><a class="dropdown-item" href="{% url 'changepassword' %}">Change Password</a></li>
 
-                    <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
-                    
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li> {% endcomment %}
                   </ul>
 
                 {% else %}
@@ -251,7 +260,8 @@
             {% for b in mobiles %}
             
             
-            <a href="{% url 'product-detail' b.id %}" class="item">
+            <a href="#" class="item">
+            {% comment %} <a href="{% url 'product-detail' b.id %}" class="item"> {% endcomment %}
               <div class="card" style="width: 18rem">
                 <img
                   src="{{b.product_image.url}}"
