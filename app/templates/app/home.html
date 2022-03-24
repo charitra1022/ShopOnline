@@ -34,7 +34,7 @@
       <nav class="navbar navbar-expand-lg navbar-dark">
         <!-- Start Container Fluid -->
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">ShopOnline</a>
+          <a class="navbar-brand" href="/">ShopOnline</a>
 
           <!-- Toggler Button -->
           <button
@@ -56,7 +56,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
               </li>
 
               <!-- Start Nav DropDown Menu -->
@@ -96,7 +96,7 @@
                   Electronics
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Mobile</a></li>
+                  <li><a class="dropdown-item" href="{% url 'mobile' %}">Mobile</a></li>
                   <li><a class="dropdown-item" href="#">Laptop</a></li>
 
                   <!-- <li><hr class="dropdown-divider" /></li>
@@ -126,25 +126,50 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <!-- Start Nav DropDown Menu -->
               <li class="nav-item dropdown">
-                <a
+                {% if request.user.is_authenticated %}
+
+                  <a
                   class="nav-link dropdown-toggle"
                   href="#"
                   id="navbarDropdown"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                >
-                  Account <i class="fa fa-user-circle"></i>
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Login</a></li>
-                  <li><a class="dropdown-item" href="#">Register</a></li>
+                  >
+                    {{user.get_username}} <i class="fa fa-user-circle"></i>
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  
+                    <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
 
-                  <!-- <li><hr class="dropdown-divider" /></li>
-                  <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </li> -->
-                </ul>
+                    <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
+
+                    <li><a class="dropdown-item" href="{% url 'changepassword' %}">Change Password</a></li>
+
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
+                    
+                  </ul>
+
+                {% else %}
+                
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Account <i class="fa fa-user-circle"></i>
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  
+                    <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+
+                    <li><a class="dropdown-item" href="{% url 'customerregistration' %}">Register</a></li>
+                    
+                  </ul>
+                {% endif %}
               </li>
               <!-- End Nav DropDown Menu -->
             </ul>
@@ -220,55 +245,31 @@
         <!-- Start First Section -->
         <div class="first-section">
           <!-- /////////////////////////////// To start, to develop, to work on /////////////////////////// -->
+          
+          <!-- Slider 1 -->
           <div class="owl-carousel" id="slider1">
-            <a href="" class="item">
+            {% for b in mobiles %}
+            
+            
+            <a href="{% url 'product-detail' b.id %}" class="item">
               <div class="card" style="width: 18rem">
                 <img
-                  src="images/redmi_note_8.jpg"
+                  src="{{b.product_image.url}}"
                   class="card-img-top"
                   height="200px"
                   alt="..."
                 />
                 <div class="card-body">
-                  <h5 class="card-title">Samsung</h5>
-                  <p class="card-text">₹ 3000</p>
+                  <h5 class="card-title">{{b.title}}</h5>
+                  <p class="card-text">₹ {{b.discounted_price}}</p>
                   <a href="#" class="btn btn-primary">Add to Cart</a>
                 </div>
               </div>
             </a>
-
-            <a href="" class="item">
-              <div class="card" style="width: 18rem">
-                <img
-                  src="images/f22.jpg"
-                  class="card-img-top"
-                  height="200px"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Samsung</h5>
-                  <p class="card-text">₹ 3000</p>
-                  <a href="#" class="btn btn-primary">Add to Cart</a>
-                </div>
-              </div>
-            </a>
-
-            <a href="" class="item">
-              <div class="card" style="width: 18rem">
-                <img
-                  src="images/Samsung-Galaxy-F12.jpg"
-                  class="card-img-top"
-                  height="200px"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Samsung</h5>
-                  <p class="card-text">₹ 3000</p>
-                  <a href="#" class="btn btn-primary">Add to Cart</a>
-                </div>
-              </div>
-            </a>
+            
+            {% endfor %}
           </div>
+                
           <!-- ////////////////////////////////////////////////////////// -->
         </div>
         <!-- Start First Section -->
