@@ -15,6 +15,22 @@
   font-family: Montserrat-Bold;
   src: local(Montserrat-bold), url("../fonts/montserrat/Montserrat-Bold.ttf");
 }
+@font-face {
+  font-family: Fira-Sans-Regular;
+  src: local(Fira-sans-regular), url("../fonts/fira-sans/FiraSans-Regular.ttf");
+}
+@font-face {
+  font-family: Fira-Sans-Bold;
+  src: local(Fira-sans-bold), url("../fonts/fira-sans/FiraSans-Bold.ttf");
+}
+@font-face {
+  font-family: Fira-Sans-Medium;
+  src: local(Fira-sans-medium), url("../fonts/fira-sans/FiraSans-Medium.ttf");
+}
+@font-face {
+  font-family: Fira-Sans-Light;
+  src: local(Fira-sans-light), url("../fonts/fira-sans/FiraSans-Light.ttf");
+}
 
 
 /********* Universal Styles ***********/
@@ -30,6 +46,7 @@ html {
 }
 main {
   width: 100%;
+  min-height: 100vh;
   margin: 0 auto;
 }
 
@@ -166,26 +183,24 @@ a:hover {
 
 /*********** Footer Styles ***********/
 footer {
+  width: 100%;
   background-color: rgb(233, 233, 233);
+  font-family: Fira-Sans-Light;
 }
 /* Footer attribution styles */
-.attribution {
+footer .attribution {
   text-align: center;
   padding-bottom: 10px;
 }
-.container .sub-section {
+footer .container .sub-section {
   padding: 2em;
   display: flex;
   flex-direction: column;
   text-align: center;
 }
-.container .sub-section .fa {
+footer .container .sub-section .fa {
   font-size: 4em;
   margin: 0.2em;
-}
-.container .sub-section .btn {
-  margin-top: auto;
-  align-self: center;
 }
 
 
