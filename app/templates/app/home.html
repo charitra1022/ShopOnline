@@ -1,5 +1,9 @@
 {% extends 'app/base.html' %}
 {% load static %}
+{% block custom_css %}
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'app/css/home.css' %}" />
+{% endblock custom_css %}
 {% block title %}Home{% endblock title %}
 
 {% block carousel_div %}
