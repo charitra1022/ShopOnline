@@ -1,24 +1,70 @@
-/* Fonts */
+/*********** Fonts ***********/
 @font-face {
   font-family: Poppins-Regular;
   src: local(Poppins-regular), url("../fonts/poppins/Poppins-Regular.ttf");
 }
-
 @font-face {
   font-family: Poppins-Bold;
   src: local(Poppins-bold), url("../fonts/poppins/Poppins-Bold.ttf");
 }
-
 @font-face {
   font-family: Poppins-Medium;
   src: local(Poppins-medium), url("../fonts/poppins/Poppins-Medium.ttf");
 }
-
 @font-face {
   font-family: Montserrat-Bold;
   src: local(Montserrat-bold), url("../fonts/montserrat/Montserrat-Bold.ttf");
 }
 
+
+/********* Universal Styles ***********/
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+body,
+html {
+  height: 100%;
+  font-family: Poppins-Regular, sans-serif;
+}
+main {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/*********** Default styles ***********/
+input {
+  outline: none;
+  border: none;
+}
+input:focus {
+  border-color: transparent !important;
+}
+input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+input:focus:-moz-placeholder {
+  color: transparent;
+}
+input:focus::-moz-placeholder {
+  color: transparent;
+}
+input:focus:-ms-input-placeholder {
+  color: transparent;
+}
+input::-webkit-input-placeholder {
+  color: #999999;
+}
+input:-moz-placeholder {
+  color: #999999;
+}
+input::-moz-placeholder {
+  color: #999999;
+}
+input:-ms-input-placeholder {
+  color: #999999;
+}
 button {
   outline: none !important;
   border: none;
@@ -27,19 +73,38 @@ button {
 button:hover {
   cursor: pointer;
 }
+a {
+  font-family: Poppins-Regular;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #57b846;
+  margin: 0px;
+  transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  text-decoration: none;
+}
+a:focus {
+  outline: none !important;
+}
+a:hover {
+  text-decoration: none;
+  color: #57b846;
+}
 
-/* Navigation Bar */
+
+
+/*********** Navigation Bar ***********/
 .navbar {
   padding: 0 70px;
   z-index: 100;
-
   background: #9053c7;
   background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
   background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
   background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
   background: linear-gradient(-135deg, #c850c0, #4158d0);
 }
-
 .navbar-brand {
   font-family: Poppins-Bold;
   font-size: 24px;
@@ -53,7 +118,6 @@ button:hover {
   line-height: 1.5;
   color: #fff;
   text-transform: uppercase;
-
   border-radius: 50px;
   background: #57b846;
   display: -webkit-box;
@@ -63,7 +127,6 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
@@ -73,26 +136,11 @@ button:hover {
   background: #333333;
   color: #e6e6e6;
 }
-@media (max-width: 786px) {
-  .navbar-brand {
-    padding-top: 20px;
-    padding-left: 0px;
-    padding-right: 0;
-  }
-  .navbar {
-    padding-left: 10px;
-    padding-bottom: 10px;
-    padding-right: 10px;
-  }
-  .dropdown-menu {
-    background-color: rgba(255, 255, 255, 0);
-    border: none;
-  }
-  .dropdown-menu li a {
-    color: #e6e6e6;
-  }
+.nav-link{
+  display: flex;
+  align-items: center;
 }
-@media (max-width: 576px) {
+@media (max-width: 991px) {
   .navbar-brand {
     padding-top: 20px;
     padding-left: 0px;
@@ -109,18 +157,36 @@ button:hover {
   }
   .dropdown-menu li a {
     color: #e6e6e6;
+  }
+  .navbar-nav.account{
+    padding-top: 30px;
   }
 }
 
-/* Utility Styles */
+/*********** Utility Styles ***********/
 .p-t-12 {
   padding-top: 12px;
 }
 .p-t-50 {
   padding-top: 50px;
 }
+.p-r-130{
+  padding-right: 130px;
+}
+.p-r-95{
+  padding-right: 95px;
+}
+.p-l-130{
+  padding-left: 130px;
+}
+.p-l-95{
+  padding-left: 95px;
+}
+.m-l-10{
+  margin-left: 10px;
+}
 
-/* ANIMATED X toggler button */
+/*********** ANIMATED X toggler button ***********/
 .navbar-toggler.x[aria-expanded="true"] .icon-bar:nth-of-type(1) {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -165,4 +231,7 @@ button:hover {
   -webkit-transform: rotate(0);
   -ms-transform: rotate(0);
   transform: rotate(0);
+}
+.navbar-toggler.x{
+  border: none;
 }
