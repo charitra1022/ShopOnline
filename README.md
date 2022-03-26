@@ -18,7 +18,7 @@ Run the following command in the terminal with project folder as the working dir
 
 
 # Advanced Operations!!
-## Note: *Stay if you don't know what is happening!*
+## Note: *Stay away if you don't know what is happening!*
 
 ### Reset Database
 python manage.py flush
