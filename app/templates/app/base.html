@@ -281,6 +281,9 @@
       crossorigin="anonymous"
     ></script>
 
+    <!-- Tilt Js -->
+    <script src="https://unpkg.com/tilt.js@1.1.13/dest/tilt.jquery.min.js"></script>
+
     <!-- Bootsrap 5 Bundle -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -290,6 +293,9 @@
 
     <!-- FontAwesome Script -->
     <script src="{% static 'app/js/all.min.js' %}"></script>
+
+    <!-- Page Specific Script -->
+    {% block custom_js %}{% endblock custom_js %}
 
     <!-- Owl Carousel Scripts
     <script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
