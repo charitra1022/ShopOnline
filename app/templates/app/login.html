@@ -1,179 +1,118 @@
-<!DOCTYPE html>
+{% extends 'app/base.html' %}
 {% load static %}
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% block custom_css %}
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'app/css/form-page.css' %}" />
+{% endblock custom_css %}
+{% block title %}Login{% endblock title %}
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
-
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-      crossorigin="anonymous"
-    />
-
-    <!--FontAwesome CSS-->
-    <link rel="stylesheet" href="{% static 'app/css/all.min.css' %}" />
-    
-    <!-- Base CSS -->
-    <link rel="stylesheet" href="{% static 'app/css/base.css' %}" />
-
-    <!--Custom CSS-->
-    <link rel="stylesheet" href="{% static 'app/css/form-page.css' %}" />
-
-    <title>ShopOnline | Login</title>
-  </head>
-  <body>
-    <main>
-      <!-- Start Main Container -->
-      <div class="main-container">
-        <!-- Start Card Container -->
-        <div class="card-container p-l-95 p-r-130">
-          
-          <!-- Illustration -->
-          <div class="illustration-img js-tilt" data-tilt>
-            <img src="{% static 'app/images/illustrations/login_illustration.png' %}" alt="login illustration" />
-          </div>
-
-
-          <!-- Start Form -->
-          <form action="" method="post" class="form" novalidate>
-            <span class="form-title">Sign In</span>
-
-            {% csrf_token %}
-
-            <!-- Start For loop-->
-            {% for f in form %}
-
-              <!-- Input Field -->
-              <div class="wrap-input validate-input">
-                {{f}}
-                
-                <span class="focus-input"></span>
-                <span class="symbol-input">
-                  {% if 'username' in f.id_for_label %}
-                    <i class="fa fa-user" aria-hidden="true"></i>
-                  {% else %}
-                    {% if 'password' in f.id_for_label %}
-                      <i class="fa fa-lock" aria-hidden="true"></i>
-                    {% endif %}
-                  {% endif %}
-                </span>
-              </div>
-              
-              <!-- Input Field Errors -->
-              <div class="form-error">
-                <small class="form-error text-danger">{{fm.errors|striptags}}</small>
-              </div>
-              
-            {% endfor %}
-            <!-- End For loop-->
-
-            <!-- Show Password checkbox -->
-            <div class="container-form-showpassword">
-              <div onclick="togglePW()">
-                <input type="checkbox" onclick="togglePW()" />
-                <span>Show Password</span>
-              </div>
-            </div>
-
-            <!-- Submit Button -->
-            <div class="container-form-btn">
-              <input type="submit" class="form-btn" value="Log In" />
-            </div>
-
-            <!-- Forgot Password Link div -->
-            <div class="text-center p-t-12">
-              <a class="txt1" href="#">Forgot Username / Password? </a>
-            </div>
-
-            <!-- Create Account Link div -->
-            <div class="text-center p-t-50">
-              <span class="txt1">Don't have an Account?</span>
-              <a class="txt1" href="{% url 'customerregistration' %}">
-                Create one here
-                <i class="fa fa-arrow-right m-l-5" aria-hidden="true"></i>
-              </a>
-            </div>
-
-            <!-- Form Errors -->
-            {% if form.non_field_errors %}
-              {% for error in form.non_field_errors %}
-                <p class="alert alert-danger my-3">{{error}}</p>          
-              {% endfor %}
-            {% endif %}
-
-          </form>
-          <!-- End Form -->
-
-        </div>
-        <!-- End Card Container -->
+{% block main-content %}
+  <!-- Start Main Container -->
+  <div class="main-container">
+    <!-- Start Card Container -->
+    <div class="card-container p-l-95 p-r-130">
+      
+      <!-- Illustration -->
+      <div class="illustration-img js-tilt" data-tilt>
+        <img src="{% static 'app/images/illustrations/login_illustration.png' %}" alt="login illustration" />
       </div>
-      <!-- End Main Container -->
-    </main>
 
-    <!-- Start Footer 
-    <footer class="container-fluid bg-dark text-center p-2 mt-5">
-      <small class="text-white"
-        >Copyright &copy;
-        <script>
-          document.write(new Date().getFullYear());
-        </script>
-        &nbsp;&nbsp; Designed By Charitra Agarwal
-      </small>
-      <img
-        src="{% static 'app/images/payment.png' %}"
-        alt=""
-        srcset=""
-        class="img-fluid"
-        height="2px"
-      />
-    </footer>
-    <!-- End Footer -->
 
-    <!-- Jquery -->
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.min.js"
-      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-      crossorigin="anonymous"
-    ></script>
+      <!-- Start Form -->
+      <form action="" method="post" class="form" novalidate>
+        <span class="form-title">Sign In</span>
 
-    <!-- Tilt Js -->
-    <script src="https://unpkg.com/tilt.js@1.1.13/dest/tilt.jquery.min.js"></script>
+        {% csrf_token %}
 
-    <!-- Bootstrap Bundle with Popper -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-      crossorigin="anonymous"
-    ></script>
+        <!-- Start For loop-->
+        {% for f in form %}
 
-    <!-- FontAwesome Script -->
-    <script src="{% static 'app/js/all.min.js' %}"></script>
+          <!-- Input Field -->
+          <div class="wrap-input validate-input">
+            {{f}}
+            
+            <span class="focus-input"></span>
+            <span class="symbol-input">
+              {% if 'username' in f.id_for_label %}
+                <i class="fa fa-user" aria-hidden="true"></i>
+              {% else %}
+                {% if 'password' in f.id_for_label %}
+                  <i class="fa fa-lock" aria-hidden="true"></i>
+                {% endif %}
+              {% endif %}
+            </span>
+          </div>
+          
+          <!-- Input Field Errors -->
+          <div class="form-error">
+            <small class="form-error text-danger">{{fm.errors|striptags}}</small>
+          </div>
+          
+        {% endfor %}
+        <!-- End For loop-->
 
-    <script>
-      $(".js-tilt").tilt({
-        scale: 1.1,
-      });
+        <!-- Show Password checkbox -->
+        <div class="container-form-showpassword">
+          <div onclick="togglePW()">
+            <input type="checkbox" onclick="togglePW()" />
+            <span>Show Password</span>
+          </div>
+        </div>
 
-      function togglePW() {
-        var inputBox = document.querySelector("input[name=password]");
-        var checkBox = document.querySelector(
-          ".container-form-showpassword input[type=checkbox]"
-        );
+        <!-- Submit Button -->
+        <div class="container-form-btn">
+          <input type="submit" class="form-btn" value="Log In" />
+        </div>
 
-        if (!checkBox.checked) {
-          inputBox.setAttribute("type", "text");
-          checkBox.checked = true;
-        } else {
-          inputBox.setAttribute("type", "password");
-          checkBox.checked = false;
-        }
+        <!-- Forgot Password Link div -->
+        <div class="text-center p-t-12">
+          <a class="txt1" href="#">Forgot Username / Password? </a>
+        </div>
+
+        <!-- Create Account Link div -->
+        <div class="text-center p-t-50">
+          <span class="txt1">Don't have an Account?</span>
+          <a class="txt1" href="{% url 'customerregistration' %}">
+            Create one here
+            <i class="fa fa-arrow-right m-l-5" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <!-- Form Errors -->
+        {% if form.non_field_errors %}
+          {% for error in form.non_field_errors %}
+            <p class="alert alert-danger my-3">{{error}}</p>          
+          {% endfor %}
+        {% endif %}
+
+      </form>
+      <!-- End Form -->
+
+    </div>
+    <!-- End Card Container -->
+  </div>
+  <!-- End Main Container -->
+{% endblock main-content %}
+
+{% block custom_js %}
+  <script>
+    $(".js-tilt").tilt({
+      scale: 1.1,
+    });
+
+    function togglePW() {
+      var inputBox = document.querySelector("input[name=password]");
+      var checkBox = document.querySelector(
+        ".container-form-showpassword input[type=checkbox]"
+      );
+
+      if (!checkBox.checked) {
+        inputBox.setAttribute("type", "text");
+        checkBox.checked = true;
+      } else {
+        inputBox.setAttribute("type", "password");
+        checkBox.checked = false;
       }
-    </script>
-  </body>
-</html>
+    }
+  </script>
+{% endblock custom_js %}
