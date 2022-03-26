@@ -156,35 +156,17 @@
 
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   {% if request.user.is_authenticated %}
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Orders</a></li>
-                    <li><a class="dropdown-item" href="#">Change Password</a></li>
                     <li>
-                      <a class="dropdown-item" href="{% url 'logout' %}"
-                        >Log Out</a
-                      >
-                    </li>
-
-                    
-                    <li>
-                      <a class="dropdown-item" href="{% url 'profile' %}"
-                        >Profile</a
-                      >
+                      <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="{% url 'orders' %}"
-                        >Orders</a
-                      >
+                      <a class="dropdown-item" href="{% url 'orders' %}">Orders</a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="{% url 'changepassword' %}"
-                        >Change Password</a
-                      >
+                      <a class="dropdown-item" href="{% url 'changepassword' %}">Change Password</a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="{% url 'logout' %}"
-                        >Log Out</a
-                      >
+                      <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
                     </li>
                     
                   {% else %}
