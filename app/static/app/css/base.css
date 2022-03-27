@@ -202,6 +202,10 @@ footer .container .sub-section .fa {
   font-size: 4em;
   margin: 0.2em;
 }
+footer a {
+  font-family: Fira-Sans-Light;
+  font-size: 1.1em;
+}
 
 
 /*********** Utility Styles ***********/
@@ -225,6 +229,24 @@ footer .container .sub-section .fa {
 }
 .m-l-10{
   margin-left: 10px;
+}
+
+/* ************ Back To Top Button ************ */
+#scrolltotop {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  background-color: #9053c7;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  text-decoration: none;
+  height: 38px;
+  font-size: 1.2em;
+  color: white;
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
 
 /*********** ANIMATED X toggler button ***********/

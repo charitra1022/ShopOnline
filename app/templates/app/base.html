@@ -274,6 +274,11 @@
     </footer>
     <!-- Footer Section -->
 
+    <!-- Back To Top Button -->
+    <a id='scrolltotop' href='#'>
+      <i class="fa fa-chevron-up"></i>
+    </a>
+
     <!-- Jquery -->
     <script
       src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -293,6 +298,27 @@
 
     <!-- FontAwesome Script -->
     <script src="{% static 'app/js/all.min.js' %}"></script>
+
+    <!-- Scroll to top js -->
+    <script>
+      var offset = 200;
+      var duration = 300;
+
+      $("#scrolltotop").fadeOut(0);
+      $(window).scroll(function(){
+          if($(this).scrollTop() > offset){
+              $("#scrolltotop").fadeIn(duration); 
+          } else{
+              $("#scrolltotop").fadeOut(duration);
+          }
+      });
+      $("#scrolltotop").click(function(event){
+          event.preventDefault();
+          $("html, body").animate({scrollTop: 0}, duration); 
+          return false;
+      });
+
+    </script>
 
     <!-- Page Specific Script -->
     {% block custom_js %}{% endblock custom_js %}
