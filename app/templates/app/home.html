@@ -76,31 +76,56 @@
 {% block main-content %}
   <!-- Start Main Container -->
   <div class="main-container">
-    <!-- Start First Section -->
-    <div class="first-section">
 
-      {% for b in mobiles %}
-      <a href="#" class="item">
-        <a href="{% url 'product-detail' b.id %}" class="item"> 
-        <div class="card" style="width: 18rem">
-          <img
-            src="{{b.product_image.url}}"
-            class="card-img-top"
-            height="200px"
-            alt="..."
-          />
-          <div class="card-body">
-            <h5 class="card-title">{{b.title}}</h5>
-            <p class="card-text">₹ {{b.discounted_price}}</p>
-            <a href="#" class="btn btn-primary">Add to Cart</a>
-          </div>
+    <!-- Start First Section -->
+    <div class="first-section section">
+      <div class="product-list-title">
+        <h3>Random Access Memory (RAM)</h3>
+
+        <div class="form-check form-switch">
+          <input class="form-check-input autoscroll-checkbox shadow-none" type="checkbox" checked>
+          <label class="form-check-label">Scroll</label>
         </div>
-      </a>
-      
-      {% endfor %}
-            
+
+      </div>
+
+      <div class="product-list">
+        {% for b in mobiles %}
+
+        <div class="product-card">
+          <a href="{% url 'product-detail' b.id %}" class="product-card-btn">
+            <div class="item">
+              <div class="item-img">
+                <img src="{{b.product_image.url}}" alt="" />
+              </div>
+              <div class="fw-bold title">
+                {{b.title}}
+              </div>
+              <div class="fs-5">₹ {{b.discounted_price}}</div>
+              <div class="fs-10 fw-light text-decoration-line-through">
+                ₹ {{b.selling_price}}
+              </div>
+
+              <div class="btn-container">
+                <a href="#" type="button" class="btn btn-primary">
+                  <span>Add to Cart</span>&nbsp;&nbsp;
+                  <i class="fas fa-shopping-cart"></i>
+                </a>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        {% endfor %}
+      </div>
     </div>
     <!-- Start First Section -->
+
   </div>
   <!-- End Main Container -->
 {% endblock main-content %}
+
+{% block custom_js %}
+  <!-- Custom Slide Script -->
+  <script src="{% static 'app/js/script.js' %}"></script>
+{% endblock custom_js %}
