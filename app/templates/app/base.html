@@ -73,11 +73,14 @@
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Fashion
+                  External Devices
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Top Wear</a></li>
-                  <li><a class="dropdown-item" href="#">Bottom Wear</a></li>
+                  <li><a class="dropdown-item" href="#">Cabinets</a></li>
+                  <li><a class="dropdown-item" href="#">Pendrives</a></li>
+                  <li><a class="dropdown-item" href="#">UPS</a></li>
+                  <li><a class="dropdown-item" href="#">Mouse</a></li>
+                  <li><a class="dropdown-item" href="#">Keyboard</a></li>
 
                   <!-- <li><hr class="dropdown-divider" /></li>
                   <li>
@@ -97,19 +100,23 @@
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Electronics
+                  Internal Devices
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Mobile</a></li>
+                  <li><a class="dropdown-item" href="#">Random Access Memory (RAM)</a></li>
                   {% comment %}
                   <li>
-                    <a class="dropdown-item" href="{% url 'mobile' %}"
-                      >Mobile</a
+                    <a class="dropdown-item" href="{% url 'ram' %}"
+                      >RAM</a
                     >
                   </li>
                   {% endcomment %}
 
-                  <li><a class="dropdown-item" href="#">Laptop</a></li>
+                  <li><a class="dropdown-item" href="#">Hard Disk Drives (HDD)</a></li>
+                  <li><a class="dropdown-item" href="#">Solid State Drives (SSD)</a></li>
+                  <li><a class="dropdown-item" href="#">Optical Drives</a></li>
+                  <li><a class="dropdown-item" href="#">Motherboards</a></li>
+                  <li><a class="dropdown-item" href="#">Power Supply Units (PSU)</a></li>
 
                   <!-- <li><hr class="dropdown-divider" /></li>
                   <li>
@@ -118,6 +125,34 @@
                 </ul>
               </li>
               <!-- End Nav DropDown Menu -->
+
+              <!-- Start Nav DropDown Menu -->
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Cables/Connectors
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">VGA</a></li>
+                  <li><a class="dropdown-item" href="#">SATA</a></li>
+                  <li><a class="dropdown-item" href="#">USB Extensions</a></li>
+                  <li><a class="dropdown-item" href="#">AUX</a></li>
+
+                  <!-- <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </li> -->
+                </ul>
+              </li>
+              <!-- End Nav DropDown Menu -->
+
+
             </ul>
 
             <!-- Start Search bar -->

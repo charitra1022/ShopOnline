@@ -15,12 +15,12 @@ class ProductView(View):
     def get(self, request):
         topwears = Product.objects.filter(category='TW')
         bottomwears = Product.objects.filter(category='BW')
-        mobiles = Product.objects.filter(category='M')
+        rams = Product.objects.filter(category='RAM')
         laptops = Product.objects.filter(category='L')
         categories = {
             "topwears": topwears,
             "bottomwears": bottomwears,
-            "mobiles": mobiles,
+            "rams": rams,
             "laptops": laptops,
         }
         return render(request, 'app/home.html', categories)
@@ -52,19 +52,19 @@ def orders(request):
     return render(request, 'app/orders.html')
 
 
-def mobile(request, data=None):
+def ram(request, data=None):
     if data==None:
-        mobiles = Product.objects.filter(category='M')
+        rams = Product.objects.filter(category='RAM')
     elif str(data).lower()=='samsung' or str(data).lower()=='redmi':
-        mobiles = Product.objects.filter(category='M').filter(brand=data)
+        rams = Product.objects.filter(category='RAM').filter(brand=data)
 
     elif str(data)=='below10000':
-        mobiles = Product.objects.filter(category='M').filter(discounted_price__lt=10000)
+        rams = Product.objects.filter(category='RAM').filter(discounted_price__lt=10000)
     
     elif str(data)=='above10000':
-        mobiles = Product.objects.filter(category='M').filter(discounted_price__gt=10000)
+        rams = Product.objects.filter(category='RAM').filter(discounted_price__gt=10000)
 
-    return render(request, 'app/mobile.html', {'mobiles': mobiles})
+    return render(request, 'app/ram.html', {'rams': rams})
 
 
 class CustomerRegistrationView(View):

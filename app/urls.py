@@ -9,8 +9,8 @@ from .forms import LoginForm, UserPasswordChangeForm
 urlpatterns = [
     path('', views.ProductView.as_view(), name='home'),
     path('product-detail/<int:pk>', views.ProductDetailView.as_view(), name='product-detail'),
-    path('mobile/<slug:data>', views.mobile, name='mobiledata'),
-    path('mobile/', views.mobile, name='mobile'),
+    path('ram/<slug:data>', views.ram, name='ramdata'),
+    path('ram/', views.ram, name='ram'),
 
     path('registration/', views.CustomerRegistrationView.as_view(), name='customerregistration'),
     
