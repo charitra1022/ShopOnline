@@ -119,7 +119,51 @@
         {% endfor %}
       </div>
     </div>
-    <!-- Start First Section -->
+    <!-- End First Section -->
+
+    <!-- Start Second Section -->
+    <div class="second-section section">
+      <div class="product-list-title">
+        <h3>Solid State Drive (SSD)</h3>
+
+        <div class="form-check form-switch">
+          <input class="form-check-input autoscroll-checkbox shadow-none" type="checkbox" checked>
+          <label class="form-check-label">Scroll</label>
+        </div>
+
+      </div>
+
+      <div class="product-list">
+        {% for b in mobiles %}
+
+        <div class="product-card">
+          <a href="{% url 'product-detail' b.id %}" class="product-card-btn">
+            <div class="item">
+              <div class="item-img">
+                <img src="{{b.product_image.url}}" alt="" />
+              </div>
+              <div class="fw-bold title">
+                {{b.title}}
+              </div>
+              <div class="fs-5">₹ {{b.discounted_price}}</div>
+              <div class="fs-10 fw-light text-decoration-line-through">
+                ₹ {{b.selling_price}}
+              </div>
+
+              <div class="btn-container">
+                <a href="#" type="button" class="btn btn-primary">
+                  <span>Add to Cart</span>&nbsp;&nbsp;
+                  <i class="fas fa-shopping-cart"></i>
+                </a>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        {% endfor %}
+      </div>
+    </div>
+    <!-- End Second Section -->
 
   </div>
   <!-- End Main Container -->
