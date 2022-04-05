@@ -20,6 +20,10 @@ Run the following command in the terminal with project folder as the working dir
 # Advanced Operations!!
 ## Note: *Stay away if you don't know what is happening!*
 
+### Changed any field in Database?
+python manage.py makemigrations
+python manage.py migrate
+
 ### Reset Database
 python manage.py flush
 
