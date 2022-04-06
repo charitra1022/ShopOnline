@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views import View
 from django.contrib import messages
 
-from .models import Product
+from .models import Product, CATEGORY_CHOICES
 from .forms import CustomerRegistrationForm
 
 
@@ -13,16 +13,20 @@ from .forms import CustomerRegistrationForm
 
 class ProductView(View):
     def get(self, request):
-        topwears = Product.objects.filter(category='TW')
-        bottomwears = Product.objects.filter(category='BW')
-        rams = Product.objects.filter(category='RAM')
-        laptops = Product.objects.filter(category='L')
-        categories = {
-            "topwears": topwears,
-            "bottomwears": bottomwears,
-            "rams": rams,
-            "laptops": laptops,
-        }
+
+        # Fetch product objects according to their categories
+        categories = {}
+        for i in CATEGORY_CHOICES:
+            cat_code = i[0]
+            cat_name = ''.join(i[1].strip().lower().split())
+            cat_product = Product.objects.filter(category=cat_code)
+            categories[cat_name] = cat_product
+
+        # topwears = Product.objects.filter(category='TW')
+        # bottomwears = Product.objects.filter(category='BW')
+        # rams = Product.objects.filter(category='RAM')
+        # laptops = Product.objects.filter(category='L')
+
         return render(request, 'app/home.html', categories)
 
 
@@ -55,14 +59,14 @@ def orders(request):
 def ram(request, data=None):
     if data==None:
         rams = Product.objects.filter(category='RAM')
-    elif str(data).lower()=='samsung' or str(data).lower()=='redmi':
+    elif str(data).lower()=='corsair' or str(data).lower()=='crucial':
         rams = Product.objects.filter(category='RAM').filter(brand=data)
 
-    elif str(data)=='below10000':
-        rams = Product.objects.filter(category='RAM').filter(discounted_price__lt=10000)
+    elif str(data)=='below2000':
+        rams = Product.objects.filter(category='RAM').filter(discounted_price__lt=2000)
     
-    elif str(data)=='above10000':
-        rams = Product.objects.filter(category='RAM').filter(discounted_price__gt=10000)
+    elif str(data)=='above2000':
+        rams = Product.objects.filter(category='RAM').filter(discounted_price__gt=2000)
 
     return render(request, 'app/ram.html', {'rams': rams})
 

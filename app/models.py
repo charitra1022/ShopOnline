@@ -58,9 +58,13 @@ class Customer(models.Model):
 
 CATEGORY_CHOICES = (
     ('RAM', 'RAM'),
-    ('L', 'Laptop'),
-    ('TW', 'Top Wear'),
-    ('BW', 'Bottom Wear')
+    ('SSD', 'Solid State Drive'),
+    ('HDD', 'Hard Disk Drive'),
+    ('MB', 'Mother Board'),
+    ('OD', 'Optical Drive'),
+    ('PSU', 'Power Supply Unit'),
+    ('CB', 'Cabinet'),
+    ('UPS', 'UPS'),
 )
 
 
