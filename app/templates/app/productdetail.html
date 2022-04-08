@@ -1,47 +1,91 @@
-{% extends 'app/base.html' %} {% load static %} {% block title %}{{product.title}}{% endblock title %} {% block main-content %}
-<style>
-    pre{
-        font-family: 'Roboto', sans-serif;
-    }
-</style>
-<div class="container my-5">
-  <div class="row">
-    <div class="col-sm-6 text-center align-self-center">
-      <img
-        src="{{product.product_image.url}}"
-        alt=""
-        class="img-fluid img-thumbnail"
-      />
-    </div>
-    <div class="col-sm-5 offset-sm-1">
-      <h2>{{product.title}}</h2>
-      <hr />
-      <p><pre>{{product.description}}</pre></p>
-      <br />
-      <h4>
-        ₹ {{product.discounted_price}}
-        <small class="fw-light text-decoration-line-through"
-          >{{product.selling_price}}</small
-        >
-      </h4>
-      <br />
-      <a href="{% url 'add-to-cart' %}" class="btn btn-primary shadow px-5 py-2"
-        >Add to Cart</a
-      >
-      <a href="{% url 'buy-now' %}" class="btn btn-danger shadow px-5 py-2 ms-4"
-        >Buy Now</a
-      >
-      <h5 class="mt-5">Available Offers</h5>
-      <ul>
-        <li>Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit</li>
-        <li>Special Price Get extra ₹3000 off (price inclusive of discount)</li>
-        <li>No cost EMI ₹1,667/month. Standard EMI also available</li>
-        <li>
-          Partner Offer ₹2000 Flipkart Gift Card on Every 1000th Transaction
-          with a new Visa Debit/Credit Card
-        </li>
-      </ul>
+{% extends 'app/base.html' %}
+{% load static %}
+{% block custom_css %}
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'app/css/product.css' %}" />
+{% endblock custom_css %}
+{% block title %}{{product.title}}{% endblock title %}
+
+{% block main-content %}
+  <!-- Start Main Container -->
+  <div class="main-container">
+    <div class="container">
+      <div class="row">
+        <div class="product-img col-sm-5 text-center">
+          <img
+            src="{{product.product_image.url}}"
+            alt=""
+            class="img-fluid img-thumbnail"
+          />
+
+          <h4>
+            ₹ {{product.discounted_price}}
+            <small class="fw-light text-decoration-line-through">
+              {{product.selling_price}}
+            </small>
+          </h4>
+
+          <a href="{% url 'add-to-cart' %}" class="product-btn cart">
+            Add to Cart&nbsp;&nbsp;
+            <i class="fas fa-shopping-cart"> </i>
+          </a>
+          <a href="{% url 'buy-now' %}" class="product-btn buy">
+            Buy Now&nbsp;&nbsp; <i class="fas fa-shopping-bag"></i>
+          </a>
+        </div>
+
+        <div class="product-detail col-sm-6 offset-sm-1">
+          <h2>{{product.title}}</h2>
+          <hr />
+
+          <div class="collapse" id="collapseExample">
+            <pre>{{product.description}}</pre>
+          </div>
+
+          <p class="mb-5">
+            <a
+              data-bs-toggle="collapse"
+              href="#collapseExample"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+              onclick="changeText()"
+              id="readmore-btn"
+            >
+              Read More
+            </a>
+          </p>
+
+          <hr />
+          <h5>Available Offers</h5>
+          <ul>
+            <li>
+              Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit
+            </li>
+            <li>
+              Special Price Get extra ₹3000 off (price inclusive of
+              discount)
+            </li>
+            <li>No cost EMI ₹1,667/month. Standard EMI also available</li>
+            <li>
+              Partner Offer ₹2000 Flipkart Gift Card on Every 1000th
+              Transaction with a new Visa Debit/Credit Card
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+  <!-- End Main Container -->
 {% endblock main-content %}
+
+{% block custom_js %}
+  <script>
+    var collapse = document.getElementById("collapseExample");
+    collapse.addEventListener("show.bs.collapse", () => {
+      document.getElementById("readmore-btn").innerHTML = "Read Less";
+    });
+    collapse.addEventListener("hide.bs.collapse", () => {
+      document.getElementById("readmore-btn").innerHTML = "Read More";
+    });
+  </script>
+{% endblock custom_js %}
