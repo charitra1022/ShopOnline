@@ -1,0 +1,40 @@
+{% extends 'app/base.html' %} 
+{% load static %} 
+{% block title %} RAM {% endblock title %} {% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="list-group">
+                <a href="{% url 'ram' %}" class='list-group-item list-group-item-action' aria-current='true'>All RAMs</a>
+
+                <a href="{% url 'ramdata' 'CORSAIR' %}" class='list-group-item list-group-item-action' aria-current='true'>Corsair</a>
+
+                <a href="{% url 'ramdata' 'CRUCIAL' %}" class='list-group-item list-group-item-action' aria-current='true'>Crucial</a>
+
+                <a href="{% url 'ramdata' 'below2000' %}" class='list-group-item list-group-item-action' aria-current='true'>Below 2000</a>
+
+                <a href="{% url 'ramdata' 'above2000' %}" class='list-group-item list-group-item-action' aria-current='true'>Above 2000</a>
+            </div>
+        </div>
+
+        <div class="col-sm-8">
+            <div class='row'>
+                {% for product in rams %}
+                    <div class='col-sm-4 text-center mb-4'>
+                        <a href="{% url 'product-detail' product.id %}" class='btn'>
+                            <div class="item">
+                                <img src="{{product.product_image.url}}" height="300">
+                                <div class="fw-bold">{{product.title}}</div>
+                                <div class="fw-bold">₹ {{product.discounted_price}}</div>
+                                <div class="fw-light text-decoration-line-through">₹ {{product.selling_price}}</div>
+                            </div>
+                        </a>
+                    </div>
+                
+                {% endfor %}
+            </div>
+        
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

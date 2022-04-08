@@ -1,40 +1,70 @@
 {% extends 'app/base.html' %} 
 {% load static %} 
-{% block title %} RAM {% endblock title %} {% block main-content %}
-<div class="container my-5">
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="list-group">
-                <a href="{% url 'ram' %}" class='list-group-item list-group-item-action' aria-current='true'>All RAMs</a>
+{% block custom_css %}
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'app/css/category.css' %}" />
+{% endblock custom_css %}
+{% block title %} RAM {% endblock title %} 
 
-                <a href="{% url 'ramdata' 'CORSAIR' %}" class='list-group-item list-group-item-action' aria-current='true'>Corsair</a>
 
-                <a href="{% url 'ramdata' 'CRUCIAL' %}" class='list-group-item list-group-item-action' aria-current='true'>Crucial</a>
+{% block main-content %}
+  <!-- Start Main Container -->
+  <div class="main-container">
+    <div class="container section">
+      <div class="row">
 
-                <a href="{% url 'ramdata' 'below2000' %}" class='list-group-item list-group-item-action' aria-current='true'>Below 2000</a>
+        <!-- Start Sidebar filter -->
+        <div class="col-sm-2">
+          <div class="list-group">
+            <a href="{% url 'ram' %}" class='list-group-item list-group-item-action' aria-current='true'>All RAMs</a>
 
-                <a href="{% url 'ramdata' 'above2000' %}" class='list-group-item list-group-item-action' aria-current='true'>Above 2000</a>
-            </div>
+            <a href="{% url 'ramdata' 'CORSAIR' %}" class='list-group-item list-group-item-action' aria-current='true'>Corsair</a>
+
+            <a href="{% url 'ramdata' 'CRUCIAL' %}" class='list-group-item list-group-item-action' aria-current='true'>Crucial</a>
+
+            <a href="{% url 'ramdata' 'below2000' %}" class='list-group-item list-group-item-action' aria-current='true'>Below 2000</a>
+
+            <a href="{% url 'ramdata' 'above2000' %}" class='list-group-item list-group-item-action' aria-current='true'>Above 2000</a>
+          </div>
         </div>
+        <!-- End Sidebar filter -->
 
-        <div class="col-sm-8">
-            <div class='row'>
-                {% for product in rams %}
-                    <div class='col-sm-4 text-center mb-4'>
-                        <a href="{% url 'product-detail' product.id %}" class='btn'>
-                            <div class="item">
-                                <img src="{{product.product_image.url}}" height="300">
-                                <div class="fw-bold">{{product.title}}</div>
-                                <div class="fw-bold">₹ {{product.discounted_price}}</div>
-                                <div class="fw-light text-decoration-line-through">₹ {{product.selling_price}}</div>
-                            </div>
-                        </a>
+        <!-- Start Product list -->
+        <div class="col-sm-10">
+          <div class='row'>
+            {% for product in rams %}
+              <div class="product-card col">
+                <a href="{% url 'product-detail' product.id %}" class="product-card-btn">
+                  <div class="item">
+                    <div class="item-img">
+                      <img src="{{product.product_image.url}}" alt="" />
                     </div>
-                
-                {% endfor %}
-            </div>
-        
+                    <div class="fw-bold title">
+                      {{product.title}}
+                    </div>
+                    <div class="fs-5">₹ {{product.discounted_price}}</div>
+                    <div class="fs-10 fw-light text-decoration-line-through">
+                      ₹ {{product.selling_price}}
+                    </div>
+      
+                    <div class="btn-container">
+                      <a href="#" type="button" class="btn btn-primary shadow-none">
+                        <span>Add to Cart</span>&nbsp;&nbsp;
+                        <i class="fas fa-shopping-cart"></i>
+                      </a>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
         </div>
+        <!-- End Product list -->
+
+      </div>
     </div>
-</div>
+
+
+  </div>
+  <!-- End Main Container -->
 {% endblock main-content %}
