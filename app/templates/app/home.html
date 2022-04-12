@@ -102,13 +102,13 @@
         <h3>Random Access Memory (RAM)</h3>
 
         <div class="form-check form-switch">
-          <input class="form-check-input autoscroll-checkbox shadow-none" type="checkbox" checked>
+          <input id="scroll-checkbox1" class="form-check-input autoscroll-checkbox shadow-none" type="checkbox" checked>
           <label class="form-check-label">Scroll</label>
         </div>
 
       </div>
 
-      <div class="product-list">
+      <div class="product-list" onmouseover="pauseScroll(1, true)" onmouseout="pauseScroll(1, false)">
         {% for b in ram %}
 
         <div class="product-card">
@@ -146,13 +146,13 @@
         <h3>Solid State Drive (SSD)</h3>
 
         <div class="form-check form-switch">
-          <input class="form-check-input autoscroll-checkbox shadow-none" type="checkbox" checked>
+          <input id="scroll-checkbox2" class="form-check-input autoscroll-checkbox shadow-none" type="checkbox" checked>
           <label class="form-check-label">Scroll</label>
         </div>
 
       </div>
 
-      <div class="product-list">
+      <div class="product-list" onmouseover="pauseScroll(2, true)" onmouseout="pauseScroll(2, false)">
         {% for b in solidstatedrive %}
 
         <div class="product-card">

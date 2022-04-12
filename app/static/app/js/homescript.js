@@ -1,3 +1,9 @@
+// Pause auto scroll when mouse enters the product list div
+function pauseScroll(number, state) {
+  var checbox = document.getElementById(`scroll-checkbox${number}`);
+  checbox.checked = !state;
+}
+
 // Auto scroll list
 function scrollDiv() {
   var productList = document.getElementsByClassName("product-list");
