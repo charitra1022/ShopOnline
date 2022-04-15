@@ -27,8 +27,6 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = True
 
 ALLOWED_HOSTS = ["shoponline-ca.herokuapp.com", "localhost"]
-CSRF_TRUSTED_ORIGINS = ["https://shoponline-ca.herokuapp.com/"]
-
 
 # Application definition
 
@@ -45,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',    #added cors header
     'whitenoise.middleware.WhiteNoiseMiddleware', #added whitenoise
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -52,13 +51,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',    #added cors header
 ]
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:8000',
     'https://shoponline-ca.herokuapp.com',
 )
+CSRF_TRUSTED_ORIGINS = ["https://shoponline-ca.herokuapp.com/"]
 
 ROOT_URLCONF = 'ShopOnline.urls'
 
