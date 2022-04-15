@@ -27,7 +27,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = True
 
 ALLOWED_HOSTS = ["shoponline-ca.herokuapp.com", "localhost"]
-CSRF_TRUSTED_ORIGINS = ["shoponline-ca.herokuapp.com", "localhost"]
+CSRF_TRUSTED_ORIGINS = ["https://shoponline-ca.herokuapp.com/"]
 
 
 # Application definition
