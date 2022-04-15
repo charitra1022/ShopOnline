@@ -115,6 +115,7 @@ a:hover {
 /*********** Navigation Bar ***********/
 .navbar {
   padding: 0 10px;
+  padding-right: 25px;
   z-index: 100;
   background: #9053c7;
   background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
@@ -156,6 +157,28 @@ a:hover {
 .nav-link{
   display: flex;
   align-items: center;
+}
+@media (max-width: 1199px) {
+  .navbar-brand {
+    padding-top: 20px;
+    padding-left: 0px;
+    padding-right: 0;
+  }
+  .navbar {
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+  }
+  .dropdown-menu {
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+  }
+  .dropdown-menu li a {
+    color: #e6e6e6;
+  }
+  .navbar-nav.account{
+    padding-top: 30px;
+  }
 }
 @media (max-width: 991px) {
   .navbar-brand {
