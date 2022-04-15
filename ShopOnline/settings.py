@@ -53,11 +53,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = (
+CORS_ALLOWED_ORIGINS = (
     'http://localhost:8000',
     'https://shoponline-ca.herokuapp.com',
 )
-CSRF_TRUSTED_ORIGINS = ["https://shoponline-ca.herokuapp.com/"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://shoponline-ca.herokuapp.com"
+]
 
 ROOT_URLCONF = 'ShopOnline.urls'
 
