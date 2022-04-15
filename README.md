@@ -1,5 +1,5 @@
 # ShopOnline
-An E-commerce site
+An E-commerce site for shopping hardware online.
 
 # How to run the project?
 ## 1. Get the project
@@ -12,9 +12,14 @@ An E-commerce site
 2. Install **dependencies** by running `python -m pip install -r requirements.txt`.
 
 ## 3. Running the project
-Run the following command in the terminal with project folder as the working directory
+Run the following command in the terminal with project folder as the working directory after selecting **master** branch
 `python manage.py runserver`
 
+## Active Bugs
+1. Username is Case Sensitive.
+2. Slow speed of product list auto scroller
+3. No word wrap for product description. [Reference](https://shoponline-ca.herokuapp.com/product-detail/12)
+4. Green text on card hover. [Reference](https://shoponline-ca.herokuapp.com/ram/)
 
 
 # Advanced Operations!!
