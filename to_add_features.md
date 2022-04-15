@@ -1,3 +1,6 @@
+# UI Modifications to do
+1. Navbar - All categories under product drop down
+
 # Features Yet to Add
 1. admin forgot password
 2. Brand name default capitalize and save to db
