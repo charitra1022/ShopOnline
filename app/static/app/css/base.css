@@ -115,7 +115,7 @@ a:hover {
 /*********** Navigation Bar ***********/
 .navbar {
   padding: 0 10px;
-  padding-right: 25px;
+  padding-right: 60px;
   z-index: 100;
   background: #9053c7;
   background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
