@@ -57,7 +57,7 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:8000',
-    'https://shoponline-ca.herokuapp.com/',
+    'https://shoponline-ca.herokuapp.com',
 )
 
 ROOT_URLCONF = 'ShopOnline.urls'
