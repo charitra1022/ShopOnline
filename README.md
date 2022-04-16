@@ -17,10 +17,7 @@ Run the following command in the terminal with project folder as the working dir
 `python manage.py runserver`
 
 ## Active Bugs
-1. Username is Case Sensitive.
-2. Slow speed of product list auto scroller
-3. No word wrap for product description. [Reference](https://shoponline-ca.herokuapp.com/product-detail/12)
-4. Green text on card hover. [Reference](https://shoponline-ca.herokuapp.com/ram/)
+Refer to [BUGS.md](/BUGS.md) for better view on Active Bugs
 
 
 # Advanced Operations!!
