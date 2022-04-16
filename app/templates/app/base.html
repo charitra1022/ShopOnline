@@ -25,6 +25,9 @@
 
     <!-- Base CSS -->
     <link rel="stylesheet" href="{% static 'app/css/base.css' %}" />
+    
+    <!-- Canonical Tag -->
+    {% block canonical_url %}{% endblock canonical_url %}
 
     <!--Custom CSS-->
     {% block custom_css %}{% endblock custom_css %}
