@@ -1,5 +1,6 @@
 # ShopOnline
 An E-commerce site for shopping hardware online.
+Site is live at [this link](https://shoponline-ca.herokuapp.com/)
 
 # How to run the project?
 ## 1. Get the project
