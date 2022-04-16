@@ -1,11 +1,6 @@
 {% extends 'app/base.html' %}
 {% load static %}
 
-{% block canonical_url %}
-  <!-- Canonical Tag -->
-  <link rel="canonical" href="https://shoponline-ca.herokuapp.com/product-detail/{{product.id}}" />
-{% endblock canonical_url %}
-
 {% block custom_css %}
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{% static 'app/css/product.css' %}" />
