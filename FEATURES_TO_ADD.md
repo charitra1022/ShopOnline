@@ -4,6 +4,10 @@ Refer to [BUGS.md](/BUGS.md) for better view on Active Bugs
 
 # UI Modifications to be done in future
 1. Navbar - All categories under product drop down
+2. Navbar stick to top with blurr transparency (arcylic effect)
+3. Smooth vertical scroll to add in homepage
+4. Smooth slide up/down to add to navbar dropdown menu in navbar
+5. infinite scroll in vertical scroll in homepage
 
 
 # Features Yet to Add
@@ -23,6 +27,8 @@ Refer to [BUGS.md](/BUGS.md) for better view on Active Bugs
 14. Data integration with flipkart
 15. product category tag per product
 16. product category filter
+17. parameter based product filter in category page
+18. Add wishlist section
 
 
 # Pages with finalized UIs
