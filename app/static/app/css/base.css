@@ -125,10 +125,12 @@ a:hover {
 }
 .navbar-brand {
   font-family: Poppins-Bold;
-  font-size: 24px;
+  font-size: 1.3rem;
   line-height: 1.2;
   display: inline;
   padding: 20px 20px;
+  color: rgba(10,60,150, 0.8);
+  text-shadow: rgb(245 245 245 / 60%) 0px 1px 10px
 }
 .search-btn {
   font-family: Montserrat-Bold;
@@ -166,7 +168,7 @@ a:hover {
   }
   .navbar {
     padding-left: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
     padding-right: 10px;
   }
   .dropdown-menu {
@@ -188,7 +190,7 @@ a:hover {
   }
   .navbar {
     padding-left: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
     padding-right: 10px;
   }
   .dropdown-menu {
