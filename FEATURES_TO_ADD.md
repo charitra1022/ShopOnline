@@ -20,7 +20,7 @@ Refer to [BUGS.md](/BUGS.md) for better view on Active Bugs
 5. multiple image support for products
 6. Different url for admin
 7. Prevent admin login on general login page
-8. 
+8. User profile image with default for no image
 9. reset password with email OTP
 10. 2FA for admin login
 11. price filter
@@ -31,6 +31,18 @@ Refer to [BUGS.md](/BUGS.md) for better view on Active Bugs
 16. product category filter
 17. parameter based product filter in category page
 18. Add wishlist section
+19. Dedicated User page
+
+## User Page Settings
+
+1. change name
+2. change password
+3. change email address
+4. edit default address (address required)
+5. edit default phone number (number required)
+6. change profile image
+7. edit/delete customer profiles
+8. Default customer profile with user details. (cant be deleted)
 
 ## Pages with finalized UIs
 
