@@ -7,9 +7,8 @@ Refer to [BUGS.md](/BUGS.md) for better view on Active Bugs
 ## UI Modifications to be done in future
 
 1. Navbar - All categories under product drop down
-2. Smooth vertical scroll to add in homepage
-3. Smooth slide up/down to add to navbar dropdown menu in navbar
-4. infinite scroll in vertical scroll in homepage
+2. Smooth slide up/down to add to navbar dropdown menu in navbar
+3. infinite scroll in vertical scroll in homepage
 
 ## Features Yet to Add
 
