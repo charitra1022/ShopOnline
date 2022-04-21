@@ -49,6 +49,7 @@
   overflow-x: scroll;
   white-space: nowrap;
   padding: 10px;
+  scroll-behavior: smooth;
 }
 .product-list .product-card {
   display: inline-block;

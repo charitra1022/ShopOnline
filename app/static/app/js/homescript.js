@@ -16,7 +16,7 @@ function scrollDiv() {
     const scroll_width = productList[i].scrollWidth;
     const off_width = productList[i].offsetWidth;
     const scrollPos = productList[i].scrollLeft;
-    const scrollBy = 10;
+    const scrollBy = 50;
 
     // var debug_msg = `Width:${scroll_width} offset:${off_width} pos:${scrollPos}`;
     // console.log(debug_msg);
