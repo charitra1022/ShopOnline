@@ -72,14 +72,21 @@
   }
   
   /* Read More styles in description */
-  #collapseExample.collapse:not(.show) {
+  #productDescription pre {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;  
+  }
+  #productDescription.collapse:not(.show) {
     display: block;
     height: 4.4rem;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
-  #collapseExample.collapsing {
+  #productDescription.collapsing {
     height: 4.4rem;
   }
   

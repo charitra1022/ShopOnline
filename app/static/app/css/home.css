@@ -21,6 +21,16 @@
   object-fit: contain;
 }
 
+/* Section styles */
+.section .view-all-link{
+  text-align: center;
+  padding-top: 20px
+}
+.section .view-all-link a {
+  text-decoration: none;
+  font-size: 20px;
+}
+
 /* Product List Display */
 .product-list-title {
   font-family: Montserrat-bold;
@@ -39,6 +49,7 @@
   overflow-x: scroll;
   white-space: nowrap;
   padding: 10px;
+  scroll-behavior: smooth;
 }
 .product-list .product-card {
   display: inline-block;

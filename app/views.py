@@ -11,15 +11,15 @@ from .forms import CustomerRegistrationForm
 # from .models import Cart, Customer, OrderPlaced
 
 
-class ProductView(View):
+class ProductSneekPeak(View):
     def get(self, request):
 
-        # Fetch product objects according to their categories
+        # Fetch first 3 product objects according to their categories
         categories = {}
         for i in CATEGORY_CHOICES:
             cat_code = i[0]
             cat_name = ''.join(i[1].strip().lower().split())
-            cat_product = Product.objects.filter(category=cat_code)
+            cat_product = Product.objects.filter(category=cat_code)[:5]
             categories[cat_name] = cat_product
 
         # topwears = Product.objects.filter(category='TW')

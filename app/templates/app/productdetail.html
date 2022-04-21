@@ -39,16 +39,16 @@
           <h2>{{product.title}}</h2>
           <hr />
 
-          <div class="collapse" id="collapseExample">
+          <div class="collapse" id="productDescription">
             <pre>{{product.description}}</pre>
           </div>
 
           <p class="mb-5">
             <a
               data-bs-toggle="collapse"
-              href="#collapseExample"
+              href="#productDescription"
               aria-expanded="false"
-              aria-controls="collapseExample"
+              aria-controls="productDescription"
               onclick="changeText()"
               id="readmore-btn"
             >
@@ -81,7 +81,7 @@
 
 {% block custom_js %}
   <script>
-    var collapse = document.getElementById("collapseExample");
+    var collapse = document.getElementById("productDescription");
     collapse.addEventListener("show.bs.collapse", () => {
       document.getElementById("readmore-btn").innerHTML = "Read Less";
     });

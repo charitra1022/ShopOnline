@@ -7,7 +7,7 @@ from django.contrib.auth import views as auth_views
 from .forms import LoginForm, UserPasswordChangeForm
 
 urlpatterns = [
-    path('', views.ProductView.as_view(), name='home'),
+    path('', views.ProductSneekPeak.as_view(), name='home'),
     path('product-detail/<int:pk>', views.ProductDetailView.as_view(), name='product-detail'),
     path('ram/<slug:data>', views.ram, name='ramdata'),
     path('ram/', views.ram, name='ram'),
