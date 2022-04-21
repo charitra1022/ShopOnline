@@ -1,0 +1,7 @@
+{
+    "terminal.integrated.copyOnSelection": true,
+    "editor.tabSize": 2,
+    "python.defaultInterpreterPath": "C:\\Users\\Chiku\\miniconda3\\envs\\django",
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "python.terminal.activateEnvironment": true
+}

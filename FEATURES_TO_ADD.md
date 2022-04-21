@@ -1,4 +1,4 @@
-# Features yet to add
+# ShopOnline
 
 ## Active Bugs
 
@@ -32,6 +32,8 @@ Refer to [BUGS.md](/BUGS.md) for better view on Active Bugs
 17. parameter based product filter in category page
 18. Add wishlist section
 19. Dedicated User page
+20. Compress images before saving to db
+21. custom renderer function for product list in home page
 
 ## User Page Settings
 
