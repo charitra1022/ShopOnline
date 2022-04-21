@@ -21,6 +21,15 @@
   object-fit: contain;
 }
 
+/* Section styles */
+.section .view-all-link{
+  text-align: center;
+}
+.section .view-all-link a {
+  text-decoration: none;
+  font-size: 20px;
+}
+
 /* Product List Display */
 .product-list-title {
   font-family: Montserrat-bold;
