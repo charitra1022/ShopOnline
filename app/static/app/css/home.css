@@ -24,6 +24,7 @@
 /* Section styles */
 .section .view-all-link{
   text-align: center;
+  padding-top: 20px
 }
 .section .view-all-link a {
   text-decoration: none;
