@@ -43,6 +43,9 @@ html {
   height: 100%;
   font-family: Poppins-Regular, sans-serif;
 }
+body {
+  transition: background-color 0.3s;
+}
 main {
   width: 100%;
   min-height: 100vh;
@@ -229,6 +232,29 @@ footer .container .sub-section .fa {
 footer a {
   font-family: Fira-Sans-Light;
   font-size: 1.1em;
+}
+
+/*********** Dark Mode Toggle button ***********/
+.darkmode-toggler-container {
+  display: flex;
+  position: fixed;
+  left: 0;
+  bottom: 10vh;
+  padding: 5px;
+}
+.darkmode-toggler-container span {
+  padding: 4px;
+}
+.darkmode-toggler-container input:checked {
+  border: 10px;
+  background-color: #9053c7;
+}
+.darkmode-toggler-container input:focus:not(:checked) {
+  background-color: rgb(207, 204, 204);
+}
+.darkmode-toggler-container input {
+  width: 20px;
+  height: 20px;
 }
 
 /*********** Utility Styles ***********/
