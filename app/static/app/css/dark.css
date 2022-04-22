@@ -3,6 +3,21 @@
   color: antiquewhite;
 }
 
-.dark .product-card, .dark .product-card a {
+.dark .product-card, .dark .product-card .item, .dark .product-card .item-img {
   background-color: #1F4068;
+}
+.dark .product-card a{
+  color: antiquewhite;
+}
+
+.dark footer {
+  background-color: #1B1B2F;
+}
+.dark footer svg, .dark footer i{
+  color: antiquewhite  !important;
+  font-size: 100px;
+}
+
+.dark a.btn {
+  background-color: #E43F5A;
 }
