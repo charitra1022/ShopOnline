@@ -236,10 +236,14 @@ footer a {
 
 /*********** Dark Mode Toggle button ***********/
 .darkmode-toggler-container {
+  display: flex;
   position: fixed;
   left: 0;
   bottom: 10vh;
   padding: 5px;
+}
+.darkmode-toggler-container span {
+  padding: 4px;
 }
 .darkmode-toggler-container input:checked {
   border: 10px;
