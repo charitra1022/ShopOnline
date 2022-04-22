@@ -43,6 +43,9 @@ html {
   height: 100%;
   font-family: Poppins-Regular, sans-serif;
 }
+body {
+  transition: background-color 0.3s;
+}
 main {
   width: 100%;
   min-height: 100vh;
