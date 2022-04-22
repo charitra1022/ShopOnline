@@ -2,17 +2,17 @@
 An E-commerce site for shopping hardware online.
 Site is live at [this link](https://shoponline-ca.herokuapp.com/)
 
-# How to run the project?
-## 1. Get the project
+## How to run the project?
+### 1. Get the project
 *Follow any one of the two methods listed below*
-1. Download the **.zip**, and extract it into a folder in your desktop, or,
-2. Clone the repo in your desktop.
+1. Download the **.zip** of madter branch, and extract it into a folder in your desktop, or,
+2. Clone the master branch repo in your desktop.
 
-## 2. Installations
+### 2. Installations
 1. Install **Python 3** onto your computer (python_version>=**3.6**)
 2. Install **dependencies** by running `python -m pip install -r requirements.txt`.
 
-## 3. Running the project
+### 3. Running the project
 Run the following command in the terminal with project folder as the working directory after selecting **master** branch
 `python manage.py runserver`
 
@@ -20,8 +20,8 @@ Run the following command in the terminal with project folder as the working dir
 Refer to [BUGS.md](/BUGS.md) for better view on Active Bugs
 
 
-# Advanced Operations!!
-## Note: *Stay away if you don't know what is happening!*
+## Advanced Operations!!
+### Note: *Stay away if you don't know what is happening!*
 
 ### Changed any field in Database?
 python manage.py makemigrations
