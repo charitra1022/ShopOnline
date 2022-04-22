@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 
-from .forms import LoginForm, UserPasswordChangeForm
+from .forms import LoginForm, UserPasswordChangeForm, MyPasswordResetForm
 
 urlpatterns = [
     path('', views.ProductSneekPeak.as_view(), name='home'),
@@ -21,6 +21,8 @@ urlpatterns = [
     path('changepasswordsuccess/', auth_views.PasswordChangeDoneView.as_view(template_name='app/changepasswordsuccess.html'), name='changepasswordsuccess'),
 
     path('changepassword/', auth_views.PasswordChangeView.as_view(template_name='app/changepassword.html', form_class=UserPasswordChangeForm, success_url='/changepasswordsuccess/'), name='changepassword'),
+
+    path('resetpassword/', auth_views.PasswordResetView.as_view(template_name='app/reset_password.html', form_class=MyPasswordResetForm), name="resetpassword"),
     
     path('cart/', views.add_to_cart, name='add-to-cart'),
     path('buy/', views.buy_now, name='buy-now'),
