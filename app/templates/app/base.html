@@ -364,19 +364,33 @@
 
     <!-- Dark Mode Toggler Script -->
     <script>
-      // toggles visibility of icons on page load
-      var htmlTag = document.getElementsByTagName("html")[0];
-      var btn = document.getElementById("darkmode-toggler");
-      if (btn.checked === true) {
-        document.getElementsByClassName("moon-icon")[0].style.display="none";
-        document.getElementsByClassName("sun-icon")[0].style.display="inline";
+      iconVisibility();
+      initTheme();
+
+      function iconVisibility() {
+        // toggles visibility of icons on page load
+        var htmlTag = document.getElementsByTagName("html")[0];
+        var btn = document.getElementById("darkmode-toggler");
+        if (btn.checked === true) {
+          document.getElementsByClassName("moon-icon")[0].style.display="none";
+          document.getElementsByClassName("sun-icon")[0].style.display="inline";
+        }
+        else{
+          document.getElementsByClassName("moon-icon")[0].style.display="inline";
+          document.getElementsByClassName("sun-icon")[0].style.display="none";
+        }
       }
-      else{
-        document.getElementsByClassName("moon-icon")[0].style.display="inline";
-        document.getElementsByClassName("sun-icon")[0].style.display="none";
+      
+
+      function initTheme(){
+        // Automatically read user preference and apply dark or light theme
+        var themeMode = localStorage.getItem('theme-mode');
+        var darkThemeSelected = (themeMode!==null && themeMode==='dark');
+        var btn = document.getElementById("darkmode-toggler");
+        btn.checked = darkThemeSelected;
+        toggleDarkMode();
       }
-      htmlTag = null;
-      btn = null;
+
       
       // called on button click
       function toggleDarkMode() {
@@ -394,11 +408,17 @@
           cssLink.setAttribute("data-theme", "dark");
           cssLink.type = "text/css";
           document.getElementsByTagName("head")[0].appendChild(cssLink);
+
+          // set dark theme in user preference
+          localStorage.setItem('theme-mode', 'dark');
         } else {
           htmlTag.classList.remove("dark");
           document.getElementsByClassName("moon-icon")[0].style.display="inline";
           document.getElementsByClassName("sun-icon")[0].style.display="none";
           $('link[data-theme=dark]').remove();
+
+          // remove dark theme from user preference
+          localStorage.removeItem('theme-mode');
         }
       }
     </script>
