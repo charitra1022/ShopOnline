@@ -234,6 +234,25 @@ footer a {
   font-size: 1.1em;
 }
 
+/*********** Dark Mode Toggle button ***********/
+.darkmode-toggler-container {
+  position: fixed;
+  left: 0;
+  bottom: 10vh;
+  padding: 5px;
+}
+.darkmode-toggler-container input:checked {
+  border: 10px;
+  background-color: #9053c7;
+}
+.darkmode-toggler-container input:focus:not(:checked) {
+  background-color: rgb(207, 204, 204);
+}
+.darkmode-toggler-container input {
+  width: 20px;
+  height: 20px;
+}
+
 /*********** Utility Styles ***********/
 .p-t-12 {
   padding-top: 12px;
