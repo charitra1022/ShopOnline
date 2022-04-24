@@ -56,10 +56,11 @@ class MySetPasswordForm(SetPasswordForm):
 class CustomerProfileForm(forms.ModelForm):
     class Meta:
         model = Customer
-        fields = ['name', 'locality', 'city', 'state', 'zipcode']
+        fields = ['name', 'phone', 'locality_address', 'city', 'state', 'zipcode']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Customer Name'}),
-            'locality': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Locality'}),
+            'phone': forms.NumberInput(attrs={'class': 'form-input', 'placeholder': 'Customer Phone Number'}),
+            'locality_address': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Address'}),
             'city': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'City'}),
             'state': forms.Select(attrs={'class': 'form-input', 'placeholder': 'State'}),
             'zipcode': forms.NumberInput(attrs={'class': 'form-input', 'placeholder': 'Zipcode'}),

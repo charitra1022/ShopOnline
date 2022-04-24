@@ -100,11 +100,12 @@ class ProfileView(View):
         if form.is_valid():
             user = request.user
             name = form.cleaned_data['name']
-            locality = form.cleaned_data['locality']
+            phone = form.cleaned_data['phone']
+            locality_address = form.cleaned_data['locality_address']
             city = form.cleaned_data['city']
             state = form.cleaned_data['state']
             zipcode = form.cleaned_data['zipcode']
-            reg = Customer(user=user, name=name, locality=locality, state=state, zipcode=zipcode, city=city)
+            reg = Customer(user=user, name=name, phone=phone, locality=locality_address, city=city, state=state, zipcode=zipcode)
             reg.save()
 
             messages.success(request, 'Customer Profile has been Added!')

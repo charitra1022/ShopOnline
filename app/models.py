@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-
-# from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 STATE_CHOICES = (
     ('Andaman and Nicobar Islands', 'Andaman and Nicobar Islands'),
@@ -47,10 +46,11 @@ STATE_CHOICES = (
 class Customer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    locality = models.CharField(max_length=200)
+    phone = models.BigIntegerField(validators=[MaxLengthValidator(10), MinLengthValidator(10)])
+    locality_address = models.CharField(max_length=200)
     city = models.CharField(max_length=50)
-    zipcode = models.IntegerField()
     state = models.CharField(choices=STATE_CHOICES, max_length=50)
+    zipcode = models.IntegerField(validators=[MaxLengthValidator(6), MinLengthValidator(6)])
 
     def __str__(self):
         return str(self.id)
