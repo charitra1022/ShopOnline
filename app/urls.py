@@ -14,6 +14,8 @@ urlpatterns = [
     path('ram/<slug:data>', views.ram, name='ramdata'),
     path('ram/', views.ram, name='ram'),
 
+    path('address/<int:id>', views.delete_customer, name='delete_customer'),
+
     # Auth
     path('registration/', views.CustomerRegistrationView.as_view(), name='customerregistration'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='app/login.html', authentication_form=LoginForm, next_page='/'), name='login'),

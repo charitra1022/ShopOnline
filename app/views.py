@@ -1,6 +1,6 @@
 import re
 from unicodedata import category
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib import messages
 
@@ -111,3 +111,9 @@ class ProfileView(View):
 
             messages.success(request, 'Customer Profile has been Added!')
         return render(request, 'app/profile.html', {'form': form, 'active': 'btn-primary'})
+
+
+def delete_customer(request, id):
+    ob = Customer.objects.get(id=id)
+    ob.delete()
+    return redirect('address')
