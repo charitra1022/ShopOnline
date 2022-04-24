@@ -13,7 +13,9 @@ urlpatterns = [
     path('product-detail/<int:pk>', views.ProductDetailView.as_view(), name='product-detail'),
     path('ram/<slug:data>', views.ram, name='ramdata'),
     path('ram/', views.ram, name='ram'),
+    path('address/', views.address, name='address'),
 
+    # url for delete address record
     path('address/<int:id>', views.delete_customer, name='delete_customer'),
 
     # Auth
@@ -35,7 +37,6 @@ urlpatterns = [
     
     path('cart/', views.add_to_cart, name='add-to-cart'),
     path('buy/', views.buy_now, name='buy-now'),
-    path('address/', views.address, name='address'),
     path('orders/', views.orders, name='orders'),
     
     

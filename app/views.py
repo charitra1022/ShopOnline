@@ -1,5 +1,3 @@
-import re
-from unicodedata import category
 from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib import messages
