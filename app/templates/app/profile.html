@@ -44,6 +44,10 @@
                       {% else %}
                         {% if 'state' in f.id_for_label %}
                           <i class="fas fa-city" aria-hidden="true"></i>
+                        {% else %}
+                          {% if 'phone' in f.id_for_label %}
+                            <i class="far fa-address-book" aria-hidden="true"></i>
+                          {% endif %}
                         {% endif %}
                       {% endif %}
                     {% endif %}
