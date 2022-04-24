@@ -13,6 +13,10 @@ urlpatterns = [
     path('product-detail/<int:pk>', views.ProductDetailView.as_view(), name='product-detail'),
     path('ram/<slug:data>', views.ram, name='ramdata'),
     path('ram/', views.ram, name='ram'),
+    path('address/', views.address, name='address'),
+
+    # url for delete address record
+    path('address/<int:id>', views.delete_customer, name='delete_customer'),
 
     # Auth
     path('registration/', views.CustomerRegistrationView.as_view(), name='customerregistration'),
@@ -29,10 +33,10 @@ urlpatterns = [
     path('resetpasswordconfirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='app/reset_password_confirm.html', form_class=MySetPasswordForm), name="password_reset_confirm"),
     path('resetpasswordsuccess', auth_views.PasswordResetCompleteView.as_view(template_name='app/reset_password_complete.html'), name="password_reset_complete"),
     
+    path('profile/', views.ProfileView.as_view(), name='profile'),
+    
     path('cart/', views.add_to_cart, name='add-to-cart'),
     path('buy/', views.buy_now, name='buy-now'),
-    path('profile/', views.profile, name='profile'),
-    path('address/', views.address, name='address'),
     path('orders/', views.orders, name='orders'),
     
     

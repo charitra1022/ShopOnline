@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
-
-# from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.forms import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 STATE_CHOICES = (
     ('Andaman and Nicobar Islands', 'Andaman and Nicobar Islands'),
@@ -43,14 +44,24 @@ STATE_CHOICES = (
     ('West Bengal', 'West Bengal')
 )
 
+def validate_phone_length(value):
+    str_value = str(value)
+    if len(str_value)!=10:
+        raise ValidationError(_('%(value)s is not invalid'))
+
+def validate_zipcode_length(value):
+    str_value = str(value)
+    if len(str_value)!=6:
+        raise ValidationError(_('%(value)s is not invalid'))
 
 class Customer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    locality = models.CharField(max_length=200)
+    phone = models.IntegerField(validators=[validate_phone_length])
+    locality_address = models.CharField(max_length=200)
     city = models.CharField(max_length=50)
-    zipcode = models.IntegerField()
     state = models.CharField(choices=STATE_CHOICES, max_length=50)
+    zipcode = models.IntegerField(validators=[validate_zipcode_length])
 
     def __str__(self):
         return str(self.id)
