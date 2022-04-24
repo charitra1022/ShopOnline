@@ -49,7 +49,8 @@ def profile(request):
 
 
 def address(request):
-    return render(request, 'app/address.html')
+    address = Customer.objects.filter(user=request.user)
+    return render(request, 'app/address.html', {'address': address, 'active': 'btn-primary'})
 
 
 def orders(request):
@@ -105,7 +106,7 @@ class ProfileView(View):
             city = form.cleaned_data['city']
             state = form.cleaned_data['state']
             zipcode = form.cleaned_data['zipcode']
-            reg = Customer(user=user, name=name, phone=phone, locality=locality_address, city=city, state=state, zipcode=zipcode)
+            reg = Customer(user=user, name=name, phone=phone, locality_address=locality_address, city=city, state=state, zipcode=zipcode)
             reg.save()
 
             messages.success(request, 'Customer Profile has been Added!')
