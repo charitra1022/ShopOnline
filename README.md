@@ -35,15 +35,18 @@ Refer to [BUGS.md](/BUGS.md) for better view on Active Bugs
 
 ### Changed any field in Database?
 
-python manage.py makemigrations
-python manage.py migrate
+`python manage.py makemigrations`
+
+`python manage.py migrate`
 
 ### Reset Database
 
-python manage.py flush
+`python manage.py flush`
 
 ### Recreate database
 
-python manage.py makemigrations
-python manage.py migrate
-python manage.py createsuperuser
+`python manage.py makemigrations`
+
+`python manage.py migrate`
+
+`python manage.py createsuperuser`
