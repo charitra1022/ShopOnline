@@ -21,6 +21,13 @@
         <form action="" method="post">
           {% csrf_token %}
 
+          <!-- Django message -->
+          {% if messages %}
+            {% for message in messages %}
+                <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p>
+            {% endfor %}
+          {% endif %}
+
           <!-- Start For loop-->
           {% for f in form %}
 
@@ -75,14 +82,6 @@
               <p class="alert alert-danger my-3">{{error}}</p>          
             {% endfor %}
           {% endif %}
-
-          <!-- Django message -->
-          {% if messages %}
-            {% for message in messages %}
-                <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p>
-            {% endfor %}
-          {% endif %}
-
         </form>
       </div>
     </div>
