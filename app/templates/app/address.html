@@ -32,9 +32,16 @@
                 <p>City: {{add.city}}</p>
                 <p>State: {{add.state}}</p>
                 <p>Postal Code: {{add.zipcode}}</p>
+
+                <form action="{% url 'delete_customer' id=add.id %}" method="post">
+                  {% csrf_token %}
+                  <button class="btn btn-danger shadow-none" type="submit" ><i class="fa fa-trash"></i></button>
+                </form>
               </div>
               </div>
             </div>
+          {% empty %}
+            <div>There are no Customer profiles added!</div>
           {% endfor %}
         </div>
       </div>
