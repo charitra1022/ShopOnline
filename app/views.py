@@ -57,16 +57,18 @@ def orders(request):
 
 
 def ram(request, data=None):
-    if data==None:
+    if data == None:
         rams = Product.objects.filter(category='RAM')
-    elif str(data).lower()=='corsair' or str(data).lower()=='crucial':
+    elif str(data).lower() == 'corsair' or str(data).lower() == 'crucial':
         rams = Product.objects.filter(category='RAM').filter(brand=data)
 
-    elif str(data)=='below2000':
-        rams = Product.objects.filter(category='RAM').filter(discounted_price__lt=2000)
-    
-    elif str(data)=='above2000':
-        rams = Product.objects.filter(category='RAM').filter(discounted_price__gt=2000)
+    elif str(data) == 'below2000':
+        rams = Product.objects.filter(
+            category='RAM').filter(discounted_price__lt=2000)
+
+    elif str(data) == 'above2000':
+        rams = Product.objects.filter(
+            category='RAM').filter(discounted_price__gt=2000)
 
     return render(request, 'app/ram.html', {'rams': rams})
 
@@ -87,7 +89,23 @@ class CustomerRegistrationView(View):
 def checkout(request):
     return render(request, 'app/checkout.html')
 
+
 class ProfileView(View):
     def get(self, request):
         form = CustomerProfileForm()
-        return render(request, 'app/profile.html', {'form': form})
+        return render(request, 'app/profile.html', {'form': form, 'active': 'btn-primary'})
+
+    def post(self, request):
+        form = CustomerProfileForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            name = form.cleaned_data['name']
+            locality = form.cleaned_data['locality']
+            city = form.cleaned_data['city']
+            state = form.cleaned_data['state']
+            zipcode = form.cleaned_data['zipcode']
+            reg = Customer(user=user, name=name, locality=locality, state=state, zipcode=zipcode, city=city)
+            reg.save()
+
+            messages.success(request, 'Customer Profile has been Added!')
+        return render(request, 'app/profile.html', {'form': form, 'active': 'btn-primary'})
