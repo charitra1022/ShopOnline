@@ -29,9 +29,10 @@ urlpatterns = [
     path('resetpasswordconfirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='app/reset_password_confirm.html', form_class=MySetPasswordForm), name="password_reset_confirm"),
     path('resetpasswordsuccess', auth_views.PasswordResetCompleteView.as_view(template_name='app/reset_password_complete.html'), name="password_reset_complete"),
     
+    path('profile/', views.ProfileView.as_view(), name='profile'),
+    
     path('cart/', views.add_to_cart, name='add-to-cart'),
     path('buy/', views.buy_now, name='buy-now'),
-    path('profile/', views.profile, name='profile'),
     path('address/', views.address, name='address'),
     path('orders/', views.orders, name='orders'),
     
