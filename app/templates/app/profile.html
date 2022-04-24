@@ -10,7 +10,7 @@
 {% block main-content %}
   <div class="container my-5">
     <div class="row">
-      <h3>Welcome <strong>{{user.get_username}}</strong></h3>
+      <h3>Welcome <strong class="text-capitalize">{{request.user.username|capfirst}}</strong></h3>
       <div class="col-sm-2 border-end">
         <ul class="list-unstyled">
           <li class="d-grid"><a href="{% url 'profile' %}" class="btn {{active}}">Profile</a></li>
