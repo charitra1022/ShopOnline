@@ -315,10 +315,10 @@
     </a>
 
     <!-- Dark Mode Toggler -->
-    <div class="darkmode-toggler-container">
+    <div class="darkmode-toggler-container" onclick="toggleSwitch()">
       <input id="darkmode-toggler" class="form-check-input autoscroll-checkbox shadow-none" type="checkbox" onclick="toggleDarkMode()">
-      <span class="moon-icon"><i class="fas fa-sun"></i></span>
-      <span class="sun-icon"><i class="fas fa-moon"></i></span>
+      <span class="sun-icon"><i class="fas fa-sun"></i></span>
+      <span class="moon-icon"><i class="fas fa-moon"></i></span>
     </div>
 
     <!-- Jquery -->
@@ -364,24 +364,7 @@
 
     <!-- Dark Mode Toggler Script -->
     <script>
-      iconVisibility();
       initTheme();
-
-      function iconVisibility() {
-        // toggles visibility of icons on page load
-        var htmlTag = document.getElementsByTagName("html")[0];
-        var btn = document.getElementById("darkmode-toggler");
-        if (btn.checked === true) {
-          document.getElementsByClassName("moon-icon")[0].style.display="none";
-          document.getElementsByClassName("sun-icon")[0].style.display="inline";
-        }
-        else{
-          document.getElementsByClassName("moon-icon")[0].style.display="inline";
-          document.getElementsByClassName("sun-icon")[0].style.display="none";
-        }
-      }
-      
-
       function initTheme(){
         // Automatically read user preference and apply dark or light theme
         var themeMode = localStorage.getItem('theme-mode');
@@ -391,16 +374,15 @@
         toggleDarkMode();
       }
 
-      
       // called on button click
       function toggleDarkMode() {
+        // applies dark mode styles and settings to website
         var htmlTag = document.getElementsByTagName("html")[0];
         var btn = document.getElementById("darkmode-toggler");
 
         if (btn.checked === true) {
           alert("Dark Mode is still in production!\nThere might be many color issues, so please stay on light mode for better experience!")
-          document.getElementsByClassName("moon-icon")[0].style.display="none";
-          document.getElementsByClassName("sun-icon")[0].style.display="inline";
+
           htmlTag.classList.add("dark");
           var cssLink = document.createElement("link");
           cssLink.href = "{% static 'app/css/dark.css' %}";
@@ -413,13 +395,16 @@
           localStorage.setItem('theme-mode', 'dark');
         } else {
           htmlTag.classList.remove("dark");
-          document.getElementsByClassName("moon-icon")[0].style.display="inline";
-          document.getElementsByClassName("sun-icon")[0].style.display="none";
           $('link[data-theme=dark]').remove();
 
           // remove dark theme from user preference
           localStorage.removeItem('theme-mode');
         }
+      }
+      
+      function toggleSwitch() {
+        // Called on icon press. Clicks on invisible input checkbox
+        document.getElementById("darkmode-toggler").click();
       }
     </script>
 

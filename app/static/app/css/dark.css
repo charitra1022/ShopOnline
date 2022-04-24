@@ -37,3 +37,11 @@
 .dark a.btn {
   background-color: #E43F5A;
 }
+
+/* dark mode toggler button */
+.dark .moon-icon {
+  transform: scale(1);
+}
+.dark .sun-icon {
+  transform: scale(0);
+}

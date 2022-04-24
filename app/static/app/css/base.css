@@ -245,16 +245,18 @@ footer a {
 .darkmode-toggler-container span {
   padding: 4px;
 }
-.darkmode-toggler-container input:checked {
-  border: 10px;
-  background-color: #9053c7;
+#darkmode-toggler {
+  display: none;
 }
-.darkmode-toggler-container input:focus:not(:checked) {
-  background-color: rgb(207, 204, 204);
+.sun-icon, .moon-icon {
+  transition: 0.3s transform;
+  position: absolute;
 }
-.darkmode-toggler-container input {
-  width: 20px;
-  height: 20px;
+.moon-icon {
+  transform: scale(0);
+}
+.sun-icon {
+  transform: scale(1);
 }
 
 /*********** Utility Styles ***********/
