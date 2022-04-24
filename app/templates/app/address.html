@@ -1,42 +1,43 @@
 {% extends 'app/base.html' %}
 {% load static %}
-{% block title %}Buy Now{% endblock title %}
+
+{% block custom_css %}
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'app/css/form-page.css' %}" />
+{% endblock custom_css %}
+{% block title %}Profile{% endblock title %}
+
 {% block main-content %}
-<div class="container my-5">
- <div class="row">
- <h3>Welcome Sonam</h3>
-  <div class="col-sm-2 border-end">
-   <ul class="list-unstyled">
-    <li class="d-grid"><a href="{% url 'profile' %}" class="btn btn-primary">Profile</a></li>
-    <li class="d-grid"><a href="{% url 'address' %}" class="btn">Address</a></li>
-   </ul>
-  </div>
-  <div class="col-sm-9 offset-sm-1">
-   <div class="row">
-    <div class="col-sm-6">
-     <div class="card">
-      <div class="card-body">
-       <h3>Address 1</h3>
-       <p>Name: Rahul Kumar</p>
-       <p>Address 1: Lalpur</p>
-       <p>Address 2: Ranchi</p>
-       <p>State: Jharkhand</p>
+  <div class="container my-5">
+    <div class="row">
+      <h3>Welcome <strong class="text-capitalize">{{request.user.username|capfirst}}</strong></h3>
+      <div class="col-sm-2 border-end">
+        <ul class="list-unstyled">
+          <li class="d-grid"><a href="{% url 'profile' %}" class="btn">Profile</a></li>
+          <li class="d-grid"><a href="{% url 'address' %}" class="btn {{active}}">Address</a></li>
+        </ul>
       </div>
-     </div>
-    </div>
-    <div class="col-sm-6">
-     <div class="card">
-      <div class="card-body">
-       <h3>Address 2</h3>
-       <p>Name: Rohit Kumar</p>
-       <p>Address 1: Lalpur</p>
-       <p>Address 2: Ranchi</p>
-       <p>State: Jharkhand</p>
+
+      <div class="col-sm-9 offset-sm-1">
+        <div class="row">
+
+          {% for add in address %}
+            <div class="col-sm-6">
+              <div class="card">
+              <div class="card-body">
+                <h3>Address {{forloop.counter}}</h3>
+                <p>Name: {{add.name}}</p>
+                <p>Phone: {{add.phone}}</p>
+                <p>Address: {{add.locality_address}}</p>
+                <p>City: {{add.city}}</p>
+                <p>State: {{add.state}}</p>
+                <p>Postal Code: {{add.zipcode}}</p>
+              </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
       </div>
-     </div>
     </div>
-   </div>
   </div>
- </div>
-</div>
 {% endblock main-content %}
