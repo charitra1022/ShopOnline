@@ -4,8 +4,8 @@ from django.shortcuts import render
 from django.views import View
 from django.contrib import messages
 
-from .models import Product, CATEGORY_CHOICES
-from .forms import CustomerRegistrationForm
+from .models import Customer, Product, CATEGORY_CHOICES
+from .forms import CustomerRegistrationForm, CustomerProfileForm
 
 
 # from .models import Cart, Customer, OrderPlaced
@@ -86,3 +86,8 @@ class CustomerRegistrationView(View):
 
 def checkout(request):
     return render(request, 'app/checkout.html')
+
+class ProfileView(View):
+    def get(self, request):
+        form = CustomerProfileForm()
+        return render(request, 'app/profile.html', {'form': form})
