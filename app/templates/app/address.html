@@ -22,36 +22,35 @@
       <div class="col-sm-9 offset-sm-1">
         <div class="row mb-3">
           <p class="col"><strong>Add multiple shipping addresses</strong></p>
-          <button onclick="$('#customer-form').css('display', 'block')" class="btn btn-primary col-sm-3"><i class="fa fa-plus"></i> Add Address</i></button>
+          <button onclick="addBtn()" class="btn btn-primary col-sm-3"><i class="fa fa-plus"></i> Add Address</i></button>
         </div>
         
         <div class="row">
 
           {% for add in address %}
-            <div class="col-sm-6">
-              <div class="card">
-              <div class="card-body">
-                <h3>Address {{forloop.counter}}</h3>
-                <p>Name: {{add.name}}</p>
-                <p>Phone: {{add.phone}}</p>
-                <p>Address: {{add.locality_address}}</p>
-                <p>City: {{add.city}}</p>
-                <p>State: {{add.state}}</p>
-                <p>Postal Code: {{add.zipcode}}</p>
+            <div class="card col-sm-6">
+              <h4 class="fw-bold fs-10">Address {{forloop.counter}}</h4>
+              <span class="fs-13 d-block"><span class="fw-bold">Name:</span> {{add.name}}</span>
+              <span class="fs-13 d-block"><span class="fw-bold">Phone:</span> {{add.phone}}</span>
+              <span class="fs-13 d-block"><span class="fw-bold">Address:</span> {{add.locality_address}}</span>
+              <span class="fs-13 d-block"><span class="fw-bold">City:</span> {{add.city}}</span>
+              <span class="fs-13 d-block"><span class="fw-bold">State:</span> {{add.state}}</span>
+              <span class="fs-13 d-block"><span class="fw-bold">Postal Code:</span> {{add.zipcode}}</span>
+              <form action="{% url 'delete_customer' id=add.id %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-danger shadow-none" type="submit" ><i class="fa fa-trash"></i></button>
+              </form>
 
-                <form action="{% url 'delete_customer' id=add.id %}" method="post">
-                  {% csrf_token %}
-                  <button class="btn btn-danger shadow-none" type="submit" ><i class="fa fa-trash"></i></button>
-                </form>
-              </div>
-              </div>
+              
             </div>
+
           {% empty %}
             <div>There are no Customer addresses added! Click the <strong>Add</strong> button to add new address</div>
           {% endfor %}
         </div>
 
-        <div style="display: none;" id="customer-form" class="col-sm-8 offset-sm-1 mt-5">
+        <div style="display: none;" id="customer-form" class="col-sm-8 offset-sm-1 pt-5">
+          <p class="text-center"><strong>Add new Shipping details</strong></p>
           <form action="" method="post">
             {% csrf_token %}
   
@@ -122,3 +121,14 @@
     </div>
   </div>
 {% endblock main-content %}
+
+{% block custom_js %}
+  <script>
+    function addBtn() {
+      // View the form and scroll to it
+      var formDiv = document.getElementById('customer-form');
+      formDiv.style.display = 'block';
+      formDiv.scrollIntoView();
+    }
+  </script>
+{% endblock custom_js %}

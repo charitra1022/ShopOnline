@@ -197,9 +197,9 @@
                     <li>
                       <a class="dropdown-item" href="{% url 'orders' %}">Orders</a>
                     </li>
-                    <li>
+                    <!-- <li>
                       <a class="dropdown-item" href="{% url 'changepassword' %}">Change Password</a>
-                    </li>
+                    </li> -->
                     <li>
                       <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
                     </li>
@@ -221,6 +221,11 @@
               <!-- End Nav DropDown Menu -->
             </ul>
             <!-- End Account Menu -->
+            <a
+            href="{% url 'add-to-cart' %}"
+            class="nav-link text-white"
+            ><i class="fa fa-shopping-cart"></i><span class="badge bg-primary">4</span>
+          </a>
           </div>
           <!-- End Collapse Menu -->
         </div>
