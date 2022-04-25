@@ -42,17 +42,11 @@ def buy_now(request):
     return render(request, 'app/buynow.html')
 
 
-def profile(request):
-    return render(request, 'app/profile.html')
-
-
-def address(request):
-    address = Customer.objects.filter(user=request.user)
-    return render(request, 'app/address.html', {'address': address, 'active': 'btn-primary'})
-
-
 def orders(request):
     return render(request, 'app/orders.html')
+
+def checkout(request):
+    return render(request, 'app/checkout.html')
 
 
 def ram(request, data=None):
@@ -85,17 +79,21 @@ class CustomerRegistrationView(View):
         return render(request, 'app/customerregistration.html', {'form': form})
 
 
-def checkout(request):
-    return render(request, 'app/checkout.html')
+
+# def address(request):
+#     address = Customer.objects.filter(user=request.user)
+#     return render(request, 'app/address.html', {'address': address, 'active': 'btn-primary'})
 
 
-class ProfileView(View):
+class AddressView(View):
     def get(self, request):
         form = CustomerProfileForm()
-        return render(request, 'app/profile.html', {'form': form, 'active': 'btn-primary'})
+        address = Customer.objects.filter(user=request.user)
+        return render(request, 'app/address.html', {'form': form, 'address': address, 'active': 'btn-primary'})
 
     def post(self, request):
         form = CustomerProfileForm(request.POST)
+
         if form.is_valid():
             user = request.user
             name = form.cleaned_data['name']
@@ -107,8 +105,33 @@ class ProfileView(View):
             reg = Customer(user=user, name=name, phone=phone, locality_address=locality_address, city=city, state=state, zipcode=zipcode)
             reg.save()
 
-            messages.success(request, 'Customer Profile has been Added!')
-        return render(request, 'app/profile.html', {'form': form, 'active': 'btn-primary'})
+            # messages.success(request, 'Customer Profile has been Added!')
+        return redirect('address')
+        # return render(request, 'app/address.html', {'form': form, 'active': 'btn-primary'})
+
+
+class ProfileView(View):
+    def get(self, request):
+        return render(request, 'app/profile.html', {'active': 'btn-primary'})
+    # def get(self, request):
+    #     form = CustomerProfileForm()
+    #     return render(request, 'app/profile.html', {'form': form, 'active': 'btn-primary'})
+
+    # def post(self, request):
+    #     form = CustomerProfileForm(request.POST)
+    #     if form.is_valid():
+    #         user = request.user
+    #         name = form.cleaned_data['name']
+    #         phone = form.cleaned_data['phone']
+    #         locality_address = form.cleaned_data['locality_address']
+    #         city = form.cleaned_data['city']
+    #         state = form.cleaned_data['state']
+    #         zipcode = form.cleaned_data['zipcode']
+    #         reg = Customer(user=user, name=name, phone=phone, locality_address=locality_address, city=city, state=state, zipcode=zipcode)
+    #         reg.save()
+
+    #         messages.success(request, 'Customer Profile has been Added!')
+    #     return render(request, 'app/profile.html', {'form': form, 'active': 'btn-primary'})
 
 
 def delete_customer(request, id):

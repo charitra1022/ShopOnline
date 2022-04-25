@@ -1,0 +1,26 @@
+/* Global Properties defined in base.css with values as follows */
+/* --primary-light: #9053c7      theme color */
+/* --secondary-light: #fff       secondary item background and text color for buttons */
+/* --tertiary-light: #57b846     button backgrounds */
+/* --quaternary-light: #000      text color */
+/* --quinary-light: #E9E9E9; */
+/* --senary-light: #333333; */
+/* --septenary-light: #666666; */
+
+
+.btn {
+  box-shadow: none !important;
+  margin: 2px;
+}
+.btn:hover {
+  background-color: var(--quinary-light);
+}
+.btn-primary {
+  background-color: var(--tertiary-light);
+  border: none;
+  box-shadow: none !important;
+  
+}
+.btn-primary:active, .btn-primary:hover {
+  background-color: var(--senary-light);
+}

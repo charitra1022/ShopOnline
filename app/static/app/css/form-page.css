@@ -1,116 +1,16 @@
-/* Universal Styles */
-* {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-}
-
-body,
-html {
-  height: 100%;
-  font-family: Poppins-Regular, sans-serif;
-}
-
-main {
-  width: 100%;
-  margin: 0 auto;
-}
-
-a {
-  font-family: Poppins-Regular;
-  font-size: 14px;
-  line-height: 1.7;
-  color: #57b846;
-  margin: 0px;
-  transition: all 0.4s;
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  text-decoration: none;
-}
-a:focus {
-  outline: none !important;
-}
-a:hover {
-  text-decoration: none;
-  color: #57b846;
-}
-
-input {
-  outline: none;
-  border: none;
-}
-textarea {
-  outline: none;
-  border: none;
-}
-textarea:focus,
-input:focus {
-  border-color: transparent !important;
-}
-input:focus::-webkit-input-placeholder {
-  color: transparent;
-}
-input:focus:-moz-placeholder {
-  color: transparent;
-}
-input:focus::-moz-placeholder {
-  color: transparent;
-}
-input:focus:-ms-input-placeholder {
-  color: transparent;
-}
-textarea:focus::-webkit-input-placeholder {
-  color: transparent;
-}
-textarea:focus:-moz-placeholder {
-  color: transparent;
-}
-textarea:focus::-moz-placeholder {
-  color: transparent;
-}
-textarea:focus:-ms-input-placeholder {
-  color: transparent;
-}
-input::-webkit-input-placeholder {
-  color: #999999;
-}
-input:-moz-placeholder {
-  color: #999999;
-}
-input::-moz-placeholder {
-  color: #999999;
-}
-input:-ms-input-placeholder {
-  color: #999999;
-}
-textarea::-webkit-input-placeholder {
-  color: #999999;
-}
-textarea:-moz-placeholder {
-  color: #999999;
-}
-textarea::-moz-placeholder {
-  color: #999999;
-}
-textarea:-ms-input-placeholder {
-  color: #999999;
-}
-
-button {
-  outline: none !important;
-  border: none;
-  background: transparent;
-}
-button:hover {
-  cursor: pointer;
-}
+/* Global Properties defined in base.css with values as follows */
+/* --primary-light: #9053c7      theme color */
+/* --secondary-light: #fff       secondary item background and text color for buttons */
+/* --tertiary-light: #57b846     button backgrounds */
+/* --quaternary-light: #000      text color */
+/* --quinary-light: #E9E9E9; */
+/* --senary-light: #333333; */
+/* --septenary-light: #666666; */
 
 /* Form Styles */
 .form {
   width: 290px;
 }
-
 .form-error {
   padding-bottom: 10px;
 }
@@ -118,7 +18,7 @@ button:hover {
 .form-title {
   font-family: Poppins-Bold;
   font-size: 24px;
-  color: #333333;
+  color: var(--senary-light);
   line-height: 1.2;
   text-align: center;
   width: 100%;
@@ -128,7 +28,7 @@ button:hover {
 .form-subtitle {
   font-family: Poppins-Bold;
   font-size: 20px;
-  color: #333333;
+  color: var(--senary-light);
   line-height: 1.2;
   text-align: center;
   width: 100%;
@@ -148,10 +48,9 @@ button:hover {
   font-family: Poppins-Medium;
   font-size: 15px;
   line-height: 1.5;
-  color: #666666;
-  /* display: inline; */
+  color: var(--septenary-light);
   width: 100%;
-  background: #e6e6e6;
+  background: var(--quinary-light);
   height: 50px;
   border-radius: 25px;
   padding: 0 30px 0 68px;
@@ -167,7 +66,8 @@ button:hover {
   width: 100%;
   height: 100%;
   box-shadow: 0px 0px 0px 0px;
-  color: rgba(87, 184, 70, 0.8);
+  color: var(--tertiary-light);
+  opacity: 50%;
 }
 
 .form-input:focus + .focus-input {
@@ -204,7 +104,7 @@ button:hover {
   height: 100%;
   padding-left: 35px;
   pointer-events: none;
-  color: #666666;
+  color: var(--septenary-light);
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
@@ -212,7 +112,7 @@ button:hover {
 }
 
 .form-input:focus + .focus-input + .symbol-input {
-  color: #57b846;
+  color: var(--tertiary-light);
   padding-left: 28px;
 }
 
@@ -247,12 +147,12 @@ button:hover {
   font-family: Montserrat-Bold;
   font-size: 15px;
   line-height: 1.5;
-  color: #fff;
+  color: var(--secondary-light);
   text-transform: uppercase;
   width: 100%;
   height: 50px;
   border-radius: 25px;
-  background: #57b846;
+  background: var(--tertiary-light);
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -269,17 +169,17 @@ button:hover {
 }
 
 .form-btn:hover {
-  background: #333333;
+  background: var(--senary-light);
 }
 
 .txt1 {
   font-family: Poppins-Regular;
   font-size: 13px;
   line-height: 1.5;
-  color: #666666;
+  color: var(--septenary-light);
 }
 a.txt1 {
-  color: #57b846;
+  color: var(--tertiary-light);
 }
 
 /* Containers */
@@ -297,7 +197,7 @@ a.txt1 {
   align-items: center;
   padding: 15px;
 
-  background: #9053c7;
+  background: var(--primary-light);
   background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
   background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
   background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
@@ -306,7 +206,7 @@ a.txt1 {
 
 .card-container {
   width: 960px;
-  background: #fff;
+  background: var(--secondary-light);
   border-radius: 10px;
   overflow: hidden;
   display: -webkit-box;

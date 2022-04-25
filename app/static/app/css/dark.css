@@ -1,41 +1,55 @@
+/* Global Properties */
+:root {
+  /* Dark theme color palette */
+  --primary-dark: #162447;
+  --secondary-dark: #1f4068;
+  --tertiary-dark: #1b1b2f;
+  --quaternary-dark: #e43f5a;
+
+  --txt-color-dark: antiquewhite;
+}
+
 /* containers */
 .dark body {
-  background-color: #162447;
-  color: antiquewhite;
+  background-color: var(--primary-dark);
+  color: var(--txt-color-dark);
 }
 .dark .main-container {
   background: none;
-  background-color: #162447 !important;
+  background-color: var(--primary-dark) !important;
 }
 
 /* Form page elements */
 .dark .card-container {
-  background-color: #1F4068;
+  background-color: var(--secondary-dark);
 }
 .dark .card-container .form-title {
-  color: antiquewhite;
+  color: var(--txt-color-dark);
 }
 
 /* Product card */
-.dark .product-card, .dark .product-card .item, .dark .product-card .item-img {
-  background-color: #1F4068;
+.dark .product-card,
+.dark .product-card .item,
+.dark .product-card .item-img {
+  background-color: var(--secondary-dark);
 }
-.dark .product-card a{
-  color: antiquewhite;
+.dark .product-card a {
+  color: var(--txt-color-dark);
 }
 
 /* Footer elements */
 .dark footer {
-  background-color: #1B1B2F;
+  background-color: var(--tertiary-dark);
 }
-.dark footer svg, .dark footer i{
-  color: antiquewhite  !important;
+.dark footer svg,
+.dark footer i {
+  color: var(--txt-color-dark) !important;
   font-size: 100px;
 }
 
 /* Buttons */
 .dark a.btn {
-  background-color: #E43F5A;
+  background-color: var(--quaternary-dark);
 }
 
 /* dark mode toggler button */
