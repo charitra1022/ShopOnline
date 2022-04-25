@@ -22,7 +22,7 @@
       <div class="col-sm-9 offset-sm-1">
         <div class="row mb-3">
           <p class="col"><strong>Add multiple shipping addresses</strong></p>
-          <button onclick="$('#customer-form').css('display', 'block')" class="btn btn-primary col-sm-3"><i class="fa fa-plus"></i> Add Address</i></button>
+          <button onclick="addBtn()" class="btn btn-primary col-sm-3"><i class="fa fa-plus"></i> Add Address</i></button>
         </div>
         
         <div class="row">
@@ -51,7 +51,8 @@
           {% endfor %}
         </div>
 
-        <div style="display: none;" id="customer-form" class="col-sm-8 offset-sm-1 mt-5">
+        <div style="display: none;" id="customer-form" class="col-sm-8 offset-sm-1 pt-5">
+          <p class="text-center"><strong>Add new Shipping details</strong></p>
           <form action="" method="post">
             {% csrf_token %}
   
@@ -122,3 +123,14 @@
     </div>
   </div>
 {% endblock main-content %}
+
+{% block custom_js %}
+  <script>
+    function addBtn() {
+      // View the form and scroll to it
+      var formDiv = document.getElementById('customer-form');
+      formDiv.style.display = 'block';
+      formDiv.scrollIntoView();
+    }
+  </script>
+{% endblock custom_js %}
