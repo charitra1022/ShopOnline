@@ -11,9 +11,14 @@
 .btn {
   box-shadow: none !important;
   margin: 2px;
+  border: none !important;
 }
 .btn:hover {
   background-color: var(--quinary-light);
+  border: none !important;
+}
+.btn:hover .fa-trash {
+  color: black;
 }
 .btn-primary {
   background-color: var(--tertiary-light);
