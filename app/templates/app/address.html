@@ -12,7 +12,7 @@
   <div class="container my-5">
     <div class="row">
       <h3>Welcome <strong class="text-capitalize">{{request.user.username|capfirst}}</strong></h3>
-      <div class="col-sm-2 border-end">
+      <div class="col-sm-2">
         <ul class="list-unstyled">
           <li class="d-grid"><a href="{% url 'profile' %}" class="btn">Profile</a></li>
           <li class="d-grid"><a href="{% url 'address' %}" class="btn {{active}}">Address</a></li>
@@ -20,6 +20,11 @@
       </div>
 
       <div class="col-sm-9 offset-sm-1">
+        <div class="row mb-3">
+          <p class="col"><strong>Add multiple shipping addresses</strong></p>
+          <button onclick="$('#customer-form').css('display', 'block')" class="btn btn-primary col-sm-3"><i class="fa fa-plus"></i> Add Address</i></button>
+        </div>
+        
         <div class="row">
 
           {% for add in address %}
@@ -42,8 +47,76 @@
               </div>
             </div>
           {% empty %}
-            <div>There are no Customer profiles added!</div>
+            <div>There are no Customer addresses added! Click the <strong>Add</strong> button to add new address</div>
           {% endfor %}
+        </div>
+
+        <div style="display: none;" id="customer-form" class="col-sm-8 offset-sm-1 mt-5">
+          <form action="" method="post">
+            {% csrf_token %}
+  
+            <!-- Django message -->
+            {% if messages %}
+              {% for message in messages %}
+                  <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p>
+              {% endfor %}
+            {% endif %}
+  
+            <!-- Start For loop-->
+            {% for f in form %}
+  
+              <!-- Input Field -->
+              <div class="wrap-input validate-input col-12">
+                {{f}}
+                
+                <span class="focus-input"></span>
+                <span class="symbol-input">
+                  {% if 'city' in f.id_for_label %}
+                    <i class="fas fa-city" aria-hidden="true"></i>
+                  {% else %}
+                    {% if 'locality' in f.id_for_label %}
+                      <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    {% else %}
+                      {% if 'name' in f.id_for_label %}
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                      {% else %}
+                        {% if 'zipcode' in f.id_for_label %}
+                          <i class="fas fa-map-pin" aria-hidden="true"></i>
+                        {% else %}
+                          {% if 'state' in f.id_for_label %}
+                            <i class="fas fa-city" aria-hidden="true"></i>
+                          {% else %}
+                            {% if 'phone' in f.id_for_label %}
+                              <i class="far fa-address-book" aria-hidden="true"></i>
+                            {% endif %}
+                          {% endif %}
+                        {% endif %}
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
+                </span>
+              </div>
+              
+              <!-- Input Field Errors -->
+              <div class="form-error">
+                <small class="form-error text-danger">{{fm.errors|striptags}}</small>
+              </div>
+              
+            {% endfor %}
+            <!-- End For loop-->
+  
+            <!-- Submit Button -->
+            <div class="container-form-btn">
+              <input type="submit" class="form-btn" value="Create Customer" />
+            </div>
+          
+            <!-- Form Errors -->
+            {% if form.non_field_errors %}
+              {% for error in form.non_field_errors %}
+                <p class="alert alert-danger my-3">{{error}}</p>          
+              {% endfor %}
+            {% endif %}
+          </form>
         </div>
       </div>
     </div>
