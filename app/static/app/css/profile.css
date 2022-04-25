@@ -7,7 +7,6 @@
 /* --senary-light: #333333; */
 /* --septenary-light: #666666; */
 
-
 .btn {
   box-shadow: none !important;
   margin: 2px;
@@ -24,8 +23,28 @@
   background-color: var(--tertiary-light);
   border: none;
   box-shadow: none !important;
-  
 }
-.btn-primary:active, .btn-primary:hover {
+.btn-primary:active,
+.btn-primary:hover {
   background-color: var(--senary-light);
+}
+
+.card {
+  display: inline-block;
+  margin: 0px 4px 7px;
+  width: max-content;
+  transition: 0.2s transform ease, 0.2s box-shadow ease;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  color: var(--quaternary-light);
+  border: none;
+  padding: 20px;
+}
+.card span {
+  overflow: visible;
+  word-wrap: break-word;
+}
+.card:hover {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  transform: scale(1.02);
 }
