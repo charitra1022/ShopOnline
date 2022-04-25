@@ -1,92 +1,106 @@
+/* Global Properties defined in base.css with values as follows */
+/* --primary-light: #9053c7      theme color */
+/* --secondary-light: #fff       secondary item background and text color for buttons */
+/* --tertiary-light: #57b846     button backgrounds */
+/* --quaternary-light: #000      text color */
+/* --quinary-light: #E9E9E9; */
+/* --senary-light: #333333; */
+/* --septenary-light: #666666; */
+
+/* Global Properties */
+:root {
+  /* Light theme color palette */
+  --cart-btn-light: #006eff;
+  --buy-btn-light: #f30029;
+}
+
 .main-container {
-    width: 100%;
-    min-height: 100vh;
-    padding: 15px;
-  }
-  .product-detail h4,
-  h5,
-  li,
-  span {
-    font-family: Poppins-Regular;
-  }
-  
-  pre {
-    font-family: Poppins-Regular;
-    font-size: 1.1rem;
-  }
-  
-  /* Product image style */
-  .product-img img {
-    display: block;
-    margin-bottom: 50px;
-    margin-top: 50px;
-    border: none;
-  }
-  
-  /* Product detail section */
+  width: 100%;
+  min-height: 100vh;
+  padding: 15px;
+}
+.product-detail h4,
+h5,
+li,
+span {
+  font-family: Poppins-Regular;
+}
+pre {
+  font-family: Poppins-Regular;
+  font-size: 1.1rem;
+}
+
+/* Product image style */
+.product-img img {
+  display: block;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  border: none;
+}
+
+/* Product detail section */
+.product-detail {
+  padding: 20px;
+  font-family: Poppins-Bold;
+}
+@media (max-width: 576px) {
   .product-detail {
-    padding: 20px;
-    font-family: Poppins-Bold;
+    padding-top: 50px;
   }
-  @media (max-width: 576px) {
-    .product-detail {
-      padding-top: 50px;
-    }
-  }
-  
-  /* Button styles */
-  .product-btn {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-family: Montserrat-Bold;
-    font-size: 12px;
-    line-height: 1.5;
-    max-width: fit-content;
-    color: #fff;
-    text-transform: uppercase;
-    height: 40px;
-    border-radius: 25px;
-    display: -webkit-inline-box;
-    display: -webkit-inline-flex;
-    display: -moz-inline-box;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 25px;
-    -webkit-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    transition: all 0.4s;
-  }
-  .product-btn.cart {
-    background: #006eff;
-  }
-  .product-btn.buy {
-    margin-left: 10px;
-    background: #f30029;
-  }
-  .product-btn:hover {
-    background: #333333;
-    color: #fff;
-  }
-  
-  /* Read More styles in description */
-  #productDescription pre {
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
-    white-space: -o-pre-wrap;
-    word-wrap: break-word;  
-  }
-  #productDescription.collapse:not(.show) {
-    display: block;
-    height: 4.4rem;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-  #productDescription.collapsing {
-    height: 4.4rem;
-  }
-  
+}
+
+/* Button styles */
+.product-btn {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-family: Montserrat-Bold;
+  font-size: 12px;
+  line-height: 1.5;
+  max-width: fit-content;
+  color: var(--secondary-light);
+  text-transform: uppercase;
+  height: 40px;
+  border-radius: 25px;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -moz-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 25px;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+.product-btn.cart {
+  background: var(--cart-btn-light);
+}
+.product-btn.buy {
+  margin-left: 10px;
+  background: var(--buy-btn-light);
+}
+.product-btn:hover {
+  background: var(--senary-light);
+  color: var(--secondary-light);
+}
+
+/* Read More styles in description */
+#productDescription pre {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+#productDescription.collapse:not(.show) {
+  display: block;
+  height: 4.4rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#productDescription.collapsing {
+  height: 4.4rem;
+}

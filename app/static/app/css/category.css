@@ -1,3 +1,12 @@
+/* Global Properties defined in base.css with values as follows */
+/* --primary-light: #9053c7      theme color */
+/* --secondary-light: #fff       secondary item background and text color for buttons */
+/* --tertiary-light: #57b846     button backgrounds */
+/* --quaternary-light: #000      text color */
+/* --quinary-light: #E9E9E9; */
+/* --senary-light: #333333; */
+/* --septenary-light: #666666; */
+
 /* Containers */
 .main-container {
   width: 100%;
@@ -12,7 +21,6 @@
   flex: 0 0 0%;
 }
 
-
 .product-card {
   display: inline-block;
   margin: 0px 2px 5px;
@@ -26,10 +34,10 @@
 }
 .product-card-btn {
   display: inline-block;
-  color: black;
+  color: var(--quaternary-light);
 }
 .product-card .item {
-  background-color: white;
+  background-color: var(--secondary-light);
   padding: 20px;
   border-radius: 5px;
 }
@@ -62,11 +70,11 @@
   font-family: Montserrat-Bold;
   font-size: 15px;
   line-height: 1.5;
-  color: #fff;
+  color: var(--secondary-light);
   text-transform: uppercase;
   height: 40px;
   border-radius: 25px;
-  background: #57b846;
+  background: var(--tertiary-light);
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -82,7 +90,5 @@
   transition: all 0.4s;
 }
 .product-card .btn-primary:hover {
-  background: #333333;
+  background: var(--senary-light);
 }
-
-
