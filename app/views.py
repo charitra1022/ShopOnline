@@ -8,7 +8,6 @@ from .models import Cart, Customer, Product, CATEGORY_CHOICES
 from .forms import CustomerRegistrationForm, CustomerProfileForm
 
 
-
 class ProductSneekPeak(View):
     # for home page
     def get(self, request):
@@ -92,6 +91,7 @@ def plus_cart_item(request):
             }
             return JsonResponse(data)
 
+
 def minus_cart_item(request):
     # for minus button in cart page
     if request.method == 'GET':
@@ -122,6 +122,7 @@ def minus_cart_item(request):
                 'shippingamount': shipping,
             }
             return JsonResponse(data)
+
 
 def remove_cart_item(request):
     # for delete button in cart page
