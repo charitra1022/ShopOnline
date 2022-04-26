@@ -2,11 +2,9 @@ from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib import messages
 
-from .models import Customer, Product, CATEGORY_CHOICES
+from .models import Cart, Customer, Product, CATEGORY_CHOICES
 from .forms import CustomerRegistrationForm, CustomerProfileForm
 
-
-# from .models import Cart, Customer, OrderPlaced
 
 
 class ProductSneekPeak(View):
@@ -35,7 +33,32 @@ class ProductDetailView(View):
 
 
 def add_to_cart(request):
-    return render(request, 'app/addtocart.html')
+    user = request.user
+    product_id = request.GET.get("product_id")
+    if product_id is not None:
+        product = Product.objects.get(id=product_id)
+        Cart(user=user, product=product).save()
+    return redirect("/cart")
+
+
+def view_cart(request):
+    if request.user.is_authenticated:
+        user = request.user
+        cart = Cart.objects.filter(user=user)
+
+        if cart:
+            amounts = []
+            shipping = 50.0
+            for i in cart:
+                amounts.append(i.product.discounted_price)
+            total_amt = sum(amounts)
+            if total_amt >= 500:
+                shipping = 0.0
+            total_amt += shipping
+
+            return render(request, 'app/addtocart.html', {'carts': cart, 'amount': sum(amounts), 'totalamount': total_amt, 'shipping': shipping, 'cartempty': False})
+        else:
+            return render(request, 'app/addtocart.html', {'cartempty': True})
 
 
 def buy_now(request):
@@ -44,6 +67,7 @@ def buy_now(request):
 
 def orders(request):
     return render(request, 'app/orders.html')
+
 
 def checkout(request):
     return render(request, 'app/checkout.html')
@@ -79,7 +103,6 @@ class CustomerRegistrationView(View):
         return render(request, 'app/customerregistration.html', {'form': form})
 
 
-
 # def address(request):
 #     address = Customer.objects.filter(user=request.user)
 #     return render(request, 'app/address.html', {'address': address, 'active': 'btn-primary'})
@@ -102,7 +125,8 @@ class AddressView(View):
             city = form.cleaned_data['city']
             state = form.cleaned_data['state']
             zipcode = form.cleaned_data['zipcode']
-            reg = Customer(user=user, name=name, phone=phone, locality_address=locality_address, city=city, state=state, zipcode=zipcode)
+            reg = Customer(user=user, name=name, phone=phone,
+                           locality_address=locality_address, city=city, state=state, zipcode=zipcode)
             reg.save()
 
             # messages.success(request, 'Customer Profile has been Added!')
