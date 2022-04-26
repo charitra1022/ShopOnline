@@ -6,8 +6,8 @@ from .models import Cart, Customer, Product, CATEGORY_CHOICES
 from .forms import CustomerRegistrationForm, CustomerProfileForm
 
 
-
 class ProductSneekPeak(View):
+    # for home page
     def get(self, request):
 
         # Fetch first 3 product objects according to their categories
@@ -17,22 +17,18 @@ class ProductSneekPeak(View):
             cat_name = ''.join(i[1].strip().lower().split())
             cat_product = Product.objects.filter(category=cat_code)[:5]
             categories[cat_name] = cat_product
-
-        # topwears = Product.objects.filter(category='TW')
-        # bottomwears = Product.objects.filter(category='BW')
-        # rams = Product.objects.filter(category='RAM')
-        # laptops = Product.objects.filter(category='L')
-
         return render(request, 'app/home.html', categories)
 
 
 class ProductDetailView(View):
+    # for product page
     def get(self, request, pk):
         product = Product.objects.get(pk=pk)
         return render(request, 'app/productdetail.html', {'product': product})
 
 
 def add_to_cart(request):
+    # for add to cart in db
     user = request.user
     product_id = request.GET.get("product_id")
     if product_id is not None:
@@ -42,10 +38,10 @@ def add_to_cart(request):
 
 
 def view_cart(request):
+    # for cart page
     if request.user.is_authenticated:
         user = request.user
         cart = Cart.objects.filter(user=user)
-
         if cart:
             amounts = []
             shipping = 50.0
@@ -74,6 +70,7 @@ def checkout(request):
 
 
 def ram(request, data=None):
+    # for ram page
     if data == None:
         rams = Product.objects.filter(category='RAM')
     elif str(data).lower() == 'corsair' or str(data).lower() == 'crucial':
@@ -91,6 +88,7 @@ def ram(request, data=None):
 
 
 class CustomerRegistrationView(View):
+    # for register page
     def get(self, request):
         form = CustomerRegistrationForm()
         return render(request, 'app/customerregistration.html', {'form': form})
@@ -103,12 +101,8 @@ class CustomerRegistrationView(View):
         return render(request, 'app/customerregistration.html', {'form': form})
 
 
-# def address(request):
-#     address = Customer.objects.filter(user=request.user)
-#     return render(request, 'app/address.html', {'address': address, 'active': 'btn-primary'})
-
-
 class AddressView(View):
+    # for address page
     def get(self, request):
         form = CustomerProfileForm()
         address = Customer.objects.filter(user=request.user)
@@ -116,7 +110,6 @@ class AddressView(View):
 
     def post(self, request):
         form = CustomerProfileForm(request.POST)
-
         if form.is_valid():
             user = request.user
             name = form.cleaned_data['name']
@@ -135,6 +128,7 @@ class AddressView(View):
 
 
 class ProfileView(View):
+    # for profile page
     def get(self, request):
         return render(request, 'app/profile.html', {'active': 'btn-primary'})
     # def get(self, request):
@@ -159,6 +153,7 @@ class ProfileView(View):
 
 
 def delete_customer(request, id):
+    # for deleting customer address
     ob = Customer.objects.get(id=id)
     ob.delete()
     return redirect('address')
