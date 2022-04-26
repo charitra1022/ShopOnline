@@ -127,10 +127,13 @@
               </div>
 
               <div class="btn-container">
-                <a href="#" type="button" class="btn btn-primary shadow-none">
-                  <span>Add to Cart</span>&nbsp;&nbsp;
-                  <i class="fas fa-shopping-cart"></i>
-                </a>
+                <form action="/add-to-cart" class="d-inline-block">
+                  <input type="hidden" name="product_id" value="{{b.id}}" id="product_id">
+                  <button type="submit" href="{% url 'add-to-cart' %}" class="btn btn-primary shadow-none">
+                    <span>Add to Cart</span>&nbsp;&nbsp;
+                    <i class="fas fa-shopping-cart"></i>
+                  </button>
+                </form>
               </div>
             </div>
           </a>
@@ -176,10 +179,13 @@
               </div>
 
               <div class="btn-container">
-                <a href="#" type="button" class="btn btn-primary shadow-none">
-                  <span>Add to Cart</span>&nbsp;&nbsp;
-                  <i class="fas fa-shopping-cart"></i>
-                </a>
+                <form action="/add-to-cart" class="d-inline-block">
+                  <input type="hidden" name="product_id" value="{{b.id}}" id="product_id">
+                  <button type="submit" href="{% url 'add-to-cart' %}" class="btn btn-primary shadow-none">
+                    <span>Add to Cart</span>&nbsp;&nbsp;
+                    <i class="fas fa-shopping-cart"></i>
+                  </button>
+                </form>
               </div>
             </div>
           </a>

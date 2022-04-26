@@ -1,15 +1,16 @@
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib import messages
+from django.db.models import Q
 
-from .models import Customer, Product, CATEGORY_CHOICES
+from .models import Cart, Customer, Product, CATEGORY_CHOICES
 from .forms import CustomerRegistrationForm, CustomerProfileForm
 
 
-# from .models import Cart, Customer, OrderPlaced
-
 
 class ProductSneekPeak(View):
+    # for home page
     def get(self, request):
 
         # Fetch first 3 product objects according to their categories
@@ -19,23 +20,108 @@ class ProductSneekPeak(View):
             cat_name = ''.join(i[1].strip().lower().split())
             cat_product = Product.objects.filter(category=cat_code)[:5]
             categories[cat_name] = cat_product
-
-        # topwears = Product.objects.filter(category='TW')
-        # bottomwears = Product.objects.filter(category='BW')
-        # rams = Product.objects.filter(category='RAM')
-        # laptops = Product.objects.filter(category='L')
-
         return render(request, 'app/home.html', categories)
 
 
 class ProductDetailView(View):
+    # for product page
     def get(self, request, pk):
         product = Product.objects.get(pk=pk)
         return render(request, 'app/productdetail.html', {'product': product})
 
 
 def add_to_cart(request):
-    return render(request, 'app/addtocart.html')
+    # for add to cart in db
+    user = request.user
+    product_id = request.GET.get("product_id")
+    if product_id is not None:
+        product = Product.objects.get(id=product_id)
+        Cart(user=user, product=product).save()
+    return redirect("/cart")
+
+
+def view_cart(request):
+    # for cart page
+    if request.user.is_authenticated:
+        cart = Cart.objects.filter(user=request.user)
+        if cart:
+            amounts = []
+            shipping = 50.0
+            for i in cart:
+                quantity = i.quantity
+                price = i.product.discounted_price * quantity
+                amounts.append(price)
+            total_amt = sum(amounts)
+            if total_amt >= 500:
+                shipping = 0.0
+            total_amt += shipping
+
+            return render(request, 'app/addtocart.html', {'carts': cart, 'amount': sum(amounts), 'totalamount': total_amt, 'shipping': shipping, 'cartempty': False})
+        else:
+            return render(request, 'app/addtocart.html', {'cartempty': True})
+
+
+def plus_cart_item(request):
+    # for plus button in cart page
+    if request.method == 'GET':
+        product_id = request.GET['product_id']
+        print(product_id)
+        cart_product = Cart.objects.get(
+            Q(product=product_id) & Q(user=request.user))
+        cart_product.quantity += 1
+        cart_product.save()
+
+        cart = Cart.objects.filter(user=request.user)
+        if cart:
+            amounts = []
+            shipping = 50.0
+            for i in cart:
+                quantity = i.quantity
+                price = i.product.discounted_price * quantity
+                amounts.append(price)
+            total_amt = sum(amounts)
+            if total_amt >= 500:
+                shipping = 0.0
+            total_amt += shipping
+
+            data = {
+                'quantity': cart_product.quantity,
+                'totalamount': sum(amounts),
+                'finalamount': total_amt,
+                'shippingamount': shipping,
+            }
+            return JsonResponse(data)
+
+def minus_cart_item(request):
+    # for minus button in cart page
+    if request.method == 'GET':
+        product_id = request.GET['product_id']
+        print(product_id)
+        cart_product = Cart.objects.get(
+            Q(product=product_id) & Q(user=request.user))
+        cart_product.quantity -= 1
+        cart_product.save()
+
+        cart = Cart.objects.filter(user=request.user)
+        if cart:
+            amounts = []
+            shipping = 50.0
+            for i in cart:
+                quantity = i.quantity
+                price = i.product.discounted_price * quantity
+                amounts.append(price)
+            total_amt = sum(amounts)
+            if total_amt >= 500:
+                shipping = 0.0
+            total_amt += shipping
+
+            data = {
+                'quantity': cart_product.quantity,
+                'totalamount': sum(amounts),
+                'finalamount': total_amt,
+                'shippingamount': shipping,
+            }
+            return JsonResponse(data)
 
 
 def buy_now(request):
@@ -45,11 +131,13 @@ def buy_now(request):
 def orders(request):
     return render(request, 'app/orders.html')
 
+
 def checkout(request):
     return render(request, 'app/checkout.html')
 
 
 def ram(request, data=None):
+    # for ram page
     if data == None:
         rams = Product.objects.filter(category='RAM')
     elif str(data).lower() == 'corsair' or str(data).lower() == 'crucial':
@@ -67,6 +155,7 @@ def ram(request, data=None):
 
 
 class CustomerRegistrationView(View):
+    # for register page
     def get(self, request):
         form = CustomerRegistrationForm()
         return render(request, 'app/customerregistration.html', {'form': form})
@@ -79,13 +168,8 @@ class CustomerRegistrationView(View):
         return render(request, 'app/customerregistration.html', {'form': form})
 
 
-
-# def address(request):
-#     address = Customer.objects.filter(user=request.user)
-#     return render(request, 'app/address.html', {'address': address, 'active': 'btn-primary'})
-
-
 class AddressView(View):
+    # for address page
     def get(self, request):
         form = CustomerProfileForm()
         address = Customer.objects.filter(user=request.user)
@@ -93,7 +177,6 @@ class AddressView(View):
 
     def post(self, request):
         form = CustomerProfileForm(request.POST)
-
         if form.is_valid():
             user = request.user
             name = form.cleaned_data['name']
@@ -102,7 +185,8 @@ class AddressView(View):
             city = form.cleaned_data['city']
             state = form.cleaned_data['state']
             zipcode = form.cleaned_data['zipcode']
-            reg = Customer(user=user, name=name, phone=phone, locality_address=locality_address, city=city, state=state, zipcode=zipcode)
+            reg = Customer(user=user, name=name, phone=phone,
+                           locality_address=locality_address, city=city, state=state, zipcode=zipcode)
             reg.save()
 
             # messages.success(request, 'Customer Profile has been Added!')
@@ -111,6 +195,7 @@ class AddressView(View):
 
 
 class ProfileView(View):
+    # for profile page
     def get(self, request):
         return render(request, 'app/profile.html', {'active': 'btn-primary'})
     # def get(self, request):
@@ -135,6 +220,7 @@ class ProfileView(View):
 
 
 def delete_customer(request, id):
+    # for deleting customer address
     ob = Customer.objects.get(id=id)
     ob.delete()
     return redirect('address')
