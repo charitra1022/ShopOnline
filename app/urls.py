@@ -16,6 +16,8 @@ urlpatterns = [
 
     path('address/', views.AddressView.as_view(), name='address'),
     path('profile/', views.ProfileView.as_view(), name='profile'),
+    path('add-to-cart/', views.add_to_cart, name='add-to-cart'),
+    path('cart/', views.view_cart, name='view_cart'),
 
     # url for delete address record
     path('address/<int:id>', views.delete_customer, name='delete_customer'),
@@ -36,7 +38,7 @@ urlpatterns = [
     path('resetpasswordsuccess', auth_views.PasswordResetCompleteView.as_view(template_name='app/reset_password_complete.html'), name="password_reset_complete"),
     
     
-    path('cart/', views.add_to_cart, name='add-to-cart'),
+    
     path('buy/', views.buy_now, name='buy-now'),
     path('orders/', views.orders, name='orders'),
     
