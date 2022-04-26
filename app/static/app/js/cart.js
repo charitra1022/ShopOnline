@@ -48,6 +48,7 @@ $('.delete-cart').click(function () {
   var ship_amt_el = document.getElementById('shipping-amount');
   var total_amt_el = document.getElementById('total-amount');
   var final_amt_el = document.getElementById('final-amount');
+  var cart_badge = document.getElementById('cart_badge');
 
   $.ajax({
     type: "GET",
@@ -61,6 +62,7 @@ $('.delete-cart').click(function () {
         total_amt_el.innerText = data.totalamount;
         final_amt_el.innerText = data.finalamount;
         el.parentNode.parentNode.parentNode.parentNode.remove();
+        cart_badge.innerText = parseInt(cart_badge.innerHTML) - 1;
       } else {
         location.reload();
       }
