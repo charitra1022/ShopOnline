@@ -1,0 +1,10 @@
+pre {
+  display: block;
+  height: 5.2rem;
+  overflow: hidden;
+  white-space:pre;
+  font-family: Poppins-Regular;
+  font-size: 0.9rem;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+}
