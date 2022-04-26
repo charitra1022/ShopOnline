@@ -23,6 +23,7 @@ urlpatterns = [
     path('cart/', views.view_cart, name='view_cart'),
     path('pluscartitem/', views.plus_cart_item, name='pluscartitem'),
     path('minuscartitem/', views.minus_cart_item, name='minuscartitem'),
+    path('removecartitem/', views.remove_cart_item, name='removecartitem'),
 
     # url for delete address record
     path('address/<int:id>', views.delete_customer, name='delete_customer'),

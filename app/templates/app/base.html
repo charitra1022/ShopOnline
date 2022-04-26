@@ -227,7 +227,7 @@
               <a
               href="{% url 'add-to-cart' %}"
               class="nav-link text-white"
-              ><i class="fa fa-shopping-cart"></i><span class="badge bg-primary">4</span>
+              ><i class="fa fa-shopping-cart"></i><span class="badge bg-primary"><span id="cart_badge">{{cart_counter}}</span></span>
             {% endif %}
           </a>
           </div>
