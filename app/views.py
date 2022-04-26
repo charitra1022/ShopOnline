@@ -56,7 +56,7 @@ def view_cart(request):
                 shipping = 0.0
             total_amt += shipping
 
-            return render(request, 'app/addtocart.html', {'carts': cart, 'amount': sum(amounts), 'totalamount': total_amt, 'shipping': shipping, 'cartempty': False})
+            return render(request, 'app/addtocart.html', {'carts': cart, 'totalamount': sum(amounts), 'finalamount': total_amt, 'shippingamount': shipping, 'cartempty': False})
         else:
             return render(request, 'app/addtocart.html', {'cartempty': True})
 
