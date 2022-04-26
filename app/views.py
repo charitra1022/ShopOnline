@@ -1,9 +1,12 @@
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib import messages
+from django.db.models import Q
 
 from .models import Cart, Customer, Product, CATEGORY_CHOICES
 from .forms import CustomerRegistrationForm, CustomerProfileForm
+
 
 
 class ProductSneekPeak(View):
@@ -40,13 +43,14 @@ def add_to_cart(request):
 def view_cart(request):
     # for cart page
     if request.user.is_authenticated:
-        user = request.user
-        cart = Cart.objects.filter(user=user)
+        cart = Cart.objects.filter(user=request.user)
         if cart:
             amounts = []
             shipping = 50.0
             for i in cart:
-                amounts.append(i.product.discounted_price)
+                quantity = i.quantity
+                price = i.product.discounted_price * quantity
+                amounts.append(price)
             total_amt = sum(amounts)
             if total_amt >= 500:
                 shipping = 0.0
@@ -55,6 +59,69 @@ def view_cart(request):
             return render(request, 'app/addtocart.html', {'carts': cart, 'amount': sum(amounts), 'totalamount': total_amt, 'shipping': shipping, 'cartempty': False})
         else:
             return render(request, 'app/addtocart.html', {'cartempty': True})
+
+
+def plus_cart_item(request):
+    # for plus button in cart page
+    if request.method == 'GET':
+        product_id = request.GET['product_id']
+        print(product_id)
+        cart_product = Cart.objects.get(
+            Q(product=product_id) & Q(user=request.user))
+        cart_product.quantity += 1
+        cart_product.save()
+
+        cart = Cart.objects.filter(user=request.user)
+        if cart:
+            amounts = []
+            shipping = 50.0
+            for i in cart:
+                quantity = i.quantity
+                price = i.product.discounted_price * quantity
+                amounts.append(price)
+            total_amt = sum(amounts)
+            if total_amt >= 500:
+                shipping = 0.0
+            total_amt += shipping
+
+            data = {
+                'quantity': cart_product.quantity,
+                'totalamount': sum(amounts),
+                'finalamount': total_amt,
+                'shippingamount': shipping,
+            }
+            return JsonResponse(data)
+
+def minus_cart_item(request):
+    # for minus button in cart page
+    if request.method == 'GET':
+        product_id = request.GET['product_id']
+        print(product_id)
+        cart_product = Cart.objects.get(
+            Q(product=product_id) & Q(user=request.user))
+        cart_product.quantity -= 1
+        cart_product.save()
+
+        cart = Cart.objects.filter(user=request.user)
+        if cart:
+            amounts = []
+            shipping = 50.0
+            for i in cart:
+                quantity = i.quantity
+                price = i.product.discounted_price * quantity
+                amounts.append(price)
+            total_amt = sum(amounts)
+            if total_amt >= 500:
+                shipping = 0.0
+            total_amt += shipping
+
+            data = {
+                'quantity': cart_product.quantity,
+                'totalamount': sum(amounts),
+                'finalamount': total_amt,
+                'shippingamount': shipping,
+            }
+            return JsonResponse(data)
 
 
 def buy_now(request):

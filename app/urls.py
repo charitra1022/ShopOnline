@@ -17,8 +17,12 @@ urlpatterns = [
 
     path('address/', views.AddressView.as_view(), name='address'),
     path('profile/', views.ProfileView.as_view(), name='profile'),
+
+    # Cart urls
     path('add-to-cart/', views.add_to_cart, name='add-to-cart'),
     path('cart/', views.view_cart, name='view_cart'),
+    path('pluscartitem/', views.plus_cart_item, name='pluscartitem'),
+    path('minuscartitem/', views.minus_cart_item, name='minuscartitem'),
 
     # url for delete address record
     path('address/<int:id>', views.delete_customer, name='delete_customer'),
