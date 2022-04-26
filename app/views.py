@@ -123,6 +123,38 @@ def minus_cart_item(request):
             }
             return JsonResponse(data)
 
+def remove_cart_item(request):
+    # for delete button in cart page
+    if request.method == 'GET':
+        product_id = request.GET['product_id']
+        print(product_id)
+        cart_product = Cart.objects.get(
+            Q(product=product_id) & Q(user=request.user))
+        cart_product.delete()
+
+        cart = Cart.objects.filter(user=request.user)
+        if cart:
+            amounts = []
+            shipping = 50.0
+            for i in cart:
+                quantity = i.quantity
+                price = i.product.discounted_price * quantity
+                amounts.append(price)
+            total_amt = sum(amounts)
+            if total_amt >= 500:
+                shipping = 0.0
+            total_amt += shipping
+
+            data = {
+                'empty': False,
+                'totalamount': sum(amounts),
+                'finalamount': total_amt,
+                'shippingamount': shipping,
+            }
+            return JsonResponse(data)
+        else:
+            return JsonResponse({'empty': True})
+
 
 def buy_now(request):
     return render(request, 'app/buynow.html')

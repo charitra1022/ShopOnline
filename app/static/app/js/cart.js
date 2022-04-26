@@ -12,7 +12,6 @@ $('.plus-cart').click(function () {
       product_id: id,
     },
     success: function (data) {
-      console.log(data);
       quantity_el.innerText = data.quantity;
       ship_amt_el.innerText = data.shippingamount;
       total_amt_el.innerText = data.totalamount;
@@ -35,7 +34,6 @@ $('.minus-cart').click(function () {
       product_id: id,
     },
     success: function (data) {
-      console.log(data);
       quantity_el.innerText = data.quantity;
       ship_amt_el.innerText = data.shippingamount;
       total_amt_el.innerText = data.totalamount;
@@ -46,5 +44,26 @@ $('.minus-cart').click(function () {
 
 $('.delete-cart').click(function () {
   var id = $(this).attr("pid");
-  console.log(`trash ${id}`);
+  var el = this;
+  var ship_amt_el = document.getElementById('shipping-amount');
+  var total_amt_el = document.getElementById('total-amount');
+  var final_amt_el = document.getElementById('final-amount');
+
+  $.ajax({
+    type: "GET",
+    url: "/removecartitem",
+    data: {
+      product_id: id,
+    },
+    success: function (data) {
+      if (!data.empty){
+        ship_amt_el.innerText = data.shippingamount;
+        total_amt_el.innerText = data.totalamount;
+        final_amt_el.innerText = data.finalamount;
+        el.parentNode.parentNode.parentNode.parentNode.remove();
+      } else {
+        location.reload();
+      }
+    }
+  })
 })
