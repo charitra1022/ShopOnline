@@ -25,6 +25,9 @@ urlpatterns = [
     path('minuscartitem/', views.minus_cart_item, name='minuscartitem'),
     path('removecartitem/', views.remove_cart_item, name='removecartitem'),
 
+    path('checkout/', views.checkout, name='checkout'),
+    path('paymentdone/', views.payment_done, name='paymentdone'),
+
     # url for delete address record
     path('address/<int:id>', views.delete_customer, name='delete_customer'),
 
@@ -57,5 +60,5 @@ urlpatterns = [
     path('orders/', views.orders, name='orders'),
 
 
-    path('checkout/', views.checkout, name='checkout'),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

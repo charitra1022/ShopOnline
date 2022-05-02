@@ -41,23 +41,37 @@ def add_to_cart(request):
     return redirect("/cart")
 
 
+def calculateAmounts(cart):
+    # Calculate total amounts based on cart objects
+    if cart:
+        amounts = []
+        shipping = 50.0
+        for i in cart:
+            quantity = i.quantity
+            price = i.product.discounted_price * quantity
+            amounts.append(price)
+        total_amt = sum(amounts)
+        if total_amt >= 500:
+            shipping = 0.0
+        total_amt += shipping
+
+        final_amounts = {
+            'shippingamount': shipping, 
+            'finalamount': total_amt,
+            'totalamount': sum(amounts),
+        }
+        return final_amounts
+    else:
+        return
+
+
 def view_cart(request):
     # for cart page
     if request.user.is_authenticated:
         cart = Cart.objects.filter(user=request.user)
         if cart:
-            amounts = []
-            shipping = 50.0
-            for i in cart:
-                quantity = i.quantity
-                price = i.product.discounted_price * quantity
-                amounts.append(price)
-            total_amt = sum(amounts)
-            if total_amt >= 500:
-                shipping = 0.0
-            total_amt += shipping
-
-            return render(request, 'app/addtocart.html', {'carts': cart, 'totalamount': sum(amounts), 'finalamount': total_amt, 'shippingamount': shipping, 'cartempty': False})
+            final_amounts = calculateAmounts(cart)
+            return render(request, 'app/addtocart.html', {'carts': cart, 'amounts': final_amounts, 'cartempty': False})
         else:
             return render(request, 'app/addtocart.html', {'cartempty': True})
 
@@ -73,24 +87,11 @@ def plus_cart_item(request):
 
         cart = Cart.objects.filter(user=request.user)
         if cart:
-            amounts = []
-            shipping = 50.0
-            for i in cart:
-                quantity = i.quantity
-                price = i.product.discounted_price * quantity
-                amounts.append(price)
-            total_amt = sum(amounts)
-            if total_amt >= 500:
-                shipping = 0.0
-            total_amt += shipping
-
-            data = {
-                'quantity': cart_product.quantity,
-                'totalamount': sum(amounts),
-                'finalamount': total_amt,
-                'shippingamount': shipping,
-            }
+            data = calculateAmounts(cart)
+            data['quantity'] = cart_product.quantity
             return JsonResponse(data)
+        else:
+            return JsonResponse({'empty': True})
 
 
 def minus_cart_item(request):
@@ -107,24 +108,11 @@ def minus_cart_item(request):
 
         cart = Cart.objects.filter(user=request.user)
         if cart:
-            amounts = []
-            shipping = 50.0
-            for i in cart:
-                quantity = i.quantity
-                price = i.product.discounted_price * quantity
-                amounts.append(price)
-            total_amt = sum(amounts)
-            if total_amt >= 500:
-                shipping = 0.0
-            total_amt += shipping
-
-            data = {
-                'quantity': cart_product.quantity,
-                'totalamount': sum(amounts),
-                'finalamount': total_amt,
-                'shippingamount': shipping,
-            }
+            data = calculateAmounts(cart)
+            data['quantity'] = cart_product.quantity
             return JsonResponse(data)
+        else:
+            return JsonResponse({'empty': True})
 
 
 def remove_cart_item(request):
@@ -137,23 +125,8 @@ def remove_cart_item(request):
 
         cart = Cart.objects.filter(user=request.user)
         if cart:
-            amounts = []
-            shipping = 50.0
-            for i in cart:
-                quantity = i.quantity
-                price = i.product.discounted_price * quantity
-                amounts.append(price)
-            total_amt = sum(amounts)
-            if total_amt >= 500:
-                shipping = 0.0
-            total_amt += shipping
-
-            data = {
-                'empty': False,
-                'totalamount': sum(amounts),
-                'finalamount': total_amt,
-                'shippingamount': shipping,
-            }
+            data = calculateAmounts(cart)
+            data['quantity'] = cart_product.quantity
             return JsonResponse(data)
         else:
             return JsonResponse({'empty': True})
@@ -165,10 +138,6 @@ def buy_now(request):
 
 def orders(request):
     return render(request, 'app/orders.html')
-
-
-def checkout(request):
-    return render(request, 'app/checkout.html')
 
 
 def ram(request, data=None):
@@ -187,6 +156,20 @@ def ram(request, data=None):
             category='RAM').filter(discounted_price__gt=2000)
 
     return render(request, 'app/ram.html', {'rams': rams})
+
+
+def checkout(request):
+    user = request.user
+    addresses = Customer.objects.filter(user=user)
+    carts = Cart.objects.filter(user=user)
+
+    final_amounts = calculateAmounts(carts)
+
+    return render(request, 'app/checkout.html', {'addresses': addresses, 'cartitems': carts, 'amounts': final_amounts})
+
+
+def payment_done(request):
+    return render(request, 'app/ram.html')
 
 
 class CustomerRegistrationView(View):
