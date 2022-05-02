@@ -7,6 +7,8 @@ from django.db.models import Q
 from .models import Cart, Customer, Product, CATEGORY_CHOICES
 from .forms import CustomerRegistrationForm, CustomerProfileForm
 
+from .custom_logger import logger
+
 
 class ProductSneekPeak(View):
     # for home page
@@ -100,6 +102,9 @@ def minus_cart_item(request):
         cart_product = Cart.objects.get(
             Q(product=product_id) & Q(user=request.user))
         cart_product.quantity -= 1
+        if cart_product.quantity<1:
+            logger.error("cart quantity was below 1, setting to 1")
+            cart_product.quantity=1
         cart_product.save()
 
         cart = Cart.objects.filter(user=request.user)
