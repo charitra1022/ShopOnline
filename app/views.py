@@ -66,7 +66,6 @@ def plus_cart_item(request):
     # for plus button in cart page
     if request.method == 'GET':
         product_id = request.GET['product_id']
-        print(product_id)
         cart_product = Cart.objects.get(
             Q(product=product_id) & Q(user=request.user))
         cart_product.quantity += 1
@@ -98,7 +97,6 @@ def minus_cart_item(request):
     # for minus button in cart page
     if request.method == 'GET':
         product_id = request.GET['product_id']
-        print(product_id)
         cart_product = Cart.objects.get(
             Q(product=product_id) & Q(user=request.user))
         cart_product.quantity -= 1
@@ -133,7 +131,6 @@ def remove_cart_item(request):
     # for delete button in cart page
     if request.method == 'GET':
         product_id = request.GET['product_id']
-        print(product_id)
         cart_product = Cart.objects.get(
             Q(product=product_id) & Q(user=request.user))
         cart_product.delete()
