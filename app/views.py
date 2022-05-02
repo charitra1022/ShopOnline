@@ -3,6 +3,8 @@ from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib import messages
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 from .models import Cart, Customer, OrderPlaced, Product, CATEGORY_CHOICES
 from .forms import CustomerRegistrationForm, CustomerProfileForm
@@ -31,6 +33,7 @@ class ProductDetailView(View):
         return render(request, 'app/productdetail.html', {'product': product})
 
 
+@login_required(login_url='/accounts/login/')
 def add_to_cart(request):
     # for add to cart in db
     user = request.user
@@ -65,6 +68,7 @@ def calculateAmounts(cart):
         return
 
 
+@login_required(login_url='/accounts/login/')
 def view_cart(request):
     # for cart page
     if request.user.is_authenticated:
@@ -76,6 +80,7 @@ def view_cart(request):
             return render(request, 'app/addtocart.html', {'cartempty': True})
 
 
+@login_required(login_url='/accounts/login/')
 def plus_cart_item(request):
     # for plus button in cart page
     if request.method == 'GET':
@@ -94,6 +99,7 @@ def plus_cart_item(request):
             return JsonResponse({'empty': True})
 
 
+@login_required(login_url='/accounts/login/')
 def minus_cart_item(request):
     # for minus button in cart page
     if request.method == 'GET':
@@ -115,6 +121,7 @@ def minus_cart_item(request):
             return JsonResponse({'empty': True})
 
 
+@login_required(login_url='/accounts/login/')
 def remove_cart_item(request):
     # for delete button in cart page
     if request.method == 'GET':
@@ -136,6 +143,7 @@ def buy_now(request):
     return render(request, 'app/buynow.html')
 
 
+@login_required(login_url='/accounts/login/')
 def orders(request):
     return render(request, 'app/orders.html')
 
@@ -158,16 +166,17 @@ def ram(request, data=None):
     return render(request, 'app/ram.html', {'rams': rams})
 
 
+@login_required(login_url='/accounts/login/')
 def checkout(request):
     user = request.user
     addresses = Customer.objects.filter(user=user)
     carts = Cart.objects.filter(user=user)
-
     final_amounts = calculateAmounts(carts)
 
     return render(request, 'app/checkout.html', {'addresses': addresses, 'cartitems': carts, 'amounts': final_amounts})
 
 
+@login_required(login_url='/accounts/login/')
 def payment_done(request):
     # called when order is placed
     user = request.user
@@ -197,6 +206,7 @@ class CustomerRegistrationView(View):
         return render(request, 'app/customerregistration.html', {'form': form})
 
 
+# to add login required
 class AddressView(View):
     # for address page
     def get(self, request):
@@ -223,6 +233,7 @@ class AddressView(View):
         # return render(request, 'app/address.html', {'form': form, 'active': 'btn-primary'})
 
 
+# to add login required
 class ProfileView(View):
     # for profile page
     def get(self, request):
@@ -248,6 +259,7 @@ class ProfileView(View):
     #     return render(request, 'app/profile.html', {'form': form, 'active': 'btn-primary'})
 
 
+@login_required(login_url='/accounts/login/')
 def delete_customer(request, id):
     # for deleting customer address
     ob = Customer.objects.get(id=id)
