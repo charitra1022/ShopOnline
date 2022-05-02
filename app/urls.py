@@ -27,6 +27,7 @@ urlpatterns = [
 
     path('checkout/', views.checkout, name='checkout'),
     path('paymentdone/', views.payment_done, name='paymentdone'),
+    path('orders/', views.orders, name='orders'),
 
     # url for delete address record
     path('address/<int:id>', views.delete_customer, name='delete_customer'),
@@ -57,7 +58,7 @@ urlpatterns = [
 
 
     path('buy/', views.buy_now, name='buy-now'),
-    path('orders/', views.orders, name='orders'),
+    
 
 
     
