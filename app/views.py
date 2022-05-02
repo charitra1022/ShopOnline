@@ -4,7 +4,7 @@ from django.views import View
 from django.contrib import messages
 from django.db.models import Q
 
-from .models import Cart, Customer, Product, CATEGORY_CHOICES
+from .models import Cart, Customer, OrderPlaced, Product, CATEGORY_CHOICES
 from .forms import CustomerRegistrationForm, CustomerProfileForm
 
 from .custom_logger import logger
@@ -169,7 +169,18 @@ def checkout(request):
 
 
 def payment_done(request):
-    return render(request, 'app/ram.html')
+    # called when order is placed
+    user = request.user
+    custid = request.GET.get('custid')
+    logger.error(custid)
+
+    customer = Customer.objects.get(id=custid)
+    cart = Cart.objects.filter(user=user)
+
+    for c in cart:
+        OrderPlaced(user=user, customer=customer, product=c.product, quantity=c.quantity).save()
+        c.delete()
+    return redirect('orders')
 
 
 class CustomerRegistrationView(View):
