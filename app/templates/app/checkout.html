@@ -17,10 +17,10 @@
             {% for cartitem in cartitems %}
               <div class="card-body">
                 <h6 class="fw-light">
-                  <a href="{% url 'product-detail' cartitem.cart.product.id %}">{{cartitem.cart.product.title}}</a>
+                  <a href="{% url 'product-detail' cartitem.product.id %}">{{cartitem.product.title}}</a>
                 </h6>
                 <p>Quantity: {{cartitem.quantity}}</p>
-                <p class="fw-bold">Price: {{cartitem.amount}}</p>
+                <p class="fw-bold">Price: {{cartitem.total_price}}</p> 
               </div>
             {% endfor %}
 
@@ -54,13 +54,15 @@
       <div class="col-sm-4 offset-sm-1">
         <h4>Select Shipping Address</h4>
         <hr>
-        <form action="">
+        <form action="/paymentdone">
           {% for address in addresses %}
             <div class="card">
               <div class="card-body">
                 <div class="form-check mt-2 mb-2 d-inline-block">
-                  <input name="address" class="form-check-input" type="radio" value="">
+
+                  <input name="custid" id="custaddress{{forloop.counter}}" class="form-check-input" type="radio" value="{{address.id}}">
                   <label class="form-check-label fw-bold" for=""></label>
+
                 </div>
                 <h4 class="fw-bold fs-10 d-inline-block mb-0">Address {{forloop.counter}}</h4>
 
@@ -78,6 +80,7 @@
           {% empty %}
             <div>There are no Customer addresses added! Go to <strong>Profile</strong> and create a new address</div>
           {% endfor %}
+
             
             
 
