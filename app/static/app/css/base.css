@@ -273,6 +273,30 @@ footer a {
   transform: scale(1);
 }
 
+/************* Add to cart button *********************/
+#add-to-cart-btn {
+  display: flex;
+  box-sizing: border-box;
+  position: fixed;
+  left: 10px;
+  top: 50%;
+  background-color: var(--tertiary-light);
+  width: fit-content;
+  border-radius: 100%;
+  opacity: 0.8;
+  box-shadow: 0 0 6px 4px var(--tertiary-light);
+}
+#add-to-cart-btn a {
+  padding: 12px 8px;
+  padding-right: 0;
+  box-sizing: border-box;
+}
+#add-to-cart-btn a .badge {
+  width: 20px;
+  margin-left: -4px;
+  font-family: Fira-Sans-Regular;
+}
+
 /*********** Utility Styles ***********/
 .p-t-12 {
   padding-top: 12px;
