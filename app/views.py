@@ -39,8 +39,14 @@ def add_to_cart(request):
     user = request.user
     product_id = request.GET.get("product_id")
     if product_id is not None:
-        product = Product.objects.get(id=product_id)
-        Cart(user=user, product=product).save()
+        cart = Cart.objects.filter(user=user, product=product_id)
+        if cart:
+            logger.error("product already exists! Skipping addition to cart")
+            logger.error(cart)
+        else:
+            # add product only if its not present
+            product = Product.objects.get(id=product_id)
+            Cart(user=user, product=product).save()
     return redirect("/cart")
 
 
