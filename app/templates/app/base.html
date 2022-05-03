@@ -221,15 +221,6 @@
               <!-- End Nav DropDown Menu -->
             </ul>
             <!-- End Account Menu -->
-
-            <!-- Cart Button -->
-            {% if request.user.is_authenticated %}
-              <a
-              href="{% url 'add-to-cart' %}"
-              class="nav-link text-white"
-              ><i class="fa fa-shopping-cart"></i><span class="badge bg-primary"><span id="cart_badge">{{cart_counter}}</span></span>
-            {% endif %}
-          </a>
           </div>
           <!-- End Collapse Menu -->
         </div>
@@ -329,6 +320,17 @@
       <span class="sun-icon"><i class="fas fa-sun"></i></span>
       <span class="moon-icon"><i class="fas fa-moon"></i></span>
     </div>
+
+    <!-- Cart Button -->
+    {% if request.user.is_authenticated %}
+      <div id="add-to-cart-btn">
+        <a
+        href="{% url 'add-to-cart' %}"
+        class="nav-link text-white"
+        ><i class="fa fa-shopping-cart"></i><span class="badge"><span id="cart_badge">{{cart_counter}}</span></span>
+        </a>
+      </div>
+    {% endif %}
 
     <!-- Jquery -->
     <script
