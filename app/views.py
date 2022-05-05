@@ -33,7 +33,7 @@ class ProductDetailView(View):
         return render(request, 'app/productdetail.html', {'product': product})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def add_to_cart(request):
     # for add to cart in db
     user = request.user
@@ -65,7 +65,7 @@ def calculateAmounts(cart):
         total_amt += shipping
 
         final_amounts = {
-            'shippingamount': shipping, 
+            'shippingamount': shipping,
             'finalamount': total_amt,
             'totalamount': sum(amounts),
         }
@@ -74,7 +74,7 @@ def calculateAmounts(cart):
         return
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def view_cart(request):
     # for cart page
     if request.user.is_authenticated:
@@ -86,7 +86,7 @@ def view_cart(request):
             return render(request, 'app/addtocart.html', {'cartempty': True})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def plus_cart_item(request):
     # for plus button in cart page
     if request.method == 'GET':
@@ -105,7 +105,7 @@ def plus_cart_item(request):
             return JsonResponse({'empty': True})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def minus_cart_item(request):
     # for minus button in cart page
     if request.method == 'GET':
@@ -113,9 +113,9 @@ def minus_cart_item(request):
         cart_product = Cart.objects.get(
             Q(product=product_id) & Q(user=request.user))
         cart_product.quantity -= 1
-        if cart_product.quantity<1:
+        if cart_product.quantity < 1:
             logger.error("cart quantity was below 1, setting to 1")
-            cart_product.quantity=1
+            cart_product.quantity = 1
         cart_product.save()
 
         cart = Cart.objects.filter(user=request.user)
@@ -127,7 +127,7 @@ def minus_cart_item(request):
             return JsonResponse({'empty': True})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def remove_cart_item(request):
     # for delete button in cart page
     if request.method == 'GET':
@@ -149,9 +149,10 @@ def buy_now(request):
     return render(request, 'app/buynow.html')
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def orders(request):
-    return render(request, 'app/orders.html')
+    orders = OrderPlaced.objects.filter(user=request.user).order_by('-ordered_date')
+    return render(request, 'app/orders.html', {'order_placed': orders})
 
 
 def ram(request, data=None):
@@ -172,7 +173,7 @@ def ram(request, data=None):
     return render(request, 'app/ram.html', {'rams': rams})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def checkout(request):
     user = request.user
     addresses = Customer.objects.filter(user=user)
@@ -182,18 +183,18 @@ def checkout(request):
     return render(request, 'app/checkout.html', {'addresses': addresses, 'cartitems': carts, 'amounts': final_amounts})
 
 
-@login_required(login_url='/accounts/login/')
+# @login_required(login_url='/accounts/login/')
+@login_required
 def payment_done(request):
     # called when order is placed
     user = request.user
     custid = request.GET.get('custid')
-    logger.error(custid)
-
     customer = Customer.objects.get(id=custid)
     cart = Cart.objects.filter(user=user)
 
     for c in cart:
-        OrderPlaced(user=user, customer=customer, product=c.product, quantity=c.quantity).save()
+        OrderPlaced(user=user, customer=customer,
+                    product=c.product, quantity=c.quantity).save()
         c.delete()
     return redirect('orders')
 
@@ -212,7 +213,7 @@ class CustomerRegistrationView(View):
         return render(request, 'app/customerregistration.html', {'form': form})
 
 
-# to add login required
+@method_decorator(login_required, name='dispatch')
 class AddressView(View):
     # for address page
     def get(self, request):
@@ -239,7 +240,7 @@ class AddressView(View):
         # return render(request, 'app/address.html', {'form': form, 'active': 'btn-primary'})
 
 
-# to add login required
+@method_decorator(login_required, name='dispatch')
 class ProfileView(View):
     # for profile page
     def get(self, request):
@@ -265,7 +266,7 @@ class ProfileView(View):
     #     return render(request, 'app/profile.html', {'form': form, 'active': 'btn-primary'})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def delete_customer(request, id):
     # for deleting customer address
     ob = Customer.objects.get(id=id)
