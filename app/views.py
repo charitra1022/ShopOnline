@@ -151,7 +151,8 @@ def buy_now(request):
 
 @login_required(login_url='/accounts/login/')
 def orders(request):
-    return render(request, 'app/orders.html')
+    orders = OrderPlaced.objects.filter(user=request.user)
+    return render(request, 'app/orders.html', {'order_placed': orders})
 
 
 def ram(request, data=None):
