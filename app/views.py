@@ -65,7 +65,7 @@ def calculateAmounts(cart):
         total_amt += shipping
 
         final_amounts = {
-            'shippingamount': shipping, 
+            'shippingamount': shipping,
             'finalamount': total_amt,
             'totalamount': sum(amounts),
         }
@@ -113,9 +113,9 @@ def minus_cart_item(request):
         cart_product = Cart.objects.get(
             Q(product=product_id) & Q(user=request.user))
         cart_product.quantity -= 1
-        if cart_product.quantity<1:
+        if cart_product.quantity < 1:
             logger.error("cart quantity was below 1, setting to 1")
-            cart_product.quantity=1
+            cart_product.quantity = 1
         cart_product.save()
 
         cart = Cart.objects.filter(user=request.user)
@@ -189,13 +189,12 @@ def payment_done(request):
     # called when order is placed
     user = request.user
     custid = request.GET.get('custid')
-    logger.error(custid)
-
     customer = Customer.objects.get(id=custid)
     cart = Cart.objects.filter(user=user)
 
     for c in cart:
-        OrderPlaced(user=user, customer=customer, product=c.product, quantity=c.quantity).save()
+        OrderPlaced(user=user, customer=customer,
+                    product=c.product, quantity=c.quantity).save()
         c.delete()
     return redirect('orders')
 
