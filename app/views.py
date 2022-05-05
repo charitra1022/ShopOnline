@@ -151,7 +151,7 @@ def buy_now(request):
 
 @login_required
 def orders(request):
-    orders = OrderPlaced.objects.filter(user=request.user)
+    orders = OrderPlaced.objects.filter(user=request.user).order_by('-ordered_date')
     return render(request, 'app/orders.html', {'order_placed': orders})
 
 
