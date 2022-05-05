@@ -34,7 +34,7 @@
                 <p>Order Status: <span class="fw-bold">{{order.status}}</span></p>
                 <div class="progress">
                     {% if order.status == 'Pending' %}
-                      <div style="width: 1%;" class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div style="width: 1%;" class="progress-bar bg-secondary" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
                     {% endif %}
 
                     {% if order.status == 'Accepted' %}
