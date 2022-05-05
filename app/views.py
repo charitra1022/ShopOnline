@@ -30,7 +30,12 @@ class ProductDetailView(View):
     # for product page
     def get(self, request, pk):
         product = Product.objects.get(pk=pk)
-        return render(request, 'app/productdetail.html', {'product': product})
+        cart_state = False
+        try:
+            cart_state = Cart.objects.filter(Q(product=product.id) & Q(user=request.user)).exists()
+        except:
+            pass
+        return render(request, 'app/productdetail.html', {'product': product, 'cart_state': cart_state})
 
 
 @login_required
