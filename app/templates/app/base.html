@@ -182,7 +182,7 @@
                   aria-expanded="false"
                 >
                   {% if request.user.is_authenticated %}
-                    <span>{{request.user.username|capfirst}}</span>
+                    <span>{{request.user.first_name|capfirst}}</span>
                     {% else %}
                     <span>Account</span>
                   {% endif %}
