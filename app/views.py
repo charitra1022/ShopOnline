@@ -33,7 +33,7 @@ class ProductDetailView(View):
         return render(request, 'app/productdetail.html', {'product': product})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def add_to_cart(request):
     # for add to cart in db
     user = request.user
@@ -74,7 +74,7 @@ def calculateAmounts(cart):
         return
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def view_cart(request):
     # for cart page
     if request.user.is_authenticated:
@@ -86,7 +86,7 @@ def view_cart(request):
             return render(request, 'app/addtocart.html', {'cartempty': True})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def plus_cart_item(request):
     # for plus button in cart page
     if request.method == 'GET':
@@ -105,7 +105,7 @@ def plus_cart_item(request):
             return JsonResponse({'empty': True})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def minus_cart_item(request):
     # for minus button in cart page
     if request.method == 'GET':
@@ -127,7 +127,7 @@ def minus_cart_item(request):
             return JsonResponse({'empty': True})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def remove_cart_item(request):
     # for delete button in cart page
     if request.method == 'GET':
@@ -149,7 +149,7 @@ def buy_now(request):
     return render(request, 'app/buynow.html')
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def orders(request):
     orders = OrderPlaced.objects.filter(user=request.user)
     return render(request, 'app/orders.html', {'order_placed': orders})
@@ -173,7 +173,7 @@ def ram(request, data=None):
     return render(request, 'app/ram.html', {'rams': rams})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def checkout(request):
     user = request.user
     addresses = Customer.objects.filter(user=user)
@@ -183,7 +183,8 @@ def checkout(request):
     return render(request, 'app/checkout.html', {'addresses': addresses, 'cartitems': carts, 'amounts': final_amounts})
 
 
-@login_required(login_url='/accounts/login/')
+# @login_required(login_url='/accounts/login/')
+@login_required
 def payment_done(request):
     # called when order is placed
     user = request.user
@@ -213,7 +214,7 @@ class CustomerRegistrationView(View):
         return render(request, 'app/customerregistration.html', {'form': form})
 
 
-# to add login required
+@method_decorator(login_required, name='dispatch')
 class AddressView(View):
     # for address page
     def get(self, request):
@@ -240,7 +241,7 @@ class AddressView(View):
         # return render(request, 'app/address.html', {'form': form, 'active': 'btn-primary'})
 
 
-# to add login required
+@method_decorator(login_required, name='dispatch')
 class ProfileView(View):
     # for profile page
     def get(self, request):
@@ -266,7 +267,7 @@ class ProfileView(View):
     #     return render(request, 'app/profile.html', {'form': form, 'active': 'btn-primary'})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def delete_customer(request, id):
     # for deleting customer address
     ob = Customer.objects.get(id=id)
