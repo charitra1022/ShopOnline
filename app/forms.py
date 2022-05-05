@@ -34,6 +34,10 @@ class CustomerRegistrationForm(UserCreationForm):
             'username': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Username'}),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({'autofocus': False})
+
     def clean_first_name(self):
         # Capitalize first letter of first name
         first_name = self.cleaned_data.get('first_name', '')
