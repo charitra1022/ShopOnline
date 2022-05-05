@@ -47,6 +47,11 @@ class CustomerRegistrationForm(UserCreationForm):
         # Capitalize first letter of last name
         last_name = self.cleaned_data.get('last_name', '')
         return last_name.capitalize()
+    
+    def clean_username(self):
+        # Make username field case-insensitive
+        username = self.cleaned_data.get('username')
+        return username.lower()
 
 
 class LoginForm(AuthenticationForm):
