@@ -42,7 +42,13 @@
                   <i class="fa fa-lock" aria-hidden="true"></i>
                 {% else %}
                   {% if 'email' in f.id_for_label %}
-                    <i class="fa fa-envelope " aria-hidden="true"></i>
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+
+                  {% else %}
+                    {% if 'name' in f.id_for_label %}
+                      <i class="fas fa-user-tie" aria-hidden="true"></i>
+                    {% endif %}
+
                   {% endif %}
                 {% endif %}
               {% endif %}
