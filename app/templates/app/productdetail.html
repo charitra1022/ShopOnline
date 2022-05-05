@@ -29,7 +29,15 @@
           <form action="/add-to-cart" class="d-inline">
             <input type="hidden" name="product_id" value="{{product.id}}" id="product_id">
             <button type="submit" href="{% url 'add-to-cart' %}" class="product-btn cart">
-              Add to Cart&nbsp;&nbsp;
+              {% if request.user.is_authenticated %}
+                {% if cart_state %}
+                  Go to Cart&nbsp;&nbsp;
+                {% else %}
+                  Add to Cart&nbsp;&nbsp;
+                {% endif %}
+              {% else %}
+                Add to Cart&nbsp;&nbsp;
+              {% endif %}
               <i class="fas fa-shopping-cart"> </i>
             </button>
           </form>
