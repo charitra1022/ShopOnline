@@ -225,10 +225,25 @@ def checkout(request):
     return render(request, 'app/checkout.html', {'addresses': addresses, 'cartitems': carts, 'amounts': final_amounts, 'paypal_clientid': client_id, 'usd_amount': usd_amount})
 
 
+@login_required
+def buy_now_payment_done(request):
+    # called when order is placed directly
+    user = request.user
+    custid = request.GET.get('custid')
+    product_id = request.GET.get('prod_id')
+    quantity = request.GET.get('prod_quant')
+    
+    customer = Customer.objects.get(id=custid)
+    product = Product.objects.get(id=product_id)
+
+    OrderPlaced(user=user, customer=customer, product=product, quantity=quantity).save()
+    return redirect('orders')
+
+
 # @login_required(login_url='/accounts/login/')
 @login_required
 def payment_done(request):
-    # called when order is placed
+    # called when order is placed through cart
     user = request.user
     custid = request.GET.get('custid')
     customer = Customer.objects.get(id=custid)

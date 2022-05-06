@@ -29,21 +29,21 @@
               <div class="my-3">
                 <label for="quantity">Quantity:</label>
 
-                <!-- <a class="minus-item btn" pid="{{product.id}}">
+                <button class="minus-item btn shadow-none">
                   <i class="fas fa-minus-square fa-lg"></i>
-                </a> -->
+                </button>
 
                 <span id="quantity">{{quantity}}</span>
                 
-                <!-- <a class="plus-item btn" pid="{{product.id}}">
+                <button class="plus-item btn shadow-none">
                   <i class="fas fa-plus-square fa-lg"></i>
-                </a> -->
+                </button>
 
               </div> 
               <div class="d-flex justify-content-between">
                 
                 <p class="mb-0">
-                  <span><strong>₹ {{product.discounted_price}}</strong></span>
+                  <span><strong>₹ <span id="product-price">{{product.discounted_price}}</span></strong></span>
                 </p>
               </div>
             </div>
@@ -72,24 +72,22 @@
             </div>
           </div>
 
-
-
         <small>Term and Condition: <br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam saepe! Iure optio repellat dolor velit, minus rem. Facilis cumque neque numquam laboriosam, accusantium adipisci nisi nihil in et quis?</small>
       </div>
-      
       
       <div class="col-sm-4 offset-sm-1">
         <h4>Select Shipping Address</h4>
         <hr>
-        <form action="/paymentdone" id="checkout-form">
+        <form action="/buynowpaymentdone" id="checkout-form">
+          <input name="prod_id" id="product_id" type="text" class="d-none bg-warning" value="{{product.id}}">
+          <input name="prod_quant" id="prod_quant" type="text" class="d-none bg-warning" value="{{quantity}}">
+          
           {% for address in addresses %}
             <div class="card">
               <div class="card-body">
                 <div class="form-check mt-2 mb-2 d-inline-block">
-
                   <input name="custid" id="custaddress{{forloop.counter}}" class="form-check-input" type="radio" value="{{address.id}}">
                   <label class="form-check-label fw-bold" for=""></label>
-
                 </div>
                 <h4 class="fw-bold fs-10 d-inline-block mb-0">Address {{forloop.counter}}</h4>
 
@@ -101,25 +99,16 @@
                 <span class="fs-13 d-block"><span class="fw-bold">Postal Code:</span> {{address.zipcode}}</span>
               </div>
             </div>
-
-            
-
           {% empty %}
             <div>There are no Customer addresses added! Go to <strong>Profile</strong> and create a new address</div>
           {% endfor %}
 
-            
-            
-
-
-            
             <div class="text-end">
-              <!-- <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button> -->
+              <!-- <button type="submit" class="btn btn-warning mt-3 px-5 my-5 fw-bold">Continue</button> -->
 
               <!-- PayPal Integration -->
               <!-- Set up a container element for the button -->
-              <div id="paypal-button-container"></div>
-
+              <div class="my-4" id="paypal-button-container"></div>
             </div>
           </form>
         </div>
@@ -128,7 +117,51 @@
 {% endblock main-content %}
 
 {% block custom_js %}
-  <!-- <script src="{% static 'app/js/cart.js' %}"></script> -->
+  <script>
+    var quantInput = document.getElementById("prod_quant");
+    var minusBtn = document.getElementsByClassName("minus-item")[0];
+    var plusBtn = document.getElementsByClassName("plus-item")[0];
+    var quantDisplay = document.getElementById("quantity");
+
+    minusBtn.addEventListener("click", ()=> {
+      var quantity = parseInt(quantDisplay.innerText);
+      quantity -= 1;
+      if (quantity<1) quantity = 1;
+      // updateQuantity(quantity);
+    });
+
+    plusBtn.addEventListener("click", ()=> {
+      var quantity = parseInt(quantDisplay.innerText);
+      quantity += 1;
+      if (quantity>10) quantity = 10;
+      // updateQuantity(quantity);
+    });
+
+    function updateQuantity(quantity) {
+      quantDisplay.innerText = quantity.toString();
+      quantInput.value = quantity.toString();
+
+      shipAmtEl = document.getElementById("shipping-amount");
+      totalAmtEl = document.getElementById("total-amount");
+      finalAmtEl = document.getElementById("final-amount");
+      priceEl = document.getElementById("product-price");
+
+      shipAmt = parseFloat(shipAmtEl.innerText);
+      totalAmt = 0.0;
+      finalAmt = 0.0;
+      price = parseFloat(document.getElementById("product-price").innerText);
+
+      totalAmt = price * quantity
+      if (totalAmt >= 500) shipAmt = 0.0;
+      finalAmt = totalAmt + shipAmt;
+
+      shipAmtEl.innerText = shipAmt;
+      totalAmtEl.innerText = totalAmt;
+      finalAmtEl.innerText = finalAmt;
+    }
+
+
+  </script>
 {% endblock custom_js %}
 
 {% block payment-gateway %}
