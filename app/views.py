@@ -6,6 +6,8 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
+import os
+
 from .models import Cart, Customer, OrderPlaced, Product, CATEGORY_CHOICES
 from .forms import CustomerRegistrationForm, CustomerProfileForm
 
@@ -185,7 +187,10 @@ def checkout(request):
     carts = Cart.objects.filter(user=user)
     final_amounts = calculateAmounts(carts)
 
-    return render(request, 'app/checkout.html', {'addresses': addresses, 'cartitems': carts, 'amounts': final_amounts})
+    # get the PayPal Client ID from OS environment variables
+    client_id = os.environ.get('PAYPAL-CLIENTID')
+
+    return render(request, 'app/checkout.html', {'addresses': addresses, 'cartitems': carts, 'amounts': final_amounts, 'paypal_clientid': client_id})
 
 
 # @login_required(login_url='/accounts/login/')
