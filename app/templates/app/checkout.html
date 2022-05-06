@@ -107,6 +107,8 @@
 {% block payment-gateway %}
   <!-- Include the PayPal JavaScript SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id={{paypal_clientid}}&currency=USD"></script>
+  
+  <!-- PayPal Payment Gateway Functionality -->
   <script>
     // Render the PayPal button into #paypal-button-container
     paypal.Buttons({
@@ -115,7 +117,7 @@
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: '{{amounts.finalamount}}'
+                        value: '{{usd_amount}}'
                     }
                 }]
             });

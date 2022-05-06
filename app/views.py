@@ -190,7 +190,12 @@ def checkout(request):
     # get the PayPal Client ID from OS environment variables
     client_id = os.environ.get('PAYPAL-CLIENTID')
 
-    return render(request, 'app/checkout.html', {'addresses': addresses, 'cartitems': carts, 'amounts': final_amounts, 'paypal_clientid': client_id})
+    # Calculating USD from INR for Payment
+    inr_amount = final_amounts['finalamount']
+    usd_amount = round(inr_amount/76.88, 2)
+    logger.critical('Converting INR '+ str(inr_amount) +' to USD '+ str(usd_amount))
+
+    return render(request, 'app/checkout.html', {'addresses': addresses, 'cartitems': carts, 'amounts': final_amounts, 'paypal_clientid': client_id, 'usd_amount': usd_amount})
 
 
 # @login_required(login_url='/accounts/login/')
