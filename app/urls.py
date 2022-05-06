@@ -25,8 +25,11 @@ urlpatterns = [
     path('minuscartitem/', views.minus_cart_item, name='minuscartitem'),
     path('removecartitem/', views.remove_cart_item, name='removecartitem'),
 
+    # checkout related
     path('checkout/', views.checkout, name='checkout'),
     path('paymentdone/', views.payment_done, name='paymentdone'),
+    path('buy/<int:pk>', views.buy_now, name='buy-now'),
+
     path('orders/', views.orders, name='orders'),
 
     # url for delete address record
@@ -55,11 +58,4 @@ urlpatterns = [
     path('resetpasswordsuccess', auth_views.PasswordResetCompleteView.as_view(
         template_name='app/reset_password_complete.html'), name="password_reset_complete"),
 
-
-
-    path('buy/', views.buy_now, name='buy-now'),
-    
-
-
-    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,6 +1,172 @@
 {% extends 'app/base.html' %}
 {% load static %}
-{% block title %}Buy Now{% endblock title %}
+{% block custom_css %}
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'app/css/cart.css' %}" />
+{% endblock custom_css %}
+{% block title %}Checkout{% endblock title %}
+
 {% block main-content %}
-Product Buy Now
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-sm-6">
+        <h4>Order Summary</h4>
+        <hr>
+
+        <div class="row">
+          <div class="col-sm-3 text-center align-self-center">
+            <a href="{% url 'product-detail' product.id %}">
+              <img src="{{product.product_image.url}}" alt="" srcset="" class="img-fluid img-thumbnail shadow-sm" height="150" width="150">
+            </a>
+          </div>
+
+          <div class="col-sm-9">
+            <div>
+              <h5>{{product.title}}</h5>
+              <p class="mb-2 text-muted small">
+                Description: <pre>{{product.description}}</pre>
+              </p>
+              <div class="my-3">
+                <label for="quantity">Quantity:</label>
+
+                <!-- <a class="minus-item btn" pid="{{product.id}}">
+                  <i class="fas fa-minus-square fa-lg"></i>
+                </a> -->
+
+                <span id="quantity">{{quantity}}</span>
+                
+                <!-- <a class="plus-item btn" pid="{{product.id}}">
+                  <i class="fas fa-plus-square fa-lg"></i>
+                </a> -->
+
+              </div> 
+              <div class="d-flex justify-content-between">
+                
+                <p class="mb-0">
+                  <span><strong>₹ {{product.discounted_price}}</strong></span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        
+          <div class="card mb-2">
+
+            <div class="card-body">
+              <h6 class="fw-bold">Total Amount: </h6>
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                  Amount<span>Rs. <span id="total-amount">{{amounts.totalamount}}</span></span> 
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                  Shipping<span>Rs. <span id="shipping-amount">{{amounts.shippingamount}}</span></span> 
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                  <div>
+                    <strong>Total</strong> <small>(including VAT)</small>
+                  </div>
+                  <span><strong>Rs. <span id="final-amount">{{amounts.finalamount}}</span></strong> 
+                </li>
+              </ul>
+            </div>
+          </div>
+
+
+
+        <small>Term and Condition: <br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam saepe! Iure optio repellat dolor velit, minus rem. Facilis cumque neque numquam laboriosam, accusantium adipisci nisi nihil in et quis?</small>
+      </div>
+      
+      
+      <div class="col-sm-4 offset-sm-1">
+        <h4>Select Shipping Address</h4>
+        <hr>
+        <form action="/paymentdone" id="checkout-form">
+          {% for address in addresses %}
+            <div class="card">
+              <div class="card-body">
+                <div class="form-check mt-2 mb-2 d-inline-block">
+
+                  <input name="custid" id="custaddress{{forloop.counter}}" class="form-check-input" type="radio" value="{{address.id}}">
+                  <label class="form-check-label fw-bold" for=""></label>
+
+                </div>
+                <h4 class="fw-bold fs-10 d-inline-block mb-0">Address {{forloop.counter}}</h4>
+
+                <span class="fs-13 d-block"><span class="fw-bold">Name:</span> {{address.name}}</span>
+                <span class="fs-13 d-block"><span class="fw-bold">Phone:</span> {{address.phone}}</span>
+                <span class="fs-13 d-block"><span class="fw-bold">Address:</span> {{address.locality_address}}</span>
+                <span class="fs-13 d-block"><span class="fw-bold">City:</span> {{address.city}}</span>
+                <span class="fs-13 d-block"><span class="fw-bold">State:</span> {{address.state}}</span>
+                <span class="fs-13 d-block"><span class="fw-bold">Postal Code:</span> {{address.zipcode}}</span>
+              </div>
+            </div>
+
+            
+
+          {% empty %}
+            <div>There are no Customer addresses added! Go to <strong>Profile</strong> and create a new address</div>
+          {% endfor %}
+
+            
+            
+
+
+            
+            <div class="text-end">
+              <!-- <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button> -->
+
+              <!-- PayPal Integration -->
+              <!-- Set up a container element for the button -->
+              <div id="paypal-button-container"></div>
+
+            </div>
+          </form>
+        </div>
+    </div>
+  </div>
 {% endblock main-content %}
+
+{% block custom_js %}
+  <!-- <script src="{% static 'app/js/cart.js' %}"></script> -->
+{% endblock custom_js %}
+
+{% block payment-gateway %}
+  <!-- Include the PayPal JavaScript SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id={{paypal_clientid}}&currency=USD"></script>
+  
+  <!-- PayPal Payment Gateway Functionality -->
+  <script>
+    // Render the PayPal button into #paypal-button-container
+    paypal.Buttons({
+        // Set up the transaction
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '{{usd_amount}}'
+                    }
+                }]
+            });
+        },
+
+        // Finalize the transaction
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(orderData) {
+                // Successful capture! For demo purposes:
+                console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                var transaction = orderData.purchase_units[0].payments.captures[0];
+                alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+
+                document.getElementById("checkout-form").submit();
+
+                // Replace the above to show a success message within this page, e.g.
+                // const element = document.getElementById('paypal-button-container');
+                // element.innerHTML = '';
+                // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                // Or go to another URL:  actions.redirect('thank_you.html');
+            });
+        }
+    }).render('#paypal-button-container');
+  </script>
+{% endblock payment-gateway %}

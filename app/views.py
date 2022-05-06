@@ -34,7 +34,8 @@ class ProductDetailView(View):
         product = Product.objects.get(pk=pk)
         cart_state = False
         try:
-            cart_state = Cart.objects.filter(Q(product=product.id) & Q(user=request.user)).exists()
+            cart_state = Cart.objects.filter(
+                Q(product=product.id) & Q(user=request.user)).exists()
         except:
             pass
         return render(request, 'app/productdetail.html', {'product': product, 'cart_state': cart_state})
@@ -152,13 +153,38 @@ def remove_cart_item(request):
             return JsonResponse({'empty': True})
 
 
-def buy_now(request):
-    return render(request, 'app/buynow.html')
+@login_required
+def buy_now(request, pk):
+    user = request.user
+    product = Product.objects.get(id=pk)
+    addresses = Customer.objects.filter(user=user)
+
+    quantity = 1
+    total_amt = quantity * product.discounted_price
+    shipping = 50 if total_amt < 500 else 0
+    final_amt = total_amt + shipping
+
+    final_amounts = {
+        'shippingamount': shipping,
+        'finalamount': final_amt,
+        'totalamount': total_amt,
+    }
+
+    # get the PayPal Client ID from OS environment variables
+    client_id = os.environ.get('PAYPAL-CLIENTID')
+
+    # Calculating USD from INR for Payment
+    usd_amount = round(final_amt/76.88, 2)
+    logger.critical('Converting INR ' + str(final_amt) +
+                    ' to USD ' + str(usd_amount))
+
+    return render(request, 'app/buynow.html', {'addresses': addresses, 'amounts': final_amounts, 'paypal_clientid': client_id, 'product': product, 'quantity': quantity, 'usd_amount': usd_amount})
 
 
 @login_required
 def orders(request):
-    orders = OrderPlaced.objects.filter(user=request.user).order_by('-ordered_date')
+    orders = OrderPlaced.objects.filter(
+        user=request.user).order_by('-ordered_date')
     return render(request, 'app/orders.html', {'order_placed': orders})
 
 
@@ -193,7 +219,8 @@ def checkout(request):
     # Calculating USD from INR for Payment
     inr_amount = final_amounts['finalamount']
     usd_amount = round(inr_amount/76.88, 2)
-    logger.critical('Converting INR '+ str(inr_amount) +' to USD '+ str(usd_amount))
+    logger.critical('Converting INR ' + str(inr_amount) +
+                    ' to USD ' + str(usd_amount))
 
     return render(request, 'app/checkout.html', {'addresses': addresses, 'cartitems': carts, 'amounts': final_amounts, 'paypal_clientid': client_id, 'usd_amount': usd_amount})
 
