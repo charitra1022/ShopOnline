@@ -7,13 +7,6 @@
 /* --senary-light: #333333; */
 /* --septenary-light: #666666; */
 
-/* Global Properties */
-:root {
-  /* Light theme color palette */
-  --cart-btn-light: #006eff;
-  --buy-btn-light: #f30029;
-}
-
 .main-container {
   width: 100%;
   min-height: 100vh;
@@ -74,12 +67,8 @@ pre {
   -moz-transition: all 0.4s;
   transition: all 0.4s;
 }
-.product-btn.cart {
-  background: var(--cart-btn-light);
-}
 .product-btn.buy {
   margin-left: 10px;
-  background: var(--buy-btn-light);
 }
 .product-btn:hover {
   background: var(--senary-light);
