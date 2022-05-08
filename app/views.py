@@ -203,7 +203,7 @@ def ram(request, data=None):
         rams = Product.objects.filter(
             category='RAM').filter(discounted_price__gt=2000)
 
-    return render(request, 'app/ram.html', {'rams': rams})
+    return render(request, 'app/categories/ram.html', {'rams': rams})
 
 def solidstatedrive(request, data=None):
     # for ssd page
@@ -220,7 +220,7 @@ def solidstatedrive(request, data=None):
         solidstatedrives = Product.objects.filter(
             category='SSD').filter(discounted_price__gt=4000)
 
-    return render(request, 'app/solidstatedrive.html', {'solidstatedrives': solidstatedrives})
+    return render(request, 'app/categories/solidstatedrive.html', {'solidstatedrives': solidstatedrives})
 
 @login_required
 def checkout(request):
