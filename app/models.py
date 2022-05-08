@@ -49,7 +49,7 @@ CATEGORY_CHOICES = (
     ('SSD', 'Solid State Drive'),
     ('HDD', 'Hard Disk Drive'),
     ('MB', 'Mother Board'),
-    ('OD', 'Optical Drive'),
+    # ('OD', 'Optical Drive'),
     ('PSU', 'Power Supply Unit'),
 
     ('CB', 'Cabinet'),
