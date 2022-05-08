@@ -19,29 +19,29 @@ urlpatterns = [
     path('solidstatedrive/<slug:data>', views.solidstatedrive, name='solidstatedrivedata'),
     path('solidstatedrive/', views.solidstatedrive, name='solidstatedrive'),
     
-    path('harddiskdrive/<slug:data>', views.solidstatedrive, name='harddiskdrivedata'),
-    path('harddiskdrive/', views.solidstatedrive, name='harddiskdrive'),
+    path('harddiskdrive/<slug:data>', views.hdd, name='harddiskdrivedata'),
+    path('harddiskdrive/', views.hdd, name='harddiskdrive'),
 
-    path('motherboard/<slug:data>', views.solidstatedrive, name='motherboarddata'),
-    path('motherboard/', views.solidstatedrive, name='motherboard'),
+    path('motherboard/<slug:data>', views.motherboard, name='motherboarddata'),
+    path('motherboard/', views.motherboard, name='motherboard'),
 
-    path('keyboard/<slug:data>', views.solidstatedrive, name='keyboarddata'),
-    path('keyboard/', views.solidstatedrive, name='keyboard'),
+    path('keyboard/<slug:data>', views.keyboard, name='keyboarddata'),
+    path('keyboard/', views.keyboard, name='keyboard'),
 
-    path('psu/<slug:data>', views.solidstatedrive, name='psu'),
-    path('psu/', views.solidstatedrive, name='psu'),
+    path('psu/<slug:data>', views.psu, name='psudata'),
+    path('psu/', views.psu, name='psu'),
 
-    path('cabinet/<slug:data>', views.solidstatedrive, name='cabinetdata'),
+    path('cabinet/<slug:data>', views.cabinet, name='cabinetdata'),
     path('cabinet/', views.cabinet, name='cabinet'),
 
-    path('ups/<slug:data>', views.solidstatedrive, name='ups'),
-    path('ups/', views.solidstatedrive, name='ups'),
+    path('ups/<slug:data>', views.ups, name='upsdata'),
+    path('ups/', views.ups, name='ups'),
 
-    path('pendrive/<slug:data>', views.solidstatedrive, name='pendrivedata'),
-    path('pendrive/', views.solidstatedrive, name='pendrive'),
+    path('pendrive/<slug:data>', views.pendrive, name='pendrivedata'),
+    path('pendrive/', views.pendrive, name='pendrive'),
 
-    path('mouse/<slug:data>', views.solidstatedrive, name='mousedata'),
-    path('mouse/', views.solidstatedrive, name='mouse'),
+    path('mouse/<slug:data>', views.mouse, name='mousedata'),
+    path('mouse/', views.mouse, name='mouse'),
 
 
     path('address/', views.AddressView.as_view(), name='address'),
