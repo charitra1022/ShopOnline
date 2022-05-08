@@ -12,10 +12,37 @@ urlpatterns = [
     # Basic urls
     path('product-detail/<int:pk>',
          views.ProductDetailView.as_view(), name='product-detail'),
+
     path('ram/<slug:data>', views.ram, name='ramdata'),
     path('ram/', views.ram, name='ram'),
+
     path('solidstatedrive/<slug:data>', views.solidstatedrive, name='solidstatedrivedata'),
     path('solidstatedrive/', views.solidstatedrive, name='solidstatedrive'),
+    
+    path('harddiskdrive/<slug:data>', views.solidstatedrive, name='harddiskdrive'),
+    path('harddiskdrive/', views.solidstatedrive, name='harddiskdrive'),
+
+    path('motherboard/<slug:data>', views.solidstatedrive, name='motherboard'),
+    path('motherboard/', views.solidstatedrive, name='motherboard'),
+
+    path('keyboard/<slug:data>', views.solidstatedrive, name='keyboard'),
+    path('keyboard/', views.solidstatedrive, name='keyboard'),
+
+    path('psu/<slug:data>', views.solidstatedrive, name='psu'),
+    path('psu/', views.solidstatedrive, name='psu'),
+
+    path('cabinet/<slug:data>', views.solidstatedrive, name='cabinet'),
+    path('cabinet/', views.solidstatedrive, name='cabinet'),
+
+    path('ups/<slug:data>', views.solidstatedrive, name='ups'),
+    path('ups/', views.solidstatedrive, name='ups'),
+
+    path('pendrive/<slug:data>', views.solidstatedrive, name='pendrive'),
+    path('pendrive/', views.solidstatedrive, name='pendrive'),
+
+    path('mouse/<slug:data>', views.solidstatedrive, name='mouse'),
+    path('mouse/', views.solidstatedrive, name='mouse'),
+
 
     path('address/', views.AddressView.as_view(), name='address'),
     path('profile/', views.ProfileView.as_view(), name='profile'),

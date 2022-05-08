@@ -248,10 +248,398 @@
 
       <!-- View All Link -->
       <div class="view-all-link">
-        <a href="{% url 'ram' %}">View all Motherboards &nbsp;<i class="fa fa-arrow-right"></i></a>
+        <a href="{% url 'motherboard' %}">View all Motherboards &nbsp;<i class="fa fa-arrow-right"></i></a>
       </div>
     </div>
     <!-- End Third Section -->
+
+
+    <!-- Start Fourth Section -->
+    <div class="second-section section">
+      <div class="product-list-title">
+        <h3>Hard Disk Drives</h3>
+
+        <div class="form-check form-switch">
+          <input id="scroll-checkbox2" class="form-check-input autoscroll-checkbox shadow-none" type="checkbox" checked>
+          <label class="form-check-label">Scroll</label>
+        </div>
+
+      </div>
+
+      <div class="product-list" onmouseover="pauseScroll(2, true)" onmouseout="pauseScroll(2, false)">
+        {% for b in harddiskdrive %}
+
+        <div class="product-card">
+          <a href="{% url 'product-detail' b.id %}" class="product-card-btn">
+            <div class="item">
+              <div class="item-img">
+                <img src="{{b.product_image.url}}" alt="" />
+              </div>
+              <div class="fw-bold title">
+                {{b.title}}
+              </div>
+              <div class="fs-5">₹ {{b.discounted_price}}</div>
+              <div class="fs-10 fw-light text-decoration-line-through">
+                ₹ {{b.selling_price}}
+              </div>
+
+              <div class="btn-container">
+                <form action="/add-to-cart" class="d-inline-block">
+                  <input type="hidden" name="product_id" value="{{b.id}}" id="product_id">
+                  <button type="submit" href="{% url 'add-to-cart' %}" class="btn btn-primary shadow-none">
+                    <span>Add to Cart</span>&nbsp;&nbsp;
+                    <i class="fas fa-shopping-cart"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        {% endfor %}
+      </div>
+
+      <!-- View All Link -->
+      <div class="view-all-link">
+        <a href="{% url 'harddiskdrive' %}">View all Hard Disk Drives &nbsp;<i class="fa fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <!-- End Fourth Section -->
+
+
+
+
+    <!-- Start Fifth Section -->
+    <div class="second-section section">
+      <div class="product-list-title">
+        <h3>Keyboards</h3>
+
+        <div class="form-check form-switch">
+          <input id="scroll-checkbox2" class="form-check-input autoscroll-checkbox shadow-none" type="checkbox" checked>
+          <label class="form-check-label">Scroll</label>
+        </div>
+
+      </div>
+
+      <div class="product-list" onmouseover="pauseScroll(2, true)" onmouseout="pauseScroll(2, false)">
+        {% for b in keyboard %}
+
+        <div class="product-card">
+          <a href="{% url 'product-detail' b.id %}" class="product-card-btn">
+            <div class="item">
+              <div class="item-img">
+                <img src="{{b.product_image.url}}" alt="" />
+              </div>
+              <div class="fw-bold title">
+                {{b.title}}
+              </div>
+              <div class="fs-5">₹ {{b.discounted_price}}</div>
+              <div class="fs-10 fw-light text-decoration-line-through">
+                ₹ {{b.selling_price}}
+              </div>
+
+              <div class="btn-container">
+                <form action="/add-to-cart" class="d-inline-block">
+                  <input type="hidden" name="product_id" value="{{b.id}}" id="product_id">
+                  <button type="submit" href="{% url 'add-to-cart' %}" class="btn btn-primary shadow-none">
+                    <span>Add to Cart</span>&nbsp;&nbsp;
+                    <i class="fas fa-shopping-cart"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        {% endfor %}
+      </div>
+
+      <!-- View All Link -->
+      <div class="view-all-link">
+        <a href="{% url 'keyboard' %}">View all Keyboards &nbsp;<i class="fa fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <!-- End Fifth Section -->
+
+
+
+    <!-- Start Sixth Section -->
+    <div class="second-section section">
+      <div class="product-list-title">
+        <h3>Power Supply Units (PSU)</h3>
+
+        <div class="form-check form-switch">
+          <input id="scroll-checkbox2" class="form-check-input autoscroll-checkbox shadow-none" type="checkbox" checked>
+          <label class="form-check-label">Scroll</label>
+        </div>
+
+      </div>
+
+      <div class="product-list" onmouseover="pauseScroll(2, true)" onmouseout="pauseScroll(2, false)">
+        {% for b in powersupplyunit %}
+
+        <div class="product-card">
+          <a href="{% url 'product-detail' b.id %}" class="product-card-btn">
+            <div class="item">
+              <div class="item-img">
+                <img src="{{b.product_image.url}}" alt="" />
+              </div>
+              <div class="fw-bold title">
+                {{b.title}}
+              </div>
+              <div class="fs-5">₹ {{b.discounted_price}}</div>
+              <div class="fs-10 fw-light text-decoration-line-through">
+                ₹ {{b.selling_price}}
+              </div>
+
+              <div class="btn-container">
+                <form action="/add-to-cart" class="d-inline-block">
+                  <input type="hidden" name="product_id" value="{{b.id}}" id="product_id">
+                  <button type="submit" href="{% url 'add-to-cart' %}" class="btn btn-primary shadow-none">
+                    <span>Add to Cart</span>&nbsp;&nbsp;
+                    <i class="fas fa-shopping-cart"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        {% endfor %}
+      </div>
+
+      <!-- View All Link -->
+      <div class="view-all-link">
+        <a href="{% url 'psu' %}">View all Power Supply Units &nbsp;<i class="fa fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <!-- End Sixth Section -->
+
+
+    
+    <!-- Start Seventh Section -->
+    <div class="second-section section">
+      <div class="product-list-title">
+        <h3>Cabinets</h3>
+
+        <div class="form-check form-switch">
+          <input id="scroll-checkbox2" class="form-check-input autoscroll-checkbox shadow-none" type="checkbox" checked>
+          <label class="form-check-label">Scroll</label>
+        </div>
+
+      </div>
+
+      <div class="product-list" onmouseover="pauseScroll(2, true)" onmouseout="pauseScroll(2, false)">
+        {% for b in cabinet %}
+
+        <div class="product-card">
+          <a href="{% url 'product-detail' b.id %}" class="product-card-btn">
+            <div class="item">
+              <div class="item-img">
+                <img src="{{b.product_image.url}}" alt="" />
+              </div>
+              <div class="fw-bold title">
+                {{b.title}}
+              </div>
+              <div class="fs-5">₹ {{b.discounted_price}}</div>
+              <div class="fs-10 fw-light text-decoration-line-through">
+                ₹ {{b.selling_price}}
+              </div>
+
+              <div class="btn-container">
+                <form action="/add-to-cart" class="d-inline-block">
+                  <input type="hidden" name="product_id" value="{{b.id}}" id="product_id">
+                  <button type="submit" href="{% url 'add-to-cart' %}" class="btn btn-primary shadow-none">
+                    <span>Add to Cart</span>&nbsp;&nbsp;
+                    <i class="fas fa-shopping-cart"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        {% endfor %}
+      </div>
+
+      <!-- View All Link -->
+      <div class="view-all-link">
+        <a href="{% url 'cabinet' %}">View all Cabinets &nbsp;<i class="fa fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <!-- End Seventh Section -->
+
+
+
+    <!-- Start Eight Section -->
+    <div class="second-section section">
+      <div class="product-list-title">
+        <h3>UPS</h3>
+
+        <div class="form-check form-switch">
+          <input id="scroll-checkbox2" class="form-check-input autoscroll-checkbox shadow-none" type="checkbox" checked>
+          <label class="form-check-label">Scroll</label>
+        </div>
+
+      </div>
+
+      <div class="product-list" onmouseover="pauseScroll(2, true)" onmouseout="pauseScroll(2, false)">
+        {% for b in ups %}
+
+        <div class="product-card">
+          <a href="{% url 'product-detail' b.id %}" class="product-card-btn">
+            <div class="item">
+              <div class="item-img">
+                <img src="{{b.product_image.url}}" alt="" />
+              </div>
+              <div class="fw-bold title">
+                {{b.title}}
+              </div>
+              <div class="fs-5">₹ {{b.discounted_price}}</div>
+              <div class="fs-10 fw-light text-decoration-line-through">
+                ₹ {{b.selling_price}}
+              </div>
+
+              <div class="btn-container">
+                <form action="/add-to-cart" class="d-inline-block">
+                  <input type="hidden" name="product_id" value="{{b.id}}" id="product_id">
+                  <button type="submit" href="{% url 'add-to-cart' %}" class="btn btn-primary shadow-none">
+                    <span>Add to Cart</span>&nbsp;&nbsp;
+                    <i class="fas fa-shopping-cart"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        {% endfor %}
+      </div>
+
+      <!-- View All Link -->
+      <div class="view-all-link">
+        <a href="{% url 'ups' %}">View all UPS &nbsp;<i class="fa fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <!-- End Eight Section -->
+
+
+    <!-- Start Nineth Section -->
+    <div class="second-section section">
+      <div class="product-list-title">
+        <h3>Pendrives</h3>
+
+        <div class="form-check form-switch">
+          <input id="scroll-checkbox2" class="form-check-input autoscroll-checkbox shadow-none" type="checkbox" checked>
+          <label class="form-check-label">Scroll</label>
+        </div>
+
+      </div>
+
+      <div class="product-list" onmouseover="pauseScroll(2, true)" onmouseout="pauseScroll(2, false)">
+        {% for b in pendrive %}
+
+        <div class="product-card">
+          <a href="{% url 'product-detail' b.id %}" class="product-card-btn">
+            <div class="item">
+              <div class="item-img">
+                <img src="{{b.product_image.url}}" alt="" />
+              </div>
+              <div class="fw-bold title">
+                {{b.title}}
+              </div>
+              <div class="fs-5">₹ {{b.discounted_price}}</div>
+              <div class="fs-10 fw-light text-decoration-line-through">
+                ₹ {{b.selling_price}}
+              </div>
+
+              <div class="btn-container">
+                <form action="/add-to-cart" class="d-inline-block">
+                  <input type="hidden" name="product_id" value="{{b.id}}" id="product_id">
+                  <button type="submit" href="{% url 'add-to-cart' %}" class="btn btn-primary shadow-none">
+                    <span>Add to Cart</span>&nbsp;&nbsp;
+                    <i class="fas fa-shopping-cart"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        {% endfor %}
+      </div>
+
+      <!-- View All Link -->
+      <div class="view-all-link">
+        <a href="{% url 'pendrive' %}">View all Pendrives &nbsp;<i class="fa fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <!-- End Nineth Section -->
+
+
+    <!-- Start Tenth Section -->
+    <div class="second-section section">
+      <div class="product-list-title">
+        <h3>Mice</h3>
+
+        <div class="form-check form-switch">
+          <input id="scroll-checkbox2" class="form-check-input autoscroll-checkbox shadow-none" type="checkbox" checked>
+          <label class="form-check-label">Scroll</label>
+        </div>
+
+      </div>
+
+      <div class="product-list" onmouseover="pauseScroll(2, true)" onmouseout="pauseScroll(2, false)">
+        {% for b in mouse %}
+
+        <div class="product-card">
+          <a href="{% url 'product-detail' b.id %}" class="product-card-btn">
+            <div class="item">
+              <div class="item-img">
+                <img src="{{b.product_image.url}}" alt="" />
+              </div>
+              <div class="fw-bold title">
+                {{b.title}}
+              </div>
+              <div class="fs-5">₹ {{b.discounted_price}}</div>
+              <div class="fs-10 fw-light text-decoration-line-through">
+                ₹ {{b.selling_price}}
+              </div>
+
+              <div class="btn-container">
+                <form action="/add-to-cart" class="d-inline-block">
+                  <input type="hidden" name="product_id" value="{{b.id}}" id="product_id">
+                  <button type="submit" href="{% url 'add-to-cart' %}" class="btn btn-primary shadow-none">
+                    <span>Add to Cart</span>&nbsp;&nbsp;
+                    <i class="fas fa-shopping-cart"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        {% endfor %}
+      </div>
+
+      <!-- View All Link -->
+      <div class="view-all-link">
+        <a href="{% url 'mouse' %}">View all Mice &nbsp;<i class="fa fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <!-- End Tenth Section -->
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   </div>
