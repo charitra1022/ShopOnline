@@ -1,5 +1,6 @@
 import logging
 
+
 class LogMessage(logging.Formatter):
 
     grey = "\x1b[38;20m"
@@ -10,18 +11,17 @@ class LogMessage(logging.Formatter):
     format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s (%(filename)s:%(lineno)d)"
 
     FORMATS = {
-        logging.DEBUG: "\n" + grey + format + reset + "\n",
-        logging.INFO: "\n" + grey + format + reset + "\n",
-        logging.WARNING: "\n" + yellow + format + reset + "\n",
-        logging.ERROR: "\n" + red + format + reset + "\n",
-        logging.CRITICAL: "\n" + bold_red + format + reset + "\n"
+        logging.DEBUG: grey + format + reset,
+        logging.INFO: grey + format + reset,
+        logging.WARNING: yellow + format + reset,
+        logging.ERROR: red + format + reset,
+        logging.CRITICAL: bold_red + format + reset
     }
 
     def format(self, record):
         log_fmt = self.FORMATS.get(record.levelno)
         formatter = logging.Formatter(log_fmt)
         return formatter.format(record)
-
 
 
 # create logger
