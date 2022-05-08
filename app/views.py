@@ -25,6 +25,7 @@ class ProductSneekPeak(View):
             cat_name = ''.join(i[1].strip().lower().split())
             cat_product = Product.objects.filter(category=cat_code)[:5]
             categories[cat_name] = cat_product
+        logger.critical(categories)
         return render(request, 'app/home.html', categories)
 
 
@@ -205,6 +206,22 @@ def ram(request, data=None):
 
     return render(request, 'app/ram.html', {'rams': rams})
 
+def solidstatedrive(request, data=None):
+    # for ssd page
+    if data == None:
+        solidstatedrives = Product.objects.filter(category='SSD')
+    elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
+        solidstatedrives = Product.objects.filter(category='SSD').filter(brand=data)
+
+    elif str(data) == 'below2000':
+        solidstatedrives = Product.objects.filter(
+            category='SSD').filter(discounted_price__lt=2000)
+
+    elif str(data) == 'above2000':
+        solidstatedrives = Product.objects.filter(
+            category='SSD').filter(discounted_price__gt=2000)
+
+    return render(request, 'app/solidstatedrive.html', {'solidstatedrives': solidstatedrives})
 
 @login_required
 def checkout(request):

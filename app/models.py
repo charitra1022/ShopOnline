@@ -76,6 +76,7 @@ CATEGORY_CHOICES = (
     ('PSU', 'Power Supply Unit'),
     ('CB', 'Cabinet'),
     ('UPS', 'UPS'),
+    ('CBL', 'Cables')
 )
 
 

@@ -14,6 +14,8 @@ urlpatterns = [
          views.ProductDetailView.as_view(), name='product-detail'),
     path('ram/<slug:data>', views.ram, name='ramdata'),
     path('ram/', views.ram, name='ram'),
+    path('solidstatedrive/<slug:data>', views.solidstatedrive, name='solidstatedrivedata'),
+    path('solidstatedrive/', views.solidstatedrive, name='solidstatedrive'),
 
     path('address/', views.AddressView.as_view(), name='address'),
     path('profile/', views.ProfileView.as_view(), name='profile'),
