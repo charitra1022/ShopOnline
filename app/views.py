@@ -25,7 +25,6 @@ class ProductSneekPeak(View):
             cat_name = ''.join(i[1].strip().lower().split())
             cat_product = Product.objects.filter(category=cat_code)[:5]
             categories[cat_name] = cat_product
-        logger.critical(categories)
         return render(request, 'app/home.html', categories)
 
 
