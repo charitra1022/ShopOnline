@@ -213,13 +213,13 @@ def solidstatedrive(request, data=None):
     elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
         solidstatedrives = Product.objects.filter(category='SSD').filter(brand=data)
 
-    elif str(data) == 'below2000':
+    elif str(data) == 'below4000':
         solidstatedrives = Product.objects.filter(
-            category='SSD').filter(discounted_price__lt=2000)
+            category='SSD').filter(discounted_price__lt=4000)
 
-    elif str(data) == 'above2000':
+    elif str(data) == 'above4000':
         solidstatedrives = Product.objects.filter(
-            category='SSD').filter(discounted_price__gt=2000)
+            category='SSD').filter(discounted_price__gt=4000)
 
     return render(request, 'app/solidstatedrive.html', {'solidstatedrives': solidstatedrives})
 
