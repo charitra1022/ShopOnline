@@ -54,7 +54,7 @@ CATEGORY_CHOICES = (
 
     ('CB', 'Cabinet'),
     ('UPS', 'UPS'),
-    ('PNP', 'Pendrive'),
+    ('PND', 'Pendrive'),
     ('MOU', 'Mouse'),
     ('KB', 'Keyboard'),
 
