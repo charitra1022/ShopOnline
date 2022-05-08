@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="{% static 'app/css/category.css' %}" />
 {% endblock custom_css %}
 
-{% block title %} SSD {% endblock title %} 
+{% block title %} Motherboard {% endblock title %} 
 
 
 {% block main-content %}
@@ -18,15 +18,15 @@
         <!-- Start Sidebar filter -->
         <div class="col-sm-2">
           <div class="list-group">
-            <a href="{% url 'solidstatedrive' %}" class='list-group-item list-group-item-action' aria-current='true'>All SSDs</a>
+            <a href="{% url 'motherboard' %}" class='list-group-item list-group-item-action' aria-current='true'>All Motherboards</a>
 
-            <a href="{% url 'solidstatedrivedata' 'SAMSUNG' %}" class='list-group-item list-group-item-action' aria-current='true'>Samsung</a>
+            <a href="{% url 'motherboarddata' 'SAMSUNG' %}" class='list-group-item list-group-item-action' aria-current='true'>Samsung</a>
 
-            <a href="{% url 'solidstatedrivedata' 'WD' %}" class='list-group-item list-group-item-action' aria-current='true'>Western Digital</a>
+            <a href="{% url 'motherboarddata' 'WD' %}" class='list-group-item list-group-item-action' aria-current='true'>Western Digital</a>
 
-            <a href="{% url 'solidstatedrivedata' 'below4000' %}" class='list-group-item list-group-item-action' aria-current='true'>Below 4000</a>
+            <a href="{% url 'motherboarddata' 'below4000' %}" class='list-group-item list-group-item-action' aria-current='true'>Below 4000</a>
 
-            <a href="{% url 'solidstatedrivedata' 'above4000' %}" class='list-group-item list-group-item-action' aria-current='true'>Above 4000</a>
+            <a href="{% url 'motherboarddata' 'above4000' %}" class='list-group-item list-group-item-action' aria-current='true'>Above 4000</a>
           </div>
         </div>
         <!-- End Sidebar filter -->
@@ -34,7 +34,7 @@
         <!-- Start Product list -->
         <div class="col-sm-10">
           <div class='row'>
-            {% for product in solidstatedrives %}
+            {% for product in motherboards %}
               <div class="product-card col">
                 <a href="{% url 'product-detail' product.id %}" class="product-card-btn">
                   <div class="item">
