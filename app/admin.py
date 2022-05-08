@@ -25,4 +25,4 @@ class CartModelAdmin(admin.ModelAdmin):
 @admin.register(OrderPlaced)
 class OrderPlacedModelAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'customer', 'product', 'quantity',
-                    'ordered_date', 'status']
+                    'ordered_date', 'status', 'txn_id']
