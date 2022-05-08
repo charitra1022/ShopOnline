@@ -69,7 +69,9 @@
               </li>
             </ul>
 
-            <form action="/buynowcheckout" id="checkout-form">
+            <form action="/buynowcheckout/" method="POST" id="checkout-form">
+              {% csrf_token %}
+
               <input name="prod_id" id="product_id" type="text" class="d-none bg-warning" value="{{product.id}}">
               <input name="prod_quant" id="prod_quant" type="text" class="d-none bg-warning" value="{{quantity}}">
 
