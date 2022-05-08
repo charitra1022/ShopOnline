@@ -19,28 +19,28 @@ urlpatterns = [
     path('solidstatedrive/<slug:data>', views.solidstatedrive, name='solidstatedrivedata'),
     path('solidstatedrive/', views.solidstatedrive, name='solidstatedrive'),
     
-    path('harddiskdrive/<slug:data>', views.solidstatedrive, name='harddiskdrive'),
+    path('harddiskdrive/<slug:data>', views.solidstatedrive, name='harddiskdrivedata'),
     path('harddiskdrive/', views.solidstatedrive, name='harddiskdrive'),
 
-    path('motherboard/<slug:data>', views.solidstatedrive, name='motherboard'),
+    path('motherboard/<slug:data>', views.solidstatedrive, name='motherboarddata'),
     path('motherboard/', views.solidstatedrive, name='motherboard'),
 
-    path('keyboard/<slug:data>', views.solidstatedrive, name='keyboard'),
+    path('keyboard/<slug:data>', views.solidstatedrive, name='keyboarddata'),
     path('keyboard/', views.solidstatedrive, name='keyboard'),
 
     path('psu/<slug:data>', views.solidstatedrive, name='psu'),
     path('psu/', views.solidstatedrive, name='psu'),
 
-    path('cabinet/<slug:data>', views.solidstatedrive, name='cabinet'),
-    path('cabinet/', views.solidstatedrive, name='cabinet'),
+    path('cabinet/<slug:data>', views.solidstatedrive, name='cabinetdata'),
+    path('cabinet/', views.cabinet, name='cabinet'),
 
     path('ups/<slug:data>', views.solidstatedrive, name='ups'),
     path('ups/', views.solidstatedrive, name='ups'),
 
-    path('pendrive/<slug:data>', views.solidstatedrive, name='pendrive'),
+    path('pendrive/<slug:data>', views.solidstatedrive, name='pendrivedata'),
     path('pendrive/', views.solidstatedrive, name='pendrive'),
 
-    path('mouse/<slug:data>', views.solidstatedrive, name='mouse'),
+    path('mouse/<slug:data>', views.solidstatedrive, name='mousedata'),
     path('mouse/', views.solidstatedrive, name='mouse'),
 
 
