@@ -86,11 +86,11 @@
                   External
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Cabinets</a></li>
-                  <li><a class="dropdown-item" href="#">Pendrives</a></li>
-                  <li><a class="dropdown-item" href="#">UPS</a></li>
-                  <li><a class="dropdown-item" href="#">Mouse</a></li>
-                  <li><a class="dropdown-item" href="#">Keyboard</a></li>
+                  <li><a class="dropdown-item" href="{% url 'cabinet' %}">Cabinets</a></li>
+                  <li><a class="dropdown-item" href="{% url 'pendrive' %}">Pendrives</a></li>
+                  <li><a class="dropdown-item" href="{% url 'ups' %}">UPS</a></li>
+                  <li><a class="dropdown-item" href="{% url 'mouse' %}">Mouse</a></li>
+                  <li><a class="dropdown-item" href="{% url 'keyboard' %}">Keyboard</a></li>
 
                   <!-- <li><hr class="dropdown-divider" /></li>
                   <li>
@@ -114,11 +114,11 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="{% url 'ram' %}">Random Access Memory (RAM)</a></li>
-                  <li><a class="dropdown-item" href="#">Hard Disk Drives (HDD)</a></li>
-                  <li><a class="dropdown-item" href="#">Solid State Drives (SSD)</a></li>
-                  <li><a class="dropdown-item" href="#">Optical Drives</a></li>
-                  <li><a class="dropdown-item" href="#">Motherboards</a></li>
-                  <li><a class="dropdown-item" href="#">Power Supply Units (PSU)</a></li>
+                  <li><a class="dropdown-item" href="{% url 'harddiskdrive' %}">Hard Disk Drives (HDD)</a></li>
+                  <li><a class="dropdown-item" href="{% url 'solidstatedrive' %}">Solid State Drives (SSD)</a></li>
+                  <li><a class="dropdown-item" href="{% url 'motherboard' %}">Motherboards</a></li>
+                  <li><a class="dropdown-item" href="{% url 'psu' %}">Power Supply Units (PSU)</a></li>
+                  <!-- <li><a class="dropdown-item" href="#">Optical Drives</a></li> -->
 
                   <!-- <li><hr class="dropdown-divider" /></li>
                   <li>
