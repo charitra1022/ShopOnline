@@ -1,0 +1,72 @@
+{% extends 'app/base.html' %} 
+{% load static %} 
+
+{% block custom_css %}
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'app/css/category.css' %}" />
+{% endblock custom_css %}
+
+{% block title %} PSU {% endblock title %} 
+
+
+{% block main-content %}
+  <!-- Start Main Container -->
+  <div class="main-container">
+    <div class="container section">
+      <div class="row">
+
+        <!-- Start Sidebar filter -->
+        <div class="col-sm-2">
+          <div class="list-group">
+            <a href="{% url 'psu' %}" class='list-group-item list-group-item-action' aria-current='true'>All PSUs</a>
+
+            <a href="{% url 'psudata' 'SAMSUNG' %}" class='list-group-item list-group-item-action' aria-current='true'>Samsung</a>
+
+            <a href="{% url 'psudata' 'WD' %}" class='list-group-item list-group-item-action' aria-current='true'>Western Digital</a>
+
+            <a href="{% url 'psudata' 'below4000' %}" class='list-group-item list-group-item-action' aria-current='true'>Below 4000</a>
+
+            <a href="{% url 'psudata' 'above4000' %}" class='list-group-item list-group-item-action' aria-current='true'>Above 4000</a>
+          </div>
+        </div>
+        <!-- End Sidebar filter -->
+
+        <!-- Start Product list -->
+        <div class="col-sm-10">
+          <div class='row'>
+            {% for product in psus %}
+              <div class="product-card col">
+                <a href="{% url 'product-detail' product.id %}" class="product-card-btn">
+                  <div class="item">
+                    <div class="item-img">
+                      <img src="{{product.product_image.url}}" alt="" />
+                    </div>
+                    <div class="fw-bold title">
+                      {{product.title}}
+                    </div>
+                    <div class="fs-5">₹ {{product.discounted_price}}</div>
+                    <div class="fs-10 fw-light text-decoration-line-through">
+                      ₹ {{product.selling_price}}
+                    </div>
+      
+                    <div class="btn-container">
+                      <a href="#" type="button" class="btn btn-primary shadow-none">
+                        <span>Add to Cart</span>&nbsp;&nbsp;
+                        <i class="fas fa-shopping-cart"></i>
+                      </a>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        <!-- End Product list -->
+
+      </div>
+    </div>
+
+
+  </div>
+  <!-- End Main Container -->
+{% endblock main-content %}

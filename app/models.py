@@ -44,6 +44,28 @@ STATE_CHOICES = (
     ('West Bengal', 'West Bengal')
 )
 
+CATEGORY_CHOICES = (
+    ('RAM', 'RAM'),
+    ('SSD', 'Solid State Drive'),
+    ('HDD', 'Hard Disk Drive'),
+    ('MB', 'Mother Board'),
+    # ('OD', 'Optical Drive'),
+    ('PSU', 'Power Supply Unit'),
+
+    ('CB', 'Cabinet'),
+    ('UPS', 'UPS'),
+    ('PND', 'Pendrive'),
+    ('MOU', 'Mouse'),
+    ('KB', 'Keyboard'),
+
+    # ('CBL', 'Cables')
+    # ('VGA', 'VGA Cable')
+    # ('SAT', 'SATA Cable')
+    # ('UEX', 'USB Extension')
+    # ('AUX', 'AUX Cable')
+)
+
+
 def validate_phone_length(value):
     str_value = str(value)
     if len(str_value)!=10:
@@ -65,18 +87,6 @@ class Customer(models.Model):
 
     def __str__(self):
         return str(self.id)
-
-
-CATEGORY_CHOICES = (
-    ('RAM', 'RAM'),
-    ('SSD', 'Solid State Drive'),
-    ('HDD', 'Hard Disk Drive'),
-    ('MB', 'Mother Board'),
-    ('OD', 'Optical Drive'),
-    ('PSU', 'Power Supply Unit'),
-    ('CB', 'Cabinet'),
-    ('UPS', 'UPS'),
-)
 
 
 class Product(models.Model):
