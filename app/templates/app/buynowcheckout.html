@@ -50,13 +50,16 @@
         <h4>Select Shipping Address</h4>
         <hr>
         <form action="/buynowpaymentdone" id="checkout-form">
+          <!-- Start Hidden form fields -->
+          <input name="prod_id" id="product_id" type="text" class="d-none bg-warning" value="{{product.id}}">
+          <input name="prod_quant" id="prod_quant" type="text" class="d-none bg-warning" value="{{quantity}}">
+          <input name="txn_id" id="txn_id" type="text" class="d-none bg-warning" value="txn id">
+          <!-- End Hidden form fields -->
+
           {% for address in addresses %}
             <div class="card">
               <div class="card-body">
                 <div class="form-check mt-2 mb-2 d-inline-block">
-                  <input name="prod_id" id="product_id" type="text" class="d-none bg-warning" value="{{product.id}}">
-                  <input name="prod_quant" id="prod_quant" type="text" class="d-none bg-warning" value="{{quantity}}">
-              
                   <input name="custid" id="custaddress{{forloop.counter}}" class="form-check-input" type="radio" value="{{address.id}}">
                   <label class="form-check-label fw-bold" for=""></label>
 
@@ -71,8 +74,6 @@
                 <span class="fs-13 d-block"><span class="fw-bold">Postal Code:</span> {{address.zipcode}}</span>
               </div>
             </div>
-
-            
 
           {% empty %}
             <div>There are no Customer addresses added! Go to <strong>Profile</strong> and create a new address</div>
@@ -94,6 +95,9 @@
 
 {% block custom_js %}
   <script src="{% static 'app/js/cart.js' %}"></script>
+  <script>
+    document.getElementById("custaddress1").checked = true;
+  </script>
 {% endblock custom_js %}
 
 {% block payment-gateway %}
@@ -123,6 +127,7 @@
                 var transaction = orderData.purchase_units[0].payments.captures[0];
                 alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
 
+                document.getElementById("txn_id").value = transaction.id;
                 document.getElementById("checkout-form").submit();
 
                 // Replace the above to show a success message within this page, e.g.

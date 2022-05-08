@@ -45,16 +45,17 @@
             </div>
           </div>
 
-
-
         <small>Term and Condition: <br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam saepe! Iure optio repellat dolor velit, minus rem. Facilis cumque neque numquam laboriosam, accusantium adipisci nisi nihil in et quis?</small>
       </div>
-      
       
       <div class="col-sm-4 offset-sm-1">
         <h4>Select Shipping Address</h4>
         <hr>
         <form action="/paymentdone" id="checkout-form">
+          <!-- Start Hidden form fields -->
+          <input name="txn_id" id="txn_id" type="text" class="d-none bg-warning" value="txn id">
+          <!-- End Hidden form fields -->
+
           {% for address in addresses %}
             <div class="card">
               <div class="card-body">
@@ -75,24 +76,16 @@
               </div>
             </div>
 
-            
-
           {% empty %}
             <div>There are no Customer addresses added! Go to <strong>Profile</strong> and create a new address</div>
           {% endfor %}
-
             
-            
-
-
-            
-            <div class="text-end">
-              <!-- <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button> -->
+            <div class="text-end my-4">
+              <!-- <button type="submit" class="btn btn-warning my-3 px-5 fw-bold">Continue</button> -->
 
               <!-- PayPal Integration -->
               <!-- Set up a container element for the button -->
               <div id="paypal-button-container"></div>
-
             </div>
           </form>
         </div>
@@ -102,6 +95,9 @@
 
 {% block custom_js %}
   <script src="{% static 'app/js/cart.js' %}"></script>
+  <script>
+    document.getElementById("custaddress1").checked = true;
+  </script>
 {% endblock custom_js %}
 
 {% block payment-gateway %}
@@ -131,6 +127,7 @@
                 var transaction = orderData.purchase_units[0].payments.captures[0];
                 alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
 
+                document.getElementById("txn_id").value = transaction.id;
                 document.getElementById("checkout-form").submit();
 
                 // Replace the above to show a success message within this page, e.g.
