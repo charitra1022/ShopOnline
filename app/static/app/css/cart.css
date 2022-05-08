@@ -8,3 +8,7 @@ pre {
   word-wrap: break-word;
   text-overflow: ellipsis;
 }
+
+h1 {
+  font-family: Poppins-Bold;
+}
