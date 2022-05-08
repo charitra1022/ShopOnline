@@ -204,58 +204,6 @@
     <!-- Start Third Section -->
     <div class="second-section section">
       <div class="product-list-title">
-        <h3>Cables</h3>
-
-        <div class="form-check form-switch">
-          <input id="scroll-checkbox2" class="form-check-input autoscroll-checkbox shadow-none" type="checkbox" checked>
-          <label class="form-check-label">Scroll</label>
-        </div>
-
-      </div>
-
-      <div class="product-list" onmouseover="pauseScroll(2, true)" onmouseout="pauseScroll(2, false)">
-        {% for b in cables %}
-
-        <div class="product-card">
-          <a href="{% url 'product-detail' b.id %}" class="product-card-btn">
-            <div class="item">
-              <div class="item-img">
-                <img src="{{b.product_image.url}}" alt="" />
-              </div>
-              <div class="fw-bold title">
-                {{b.title}}
-              </div>
-              <div class="fs-5">₹ {{b.discounted_price}}</div>
-              <div class="fs-10 fw-light text-decoration-line-through">
-                ₹ {{b.selling_price}}
-              </div>
-
-              <div class="btn-container">
-                <form action="/add-to-cart" class="d-inline-block">
-                  <input type="hidden" name="product_id" value="{{b.id}}" id="product_id">
-                  <button type="submit" href="{% url 'add-to-cart' %}" class="btn btn-primary shadow-none">
-                    <span>Add to Cart</span>&nbsp;&nbsp;
-                    <i class="fas fa-shopping-cart"></i>
-                  </button>
-                </form>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        {% endfor %}
-      </div>
-
-      <!-- View All Link -->
-      <div class="view-all-link">
-        <a href="{% url 'ram' %}">View all Cables &nbsp;<i class="fa fa-arrow-right"></i></a>
-      </div>
-    </div>
-    <!-- End Third Section -->
-
-    <!-- Start Fourth Section -->
-    <div class="second-section section">
-      <div class="product-list-title">
         <h3>Motherboards</h3>
 
         <div class="form-check form-switch">
@@ -303,7 +251,7 @@
         <a href="{% url 'ram' %}">View all Motherboards &nbsp;<i class="fa fa-arrow-right"></i></a>
       </div>
     </div>
-    <!-- End fourth Section -->
+    <!-- End Third Section -->
 
 
   </div>
