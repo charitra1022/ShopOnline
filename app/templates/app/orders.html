@@ -1,11 +1,9 @@
 {% extends 'app/base.html' %}
 {% load static %}
-
 {% block custom_css %}
   <!-- Custom CSS -->
 {% endblock custom_css %}
 {% block title %}Orders{% endblock title %}
-
 
 {% block main-content %}
   <div class="container">
@@ -28,6 +26,7 @@
                 <span><span class="fw-bold">Ordered By:</span> {{order.customer.name}}</span><br>
                 <span><span class="fw-bold">Status:</span> {{order.status}}</span><br>
                 <span><span class="fw-bold">Price:</span> {{order.total_cost}}</span><br>
+                <span><span class="fw-bold">Txn ID:</span> {{order.txn_id}}</span><br>
               </div>
               
               <div class="col-sm-3 pt-5">
@@ -61,7 +60,6 @@
 
               <hr class="my-5">
             {% endfor %}
-
           </div>
       </div>
     </div>

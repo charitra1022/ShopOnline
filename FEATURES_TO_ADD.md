@@ -30,8 +30,7 @@ Refer to [BUGS.md](/BUGS.md) for better view on Active Bugs
 16. product category filter
 17. parameter based product filter in category page
 18. Add wishlist section
-19. Dedicated User page
-20. Compress images before saving to db
+19. Compress images before saving to db
 
 ## User Page Settings
 
@@ -60,3 +59,17 @@ Refer to [BUGS.md](/BUGS.md) for better view on Active Bugs
 4. cart
 5. buynow
 6. ram
+7. hdd
+8. ssd
+9. pendrive
+10. motherboard
+11. psu
+12. ups
+13. cabinet
+14. mouse
+15. keyboard
+16. cart
+17. buynow
+18. address
+19. orders
+20. checkout

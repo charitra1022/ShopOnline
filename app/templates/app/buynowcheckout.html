@@ -14,15 +14,13 @@
         <hr>
           <div class="card mb-2">
 
-            {% for cartitem in cartitems %}
-              <div class="card-body">
-                <h6 class="fw-light">
-                  <a href="{% url 'product-detail' cartitem.product.id %}">{{cartitem.product.title}}</a>
-                </h6>
-                <p>Quantity: {{cartitem.quantity}}</p>
-                <p class="fw-bold">Price: {{cartitem.total_price}}</p> 
-              </div>
-            {% endfor %}
+            <div class="card-body">
+              <h6 class="fw-light">
+                <a href="{% url 'product-detail' product.id %}">{{product.title}}</a>
+              </h6>
+              <p>Quantity: {{quantity}}</p>
+              <p class="fw-bold">Price: {{product.discounted_price}}</p> 
+            </div>
 
             <hr>
 
@@ -51,8 +49,10 @@
       <div class="col-sm-4 offset-sm-1">
         <h4>Select Shipping Address</h4>
         <hr>
-        <form action="/paymentdone" id="checkout-form">
+        <form action="/buynowpaymentdone" id="checkout-form">
           <!-- Start Hidden form fields -->
+          <input name="prod_id" id="product_id" type="text" class="d-none bg-warning" value="{{product.id}}">
+          <input name="prod_quant" id="prod_quant" type="text" class="d-none bg-warning" value="{{quantity}}">
           <input name="txn_id" id="txn_id" type="text" class="d-none bg-warning" value="txn id">
           <!-- End Hidden form fields -->
 
@@ -60,7 +60,6 @@
             <div class="card">
               <div class="card-body">
                 <div class="form-check mt-2 mb-2 d-inline-block">
-
                   <input name="custid" id="custaddress{{forloop.counter}}" class="form-check-input" type="radio" value="{{address.id}}">
                   <label class="form-check-label fw-bold" for=""></label>
 
@@ -79,13 +78,14 @@
           {% empty %}
             <div>There are no Customer addresses added! Go to <strong>Profile</strong> and create a new address</div>
           {% endfor %}
-            
+
             <div class="text-end my-4">
-              <!-- <button type="submit" class="btn btn-warning my-3 px-5 fw-bold">Continue</button> -->
+              <!-- <button type="submit" class="btn btn-warning mt-3 px-5 my-5 fw-bold">Continue</button> -->
 
               <!-- PayPal Integration -->
               <!-- Set up a container element for the button -->
               <div id="paypal-button-container"></div>
+
             </div>
           </form>
         </div>
