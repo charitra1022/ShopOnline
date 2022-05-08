@@ -222,6 +222,145 @@ def solidstatedrive(request, data=None):
 
     return render(request, 'app/categories/solidstatedrive.html', {'solidstatedrives': solidstatedrives})
 
+def cabinet(request, data=None):
+    # for cabinet page
+    if data == None:
+        cabinets = Product.objects.filter(category='CB')
+    elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
+        cabinets = Product.objects.filter(category='CB').filter(brand=data)
+
+    elif str(data) == 'below4000':
+        cabinets = Product.objects.filter(
+            category='CB').filter(discounted_price__lt=4000)
+
+    elif str(data) == 'above4000':
+        cabinets = Product.objects.filter(
+            category='CB').filter(discounted_price__gt=4000)
+
+    return render(request, 'app/categories/cabinet.html', {'cabinets': cabinets})
+
+
+def pendrive(request, data=None):
+    # for pendrive page
+    if data == None:
+        pendrives = Product.objects.filter(category='PND')
+    elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
+        pendrives = Product.objects.filter(category='PND').filter(brand=data)
+
+    elif str(data) == 'below4000':
+        pendrives = Product.objects.filter(
+            category='PND').filter(discounted_price__lt=4000)
+
+    elif str(data) == 'above4000':
+        pendrives = Product.objects.filter(
+            category='PND').filter(discounted_price__gt=4000)
+
+    return render(request, 'app/categories/pendrive.html', {'pendrives': pendrives})
+
+def ups(request, data=None):
+    # for ups page
+    if data == None:
+        upss = Product.objects.filter(category='UPS')
+    elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
+        upss = Product.objects.filter(category='UPS').filter(brand=data)
+
+    elif str(data) == 'below4000':
+        upss = Product.objects.filter(
+            category='UPS').filter(discounted_price__lt=4000)
+
+    elif str(data) == 'above4000':
+        upss = Product.objects.filter(
+            category='UPS').filter(discounted_price__gt=4000)
+
+    return render(request, 'app/categories/ups.html', {'upss': upss})
+
+def keyboard(request, data=None):
+    # for keyboard page
+    if data == None:
+        keyboards = Product.objects.filter(category='KB')
+    elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
+        keyboards = Product.objects.filter(category='KB').filter(brand=data)
+
+    elif str(data) == 'below4000':
+        keyboards = Product.objects.filter(
+            category='KB').filter(discounted_price__lt=4000)
+
+    elif str(data) == 'above4000':
+        keyboards = Product.objects.filter(
+            category='KB').filter(discounted_price__gt=4000)
+
+    return render(request, 'app/categories/keyboard.html', {'keyboards': keyboards})
+
+def hdd(request, data=None):
+    # for hdd page
+    if data == None:
+        hdds = Product.objects.filter(category='HDD')
+    elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
+        hdds = Product.objects.filter(category='HDD').filter(brand=data)
+
+    elif str(data) == 'below4000':
+        hdds = Product.objects.filter(
+            category='HDD').filter(discounted_price__lt=4000)
+
+    elif str(data) == 'above4000':
+        hdds = Product.objects.filter(
+            category='HDD').filter(discounted_price__gt=4000)
+
+    return render(request, 'app/categories/hdd.html', {'hdds': hdds})
+
+def psu(request, data=None):
+    # for psu page
+    if data == None:
+        psus = Product.objects.filter(category='PSU')
+    elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
+        psus = Product.objects.filter(category='PSU').filter(brand=data)
+
+    elif str(data) == 'below4000':
+        psus = Product.objects.filter(
+            category='PSU').filter(discounted_price__lt=4000)
+
+    elif str(data) == 'above4000':
+        psus = Product.objects.filter(
+            category='PSU').filter(discounted_price__gt=4000)
+
+    return render(request, 'app/categories/psu.html', {'psus': psus})
+
+def motherboard(request, data=None):
+    # for motherboard page
+    if data == None:
+        motherboards = Product.objects.filter(category='MB')
+    elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
+        motherboards = Product.objects.filter(category='MB').filter(brand=data)
+
+    elif str(data) == 'below4000':
+        motherboards = Product.objects.filter(
+            category='MB').filter(discounted_price__lt=4000)
+
+    elif str(data) == 'above4000':
+        motherboards = Product.objects.filter(
+            category='MB').filter(discounted_price__gt=4000)
+
+    return render(request, 'app/categories/motherboard.html', {'motherboards': motherboards})
+
+def mouse(request, data=None):
+    # for mouse page
+    if data == None:
+        mouses = Product.objects.filter(category='MOU')
+    elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
+        mouses = Product.objects.filter(category='MOU').filter(brand=data)
+
+    elif str(data) == 'below4000':
+        mouses = Product.objects.filter(
+            category='MOU').filter(discounted_price__lt=4000)
+
+    elif str(data) == 'above4000':
+        mouses = Product.objects.filter(
+            category='MOU').filter(discounted_price__gt=4000)
+
+    return render(request, 'app/categories/mouse.html', {'mouses': mouses})
+
+
+
 @login_required
 def checkout(request):
     user = request.user
