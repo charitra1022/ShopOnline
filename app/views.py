@@ -190,6 +190,7 @@ def orders(request):
 
 def ram(request, data=None):
     # for ram page
+    if data is not None: data = " ".join(data.split("_"))
     if data == None:
         rams = Product.objects.filter(category='RAM')
     elif str(data).lower() == 'corsair' or str(data).lower() == 'crucial':
@@ -207,9 +208,10 @@ def ram(request, data=None):
 
 def solidstatedrive(request, data=None):
     # for ssd page
+    if data is not None: data = " ".join(data.split("_"))
     if data == None:
         solidstatedrives = Product.objects.filter(category='SSD')
-    elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
+    elif str(data).lower() == 'samsung' or str(data).lower() == 'western digital':
         solidstatedrives = Product.objects.filter(category='SSD').filter(brand=data)
 
     elif str(data) == 'below4000':
@@ -224,6 +226,7 @@ def solidstatedrive(request, data=None):
 
 def cabinet(request, data=None):
     # for cabinet page
+    if data is not None: data = " ".join(data.split("_"))
     if data == None:
         cabinets = Product.objects.filter(category='CB')
     elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
@@ -242,6 +245,7 @@ def cabinet(request, data=None):
 
 def pendrive(request, data=None):
     # for pendrive page
+    if data is not None: data = " ".join(data.split("_"))
     if data == None:
         pendrives = Product.objects.filter(category='PND')
     elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
@@ -259,6 +263,7 @@ def pendrive(request, data=None):
 
 def ups(request, data=None):
     # for ups page
+    if data is not None: data = " ".join(data.split("_"))
     if data == None:
         upss = Product.objects.filter(category='UPS')
     elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
@@ -276,6 +281,7 @@ def ups(request, data=None):
 
 def keyboard(request, data=None):
     # for keyboard page
+    if data is not None: data = " ".join(data.split("_"))
     if data == None:
         keyboards = Product.objects.filter(category='KB')
     elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
@@ -293,9 +299,10 @@ def keyboard(request, data=None):
 
 def hdd(request, data=None):
     # for hdd page
+    if data is not None: data = " ".join(data.split("_"))
     if data == None:
         hdds = Product.objects.filter(category='HDD')
-    elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
+    elif str(data).lower() == 'samsung' or str(data).lower() == 'western digital':
         hdds = Product.objects.filter(category='HDD').filter(brand=data)
 
     elif str(data) == 'below4000':
@@ -306,10 +313,11 @@ def hdd(request, data=None):
         hdds = Product.objects.filter(
             category='HDD').filter(discounted_price__gt=4000)
 
-    return render(request, 'app/categories/hdd.html', {'hdds': hdds})
+    return render(request, 'app/categories/hdd.html', {'harddiskdrives': hdds})
 
 def psu(request, data=None):
     # for psu page
+    if data is not None: data = " ".join(data.split("_"))
     if data == None:
         psus = Product.objects.filter(category='PSU')
     elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
@@ -327,6 +335,7 @@ def psu(request, data=None):
 
 def motherboard(request, data=None):
     # for motherboard page
+    if data is not None: data = " ".join(data.split("_"))
     if data == None:
         motherboards = Product.objects.filter(category='MB')
     elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
@@ -344,6 +353,7 @@ def motherboard(request, data=None):
 
 def mouse(request, data=None):
     # for mouse page
+    if data is not None: data = " ".join(data.split("_"))
     if data == None:
         mouses = Product.objects.filter(category='MOU')
     elif str(data).lower() == 'samsung' or str(data).lower() == 'wd':
