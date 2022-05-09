@@ -13,13 +13,20 @@
         <h4>Order Summary</h4>
         <hr>
           <div class="card mb-2">
+            <div class="row">
+              <div class="col-sm-3 text-center align-self-center">
+                <a href="{% url 'product-detail' product.id %}">
+                  <img src="{{product.product_image.url}}" alt="" srcset="" class="img-fluid img-thumbnail border-0" height="150" width="150">
+                </a>
+              </div>
 
-            <div class="card-body">
-              <h6 class="fw-light">
-                <a href="{% url 'product-detail' product.id %}">{{product.title}}</a>
-              </h6>
-              <p>Quantity: {{quantity}}</p>
-              <p class="fw-bold">Price: {{product.discounted_price}}</p> 
+              <div class="card-body col-sm-9">
+                <h6 class="fw-light">
+                  <a href="{% url 'product-detail' product.id %}">{{product.title}}</a>
+                </h6>
+                <p>Quantity: {{quantity}}</p>
+                <p class="fw-bold">Price: {{product.discounted_price}}</p> 
+              </div>
             </div>
 
             <hr>
