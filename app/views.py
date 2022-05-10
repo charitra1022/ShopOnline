@@ -1,15 +1,21 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.contrib.auth.models import User
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from django.contrib.auth.tokens import default_token_generator
+from django.template.loader import render_to_string
+from django.core.mail import send_mail, BadHeaderError
 
 import os
 
 from .models import Cart, Customer, OrderPlaced, Product, CATEGORY_CHOICES
-from .forms import CustomerRegistrationForm, CustomerProfileForm
+from .forms import CustomerRegistrationForm, CustomerProfileForm, MyPasswordResetForm
 
 from .custom_logger import logger
 
@@ -551,3 +557,44 @@ def delete_customer(request, id):
     ob = Customer.objects.get(id=id)
     ob.delete()
     return redirect('address')
+
+
+def password_reset_request(request):
+    # Called when password request is generated
+    if request.method.lower() == "post":
+        form = MyPasswordResetForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            user_set = User.objects.filter(Q(email=email))
+
+            if user_set.exists():
+                user = user_set[0]
+                subject = "Password Reset Request"
+                template = "app/password/password_reset_email.txt"
+                details = {
+                    "user_first_name": user.first_name,
+                    "user_email": user.email,
+					"user": user,
+					"protocol": "http",
+					"domain": "127.0.0.1:8000",
+                    "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+					"token": default_token_generator.make_token(user),
+					"site_name": "ShopOnline"
+                }
+                email_txt = render_to_string(template, details)
+                try:
+                    send_mail(subject, email_txt, os.environ.get('ADMIN_EMAIL'), [user.email], fail_silently=False)
+
+                except BadHeaderError:
+                    return HttpResponse('Invalid header found.')
+                
+                return redirect("password_reset_done")
+            else:
+                return redirect("password_reset_error")
+
+    logger.critical("outside if statement")
+    reset_form = MyPasswordResetForm()
+    return render(request, "app/reset_password.html", {'form': reset_form})
+
+def password_reset_error(request):
+    return render(request, "app/reset_password_error.html")
