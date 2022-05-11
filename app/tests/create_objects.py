@@ -1,6 +1,8 @@
-from itertools import product
 from ..models import Product, Customer, OrderPlaced, Cart
 from django.contrib.auth.models import User
+
+import random
+import string
 
 
 #  create and return product object
@@ -24,7 +26,7 @@ def createProduct():
     )
 
 
-# create and return user object
+# create and return customer object
 def createCustomer():
     user = createUser()
     name = "Test Customer"
@@ -45,14 +47,17 @@ def createCustomer():
     )
 
 
+# create and return user object
 def createUser():
+    username = ''.join(random.choices(string.ascii_uppercase + string.digits, k = 5))
     return User.objects.create_user(
-        username='john',
+        username=username,
         email='jlennon@beatles.com',
         password='glass onion'
     )
 
 
+# create and return cart object
 def createCart():
     user = createUser()
     product = createProduct()
@@ -62,4 +67,21 @@ def createCart():
         user=user,
         product=product,
         quantity=quantity
+    )
+
+
+# create and return orderplaced object
+def createOrder():
+    user = createUser()
+    customer = createCustomer()
+    product = createProduct()
+    quantity = 10
+    txn_id = "DEMOTRANSACTIONID"
+
+    return OrderPlaced.objects.create(
+        user=user,
+        customer=customer,
+        product=product,
+        quantity=quantity,
+        txn_id=txn_id
     )
