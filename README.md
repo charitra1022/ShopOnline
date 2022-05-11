@@ -25,6 +25,16 @@ Run the following command in the terminal with project folder as the working dir
 
 `python manage.py runserver`
 
+## Running Tests
+
+To run tests, run the following command into the terminal:
+
+`coverage run manage.py test app -v 2`
+
+`coverage html`
+
+To see the output, go to `htmlcov` folder and run `index.html` file. Click any links to see the test efficiency.
+
 ## Active Bugs
 
 Refer to [BUGS.md](/BUGS.md) for better view on Active Bugs
