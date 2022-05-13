@@ -97,7 +97,7 @@ class Product(models.Model):
     brand = models.CharField(max_length=100)
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=3)
     product_image = models.ImageField(upload_to='productimg')
-    stock = models.IntegerField(default=100)
+    stock = models.PositiveIntegerField(default=100)
 
     def __str__(self):
         return str(self.id)
