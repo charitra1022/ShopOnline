@@ -30,23 +30,37 @@
             <input type="hidden" name="product_id" value="{{product.id}}" id="product_id">
               {% if request.user.is_authenticated %}
                 {% if cart_state %}
-                  <button type="submit" href="{% url 'add-to-cart' %}" class="product-btn cart bg-secondary">
+                  <button type="submit" class="product-btn cart bg-secondary">
                     Go to Cart&nbsp;&nbsp;
                 {% else %}
-                  <button type="submit" href="{% url 'add-to-cart' %}" class="product-btn cart bg-primary">
-                    Add to Cart&nbsp;&nbsp;
+                  <!-- Stock Validation -->
+                  {% if product.stock == 0 %}
+                    <button type="submit" class="product-btn btn disabled cart bg-primary">
+                      Add to Cart&nbsp;&nbsp;
+                  {% else %}
+                    <button type="submit" class="product-btn cart bg-primary">
+                      Add to Cart&nbsp;&nbsp;
+                  {% endif %}
                 {% endif %}
               {% else %}
-                <button type="submit" href="{% url 'add-to-cart' %}" class="product-btn cart bg-primary">
-                  Add to Cart&nbsp;&nbsp;
+                <!-- Stock Validation -->
+                {% if product.stock == 0 %}
+                  <button type="submit" class="product-btn btn disabled cart bg-primary">
+                    Add to Cart&nbsp;&nbsp;
+                {% else %}
+                  <button type="submit" class="product-btn cart bg-primary">
+                    Add to Cart&nbsp;&nbsp;
+                {% endif %}
               {% endif %}
               <i class="fas fa-shopping-cart"> </i>
             </button>
           </form>
 
-          <a href="{% url 'buy-now' product.id %}" class="product-btn buy bg-danger">
-            Buy Now&nbsp;&nbsp; <i class="fas fa-shopping-bag"></i>
-          </a>
+          {% if product.stock == 0 %}
+            <button type="button" class="product-btn btn buy bg-danger disabled"> Buy Now&nbsp;&nbsp; <i class="fas fa-shopping-bag"></i></button>
+          {% else %}
+            <a href="{% url 'buy-now' product.id %}" class="product-btn buy bg-danger"> Buy Now&nbsp;&nbsp; <i class="fas fa-shopping-bag"></i></a>
+          {% endif %}
 
           <div class="my-4">
             {% if product.stock == 0 %}
