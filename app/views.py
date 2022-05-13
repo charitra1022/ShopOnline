@@ -103,7 +103,7 @@ class ProductSneekPeak(View):
         for i in CATEGORY_CHOICES:
             cat_code = i[0]
             cat_name = ''.join(i[1].strip().lower().split())
-            cat_product = Product.objects.filter(category=cat_code)[:5]
+            cat_product = Product.objects.filter(category=cat_code, stock__gt=0)[:5]
             categories[cat_name] = cat_product
         return render(request, 'app/home.html', categories)
 
@@ -444,6 +444,9 @@ def payment_done(request):
         OrderPlaced(user=user, customer=customer,
                     product=c.product, quantity=c.quantity, txn_id=txn_id).save()
         c.delete()
+
+        stock = c.product.stock - c.quantity
+        Product.objects.filter(id=c.product.id).update(stock=stock)
     return redirect('orders')
 
 
@@ -511,7 +514,7 @@ def buy_now_payment_done(request):
     user = request.user
     custid = request.GET.get('custid')
     product_id = request.GET.get('prod_id')
-    quantity = request.GET.get('prod_quant')
+    quantity = int(request.GET.get('prod_quant'))
     txn_id = request.GET.get('txn_id')
 
     customer = Customer.objects.get(id=custid)
@@ -519,6 +522,9 @@ def buy_now_payment_done(request):
 
     OrderPlaced(user=user, customer=customer, product=product,
                 quantity=quantity, txn_id=txn_id).save()
+
+    stock = product.stock - quantity
+    Product.objects.filter(id=product.id).update(stock=stock)
 
     return redirect('orders')
 

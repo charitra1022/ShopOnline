@@ -125,6 +125,7 @@
 
       totalAmt = price * quantity
       if (totalAmt >= 500) shipAmt = 0.0;
+      else shipAmt = 50;
       finalAmt = totalAmt + shipAmt;
 
       shipAmtEl.innerText = shipAmt;
