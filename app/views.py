@@ -103,7 +103,7 @@ class ProductSneekPeak(View):
         for i in CATEGORY_CHOICES:
             cat_code = i[0]
             cat_name = ''.join(i[1].strip().lower().split())
-            cat_product = Product.objects.filter(category=cat_code)[:5]
+            cat_product = Product.objects.filter(category=cat_code, stock__gt=0)[:5]
             categories[cat_name] = cat_product
         return render(request, 'app/home.html', categories)
 

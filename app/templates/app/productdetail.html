@@ -52,7 +52,7 @@
             {% if product.stock == 0 %}
               <span class="text-danger">Out of Stock!</span>
               {% else %}
-              {% if product.stock < 10 %}
+              {% if product.stock < 11 %}
               <span style="color: rgb(185, 158, 2);">Hurry Up! Only {{product.stock}} left!</span>
               {% else %}
                 <span class="text-success">In Stock</span>
