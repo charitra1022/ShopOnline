@@ -13,6 +13,7 @@ from django.template.loader import render_to_string
 from django.core.mail import send_mail, BadHeaderError
 
 import os
+from itertools import chain
 
 from .models import Cart, Customer, OrderPlaced, Product, CATEGORY_CHOICES
 from .forms import CustomerRegistrationForm, CustomerProfileForm, MyPasswordResetForm
@@ -604,3 +605,14 @@ def password_reset_request(request):
 
 def password_reset_error(request):
     return render(request, "app/reset_password_error.html")
+
+
+def search(request):
+    queryStr = request.GET.get('search', '')
+
+    product_by_titles = Product.objects.filter(title__icontains=queryStr)
+    product_by_brand = Product.objects.filter(brand__icontains=queryStr)
+    
+    products = list(set(list(chain(product_by_titles, product_by_brand))))
+    return render(request, "app/search.html", {"products": products, "query": queryStr})
+
