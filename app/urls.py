@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from app import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -84,6 +84,8 @@ urlpatterns = [
     # Reset password
     # path('resetpassword/', auth_views.PasswordResetView.as_view(template_name='app/reset_password.html',
         # form_class=MyPasswordResetForm), name="resetpassword"),
+    
+    re_path(r'^search/$', views.search, name="search"),
 
     path("resetpassword/", views.password_reset_request, name="resetpassword"),
     path("password_reset_error/", views.password_reset_error, name="password_reset_error"),

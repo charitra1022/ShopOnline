@@ -1,0 +1,83 @@
+{% extends 'app/base.html' %} 
+{% load static %} 
+
+{% block custom_css %}
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'app/css/category.css' %}" />
+{% endblock custom_css %}
+
+{% block title %} "{{query}}" {% endblock title %} 
+
+
+{% block main-content %}
+  <!-- Start Main Container -->
+  <div class="main-container">
+    <div class="container section">
+      <div class="row">
+
+        <!-- Start Sidebar filter -->
+        {% comment %} <div class="col-sm-2">
+          <div class="list-group">
+            <a href="{% url 'harddiskdrive' %}" class='list-group-item list-group-item-action' aria-current='true'>All HDDs</a>
+
+            <a href="{% url 'harddiskdrivedata' 'SAMSUNG' %}" class='list-group-item list-group-item-action' aria-current='true'>Samsung</a>
+
+            <a href="{% url 'harddiskdrivedata' 'WESTERN_DIGITAL' %}" class='list-group-item list-group-item-action' aria-current='true'>Western Digital</a>
+
+            <a href="{% url 'harddiskdrivedata' 'below4000' %}" class='list-group-item list-group-item-action' aria-current='true'>Below 4000</a>
+
+            <a href="{% url 'harddiskdrivedata' 'above4000' %}" class='list-group-item list-group-item-action' aria-current='true'>Above 4000</a>
+          </div>
+        </div> {% endcomment %}
+        <!-- End Sidebar filter -->
+
+        <h5 class="mb-4">Search results for "{{query}}"</h5>
+
+        <!-- Start Product list -->
+        <div class="col-sm-10">
+          <div class='row'>
+            {% for product in products %}
+              <div class="product-card col">
+                <a href="{% url 'product-detail' product.id %}" class="product-card-btn">
+                  <div class="item">
+                    <div class="item-img">
+                      <img src="{{product.product_image.url}}" alt="" />
+                    </div>
+                    <div class="fw-bold title">
+                      {{product.title}}
+                    </div>
+                    <div class="fs-5">₹ {{product.discounted_price}}</div>
+                    <div class="fs-10 fw-light text-decoration-line-through">
+                      ₹ {{product.selling_price}}
+                    </div>
+      
+                    <div class="btn-container">
+                      {% if product.stock %}
+                        <form action="/add-to-cart" class="d-inline-block">
+                          <input type="hidden" name="product_id" value="{{product.id}}" id="product_id">
+                          <button type="submit" href="{% url 'add-to-cart' %}" class="btn btn-primary shadow-none">
+                            <span>Add to Cart</span>&nbsp;&nbsp;
+                            <i class="fas fa-shopping-cart"></i>
+                          </button>
+                        </form>
+                      {% else %}
+                        <button class="btn bg-danger btn-primary shadow-none disabled d-inline-block">
+                          <span>Out of Stock</span>&nbsp;&nbsp;
+                        </button>
+                      {% endif %}
+                    </div>
+
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        <!-- End Product list -->
+      </div>
+    </div>
+
+
+  </div>
+  <!-- End Main Container -->
+{% endblock main-content %}

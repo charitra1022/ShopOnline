@@ -152,16 +152,17 @@
             </ul>
 
             <!-- Start Search bar -->
-            <form class="d-flex">
+            <form class="d-flex" method="get" action="/search">
               <input
-                class="form-control me-2"
+                class="form-control me-2 shadow-none"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                name="search"
               />
-              <a class="btn search-btn" type="submit">
+              <button class="btn search-btn" type="submit">
                 <i class="fa fa-search"></i>
-              </a>
+              </button>
             </form>
             <!-- End Search bar -->
 
