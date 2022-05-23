@@ -4,11 +4,15 @@
 
 Refer to [BUGS.md](/BUGS.md) for better view on Active Bugs
 
+<br/><hr/><br/>
+
 ## UI Modifications to be done in future
 
 1. Navbar - All categories under product drop down
 2. Smooth slide up/down to add to navbar dropdown menu in navbar
 3. infinite scroll in vertical scroll in homepage
+
+<br/><hr/><br/>
 
 ## Features Yet to Add
 
@@ -23,7 +27,7 @@ Refer to [BUGS.md](/BUGS.md) for better view on Active Bugs
 9. reset password with email OTP
 10. 2FA for admin login
 11. price filter
-12. name search
+12. ~~name search~~
 13. product rating
 14. Data integration with flipkart
 15. product category tag per product
@@ -31,6 +35,9 @@ Refer to [BUGS.md](/BUGS.md) for better view on Active Bugs
 17. parameter based product filter in category page
 18. Add wishlist section
 19. Compress images before saving to db
+20. Ask for confirmation whilte deleting address
+
+<br/><hr/><br/>
 
 ## User Page Settings
 
@@ -43,33 +50,4 @@ Refer to [BUGS.md](/BUGS.md) for better view on Active Bugs
 7. edit/delete customer profiles
 8. Default customer profile with user details. (cant be deleted)
 
-## Pages with finalized UIs
-
-1. login
-2. register
-3. change password
-4. homepage
-5. product
-
-## Page with old UI
-
-1. check out
-2. profile
-3. orders
-4. cart
-5. buynow
-6. ram
-7. hdd
-8. ssd
-9. pendrive
-10. motherboard
-11. psu
-12. ups
-13. cabinet
-14. mouse
-15. keyboard
-16. cart
-17. buynow
-18. address
-19. orders
-20. checkout
+<br/><hr/><br/>
