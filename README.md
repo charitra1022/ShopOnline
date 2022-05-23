@@ -13,7 +13,7 @@ This is a college project and not any actual e-commerce website!
 1. [How to run Project](#how-to-run-the-project)
 2. [Running Tests](#running-tests)
 3. [Active Bugs](#active-bugs)
-4.
+4. [Advanced Database Operation](#advanced-database-operations)
 
 
 <br/><hr/><br/>
@@ -79,9 +79,9 @@ Refer to [BUGS.md](/BUGS.md) for better view on Active Bugs
 <br/><hr/><br/>
 
 
-## Advanced Operations
+## Advanced Database Operations
 
-### Note: *Stay away if you don't know what is happening!*
+_**Note: Stay away if you don't know what is happening!**_
 
 ### Changed any field in Database?
 
