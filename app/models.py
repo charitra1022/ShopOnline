@@ -3,6 +3,7 @@ from django.db import models
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.forms import ValidationError
 from django.utils.translation import gettext_lazy as _
+# from django.utils.text import slugify
 
 STATE_CHOICES = (
     ('Andaman and Nicobar Islands', 'Andaman and Nicobar Islands'),
@@ -98,9 +99,18 @@ class Product(models.Model):
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=3)
     product_image = models.ImageField(upload_to='productimg')
     stock = models.PositiveIntegerField(default=100)
+    # slug = models.SlugField(blank=True, null=True)
+
+    # def save(self, *args, **kwargs):
+    #     self.slug = slugify(self.title)
+    #     super().save(*args, **kwargs)
 
     def __str__(self):
         return str(self.id)
+
+    def get_absolute_url(self):
+        # return f'/{self.slug}'
+        return f'/product-detail/{self.id}'
 
 
 class Cart(models.Model):
