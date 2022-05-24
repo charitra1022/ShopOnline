@@ -4,6 +4,8 @@ coverage==6.3.2
 Django==4.0.4
 django-cors-headers==3.11.0
 Pillow==9.0.1
+PyInvoice==0.1.7
+reportlab==3.6.9
 sqlparse==0.4.2
 tzdata==2021.5
 waitress==2.1.1
