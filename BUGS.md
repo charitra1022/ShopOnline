@@ -10,3 +10,4 @@
 6. Django debug error custom page
 8. Django custom error page
 9. Mobile size UI enhancements
+10. Invoice is generated only for 1 product. Same txn id is used for multiple products in same cart, so pdf gets replaced for evry product in cart! Can be solved by creating another model separately for invoices.
