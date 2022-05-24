@@ -106,7 +106,8 @@ class ProductSneekPeak(View):
             cat_name = ''.join(i[1].strip().lower().split())
             cat_product = Product.objects.filter(category=cat_code, stock__gt=0)[:5]
             categories[cat_name] = cat_product
-        return render(request, 'app/home.html', categories)
+        data = dict(categories)
+        return render(request, 'app/home.html', data)
 
 
 class ProductDetailView(View):
