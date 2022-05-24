@@ -342,8 +342,6 @@ def add_to_cart(request):
             # add product only if its not present
             product = Product.objects.get(id=product_id)
             Cart(user=user, product=product).save()
-    
-        logger.critical(cart[0].user)
     return redirect("/cart")
 
 
@@ -445,6 +443,7 @@ def payment_done(request):
     customer = Customer.objects.get(id=custid)
     cart = Cart.objects.filter(user=user)
     txn_id = request.GET.get('txn_id')
+    
     tax = 0
     amount = calculateAmounts(cart)
 
@@ -456,6 +455,7 @@ def payment_done(request):
         ]
         
         createInvoice(client_details=client_details, txn_details=txn_details, products=products)
+
         order = OrderPlaced(user=user, customer=customer,
                     product=c.product, quantity=c.quantity, txn_id=txn_id)
         order.invoice.name = f"invoice/{txn_id}.pdf"
@@ -537,8 +537,21 @@ def buy_now_payment_done(request):
     customer = Customer.objects.get(id=custid)
     product = Product.objects.get(id=product_id)
 
-    OrderPlaced(user=user, customer=customer, product=product,
-                quantity=quantity, txn_id=txn_id).save()
+    amount = quantity * product.discounted_price
+    tax = 0
+
+    client_details = [customer.name, customer.user.email]
+    txn_details =  (txn_id, datetime.now(), amount, tax)
+    products = [
+        (product.title, quantity, product.discounted_price),
+    ]
+
+    createInvoice(client_details=client_details, txn_details=txn_details, products=products)
+
+    order = OrderPlaced(user=user, customer=customer, product=product,
+                quantity=quantity, txn_id=txn_id)
+    order.invoice.name = f"invoice/{txn_id}.pdf"
+    order.save()
 
     stock = product.stock - quantity
     Product.objects.filter(id=product.id).update(stock=stock)
