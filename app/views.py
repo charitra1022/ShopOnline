@@ -100,7 +100,7 @@ class ProductSneekPeak(View):
     def get(self, request):
 
         # Get google site verification for site indexing
-        google_code = os.environ.get('GOOGLE_SITE_VERIFICATION')
+        google_code = os.environ.get('GOOGLE-SITE-VERIFICATION')
 
         # Fetch first 3 product objects according to their categories
         categories = {}
