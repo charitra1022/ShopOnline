@@ -3,11 +3,22 @@ from app import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+from django.contrib.sitemaps.views import sitemap
 
+from .sitemaps import StaticViewSitemap, ProductSitemap
 from .forms import LoginForm, UserPasswordChangeForm, MyPasswordResetForm, MySetPasswordForm
+
+
+sitemaps = {
+    'static': StaticViewSitemap,
+    'products': ProductSitemap,
+}
 
 urlpatterns = [
     path('', views.ProductSneekPeak.as_view(), name='home'),
+
+    # Sitemap
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
 
     # Basic urls
     path('product-detail/<int:pk>',
