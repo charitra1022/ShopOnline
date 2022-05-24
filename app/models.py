@@ -143,6 +143,7 @@ class OrderPlaced(models.Model):
     ordered_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(choices=STATUS_CHOICES, max_length=50, default='Pending')
     txn_id = models.CharField(max_length=20)
+    invoice = models.FileField(upload_to='invoice', null=True)
 
     def __str__(self):
         return str(self.id)
