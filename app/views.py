@@ -99,6 +99,9 @@ class ProductSneekPeak(View):
     # for home page
     def get(self, request):
 
+        # Get google site verification for site indexing
+        google_code = os.environ.get('GOOGLE_SITE_VERIFICATION')
+
         # Fetch first 3 product objects according to their categories
         categories = {}
         for i in CATEGORY_CHOICES:
@@ -106,7 +109,7 @@ class ProductSneekPeak(View):
             cat_name = ''.join(i[1].strip().lower().split())
             cat_product = Product.objects.filter(category=cat_code, stock__gt=0)[:5]
             categories[cat_name] = cat_product
-        return render(request, 'app/home.html', categories)
+        return render(request, 'app/home.html', categories, {'google_site_verification_code': google_code})
 
 
 class ProductDetailView(View):

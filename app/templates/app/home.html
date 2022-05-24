@@ -5,6 +5,11 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{% static 'app/css/home.css' %}" />
 {% endblock custom_css %}
+
+{% block google_site_verification %}
+  <meta name="google-site-verification" content="{{google_site_verification_code}}" />
+{% endblock google_site_verification %}
+
 {% block title %}Home{% endblock title %}
 
 {% block carousel_div %}
