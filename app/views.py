@@ -492,6 +492,7 @@ def payment_done(request):
         order = OrderPlaced(user=user, customer=customer,
                     product=c.product, quantity=c.quantity, txn_id=txn_id)
         order.invoice.name = f"invoice/{txn_id}.pdf"
+        order.order_id = generateOrderId(user.id, c.product.id)
         order.save()
         c.delete()
 
@@ -584,6 +585,7 @@ def buy_now_payment_done(request):
     order = OrderPlaced(user=user, customer=customer, product=product,
                 quantity=quantity, txn_id=txn_id)
     order.invoice.name = f"invoice/{txn_id}.pdf"
+    order.order_id = generateOrderId(user.id, product.id)
     order.save()
 
     stock = product.stock - quantity

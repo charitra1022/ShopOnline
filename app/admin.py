@@ -30,7 +30,7 @@ class CartModelAdmin(admin.ModelAdmin):
 
 @admin.register(OrderPlaced)
 class OrderPlacedModelAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'customer', 'customer_info', 'product', 'product_info', 'quantity',
+    list_display = ['id', 'order_id', 'user', 'customer', 'customer_info', 'product', 'product_info', 'quantity',
                     'ordered_date', 'status', 'txn_id']
     
     def customer_info(self, obj):
