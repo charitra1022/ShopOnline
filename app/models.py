@@ -145,6 +145,9 @@ class OrderPlaced(models.Model):
     txn_id = models.CharField(max_length=20)
     invoice = models.FileField(upload_to='invoice', null=True)
 
+    order_id = models.CharField(blank=True, null=True, max_length=24)
+
+
     def __str__(self):
         return str(self.id)
 
