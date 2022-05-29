@@ -49,6 +49,39 @@ def calculateAmounts(cart):
         return
 
 
+def generateOrderId(userId, productId):
+    """
+    Generates Order ID of format ODYYYYMMDDhhmmssPPPPPUUUUU.
+    
+    Annotations:
+        Consider order datetime -> 25 May, 2022, 18:45:56
+
+        YYYY - complete year. Ex- 2022
+        MM  - month. Ex- 05
+        DD - date. Ex- 25
+        hh - hour in 24H format. Ex- 18
+        mm - minute. Ex- 45
+        ss - second. Ex- 56
+        PPPPP - 5 char long product id
+        UUUUU - 5 char long user id
+
+    Parameters:
+        userId (int): User id of orderer
+        productId (int): Product id of the ordered product
+    """
+
+    formatted_datetime = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+    dateStr, timeStr = formatted_datetime.split()
+    date, month, year = dateStr.split('-')
+    hh, mm, ss = timeStr.split(':')
+
+    product_id = str(productId).zfill(5)
+    user_id = str(userId).zfill(5)
+    order_id = f"OD{year}{month}{date}{hh}{mm}{ss}{product_id}{user_id}"
+
+    return order_id
+
+
 ################### Basic Page Renderers #########################
 @login_required
 def orders(request):
