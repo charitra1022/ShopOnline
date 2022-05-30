@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
+from django.utils.http import urlencode
 
 from .models import (
     Customer, Product, Cart, OrderPlaced, Order, OrderDetail
@@ -44,7 +45,7 @@ class OrderPlacedModelAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderModelAdmin(admin.ModelAdmin):
-    list_display = ['id', 'order_id', 'user', 'customer', 'customer_info',
+    list_display = ['id', 'order_id_', 'user', 'customer', 'customer_info',
                     'ordered_date', 'status', 'txn_id']
     
     def customer_info(self, obj):
@@ -54,6 +55,10 @@ class OrderModelAdmin(admin.ModelAdmin):
     def product_info(self, obj):
         link = reverse("admin:app_product_change", args=[obj.product.pk])
         return format_html('<a href="{}">{}</a>', link, obj.product.title)
+    
+    def order_id_(self, obj):
+        link = reverse("admin:app_orderdetail_changelist") + "?" + urlencode({"order__id": f"{obj.id}"})
+        return format_html('<a href="{}">{}</a>', link, obj.order_id)
 
 
 
