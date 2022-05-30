@@ -99,7 +99,7 @@ def generateInvoiceId(userId:int, orderCount:int, invoiceCount:int):
     order_count = str(orderCount).zfill(5)
     user_id = str(userId).zfill(5)
     invoice_count = str(invoiceCount).zfill(2)
-    invoice_id = f"OD{user_id}{order_count}{invoice_count}"
+    invoice_id = f"IN{user_id}{order_count}{invoice_count}"
 
     return invoice_id
 
