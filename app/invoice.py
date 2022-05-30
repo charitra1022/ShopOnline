@@ -23,7 +23,7 @@ def createInvoice(client_details, txn_details, products):
     :param client_details: Client details (name, email)
     :type client_details: list or tuple
 
-    :param txn_details: transaction details (id, date, amount, tax)
+    :param txn_details: transaction details (txn_id, date, amount, tax, invoice_id)
     :type txn_details: list or tuple
 
     :param products: Products [(title, quantity, unit_price),]
@@ -37,11 +37,11 @@ def createInvoice(client_details, txn_details, products):
     gateway = "PayPal"
 
     # Transaction Details
-    invoiceId = txn_details[0]
     txnId = txn_details[0]
     txnDate = txn_details[1]
     amountPaid = txn_details[2]
     tax = txn_details[3]
+    invoiceId = txn_details[4]
 
     # Product details
     items = []
