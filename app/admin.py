@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.utils.http import urlencode
 
 from .models import (
-    Customer, Product, Cart, OrderPlaced, Order, OrderDetail
+    Customer, Product, Cart, Order, OrderDetail
 )
 
 
@@ -29,18 +29,18 @@ class CartModelAdmin(admin.ModelAdmin):
         return format_html('<a href="{}">{}</a>', link, obj.product.title)
 
 
-@admin.register(OrderPlaced)
-class OrderPlacedModelAdmin(admin.ModelAdmin):
-    list_display = ['id', 'order_id', 'user', 'customer', 'customer_info', 'product', 'product_info', 'quantity',
-                    'ordered_date', 'status', 'txn_id']
+# @admin.register(OrderPlaced)
+# class OrderPlacedModelAdmin(admin.ModelAdmin):
+#     list_display = ['id', 'order_id', 'user', 'customer', 'customer_info', 'product', 'product_info', 'quantity',
+#                     'ordered_date', 'status', 'txn_id']
     
-    def customer_info(self, obj):
-        link = reverse("admin:app_customer_change", args=[obj.customer.pk])
-        return format_html('<a href="{}">{}</a>', link, obj.customer.name)
+#     def customer_info(self, obj):
+#         link = reverse("admin:app_customer_change", args=[obj.customer.pk])
+#         return format_html('<a href="{}">{}</a>', link, obj.customer.name)
 
-    def product_info(self, obj):
-        link = reverse("admin:app_product_change", args=[obj.product.pk])
-        return format_html('<a href="{}">{}</a>', link, obj.product.title)
+#     def product_info(self, obj):
+#         link = reverse("admin:app_product_change", args=[obj.product.pk])
+#         return format_html('<a href="{}">{}</a>', link, obj.product.title)
 
 
 @admin.register(Order)

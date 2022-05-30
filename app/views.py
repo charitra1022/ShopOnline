@@ -16,7 +16,7 @@ import os
 from itertools import chain
 from datetime import datetime
 
-from .models import Cart, Customer, OrderPlaced, Product, Order, OrderDetail, CATEGORY_CHOICES
+from .models import Cart, Customer, Product, Order, OrderDetail, CATEGORY_CHOICES
 from .forms import CustomerRegistrationForm, CustomerProfileForm, MyPasswordResetForm
 
 from .custom_logger import logger
