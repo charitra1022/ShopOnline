@@ -72,7 +72,7 @@ def generateOrderId(userId:int, orderCount:int):
     date, month, year = dateStr.split('-')
     # hh, mm, ss = timeStr.split(':')
 
-    order_count = str(orderCount+1).zfill(5)
+    order_count = str(orderCount).zfill(5)
     user_id = str(userId).zfill(5)
     # order_id = f"OD{year}{month}{date}{hh}{mm}{ss}{user_id}{order_count}"
     order_id = f"OD{year}{month}{date}{user_id}{order_count}"
@@ -511,7 +511,7 @@ def payment_done(request):
     tax = 0
     amount = calculateAmounts(cart)
 
-    orderCount = Order.objects.filter(user=user).count()
+    orderCount = Order.objects.filter(user=user).count()+1
 
     # Create a Order object
     order = Order(user=user, customer=customer, txn_id=txn_id)
@@ -626,7 +626,7 @@ def buy_now_payment_done(request):
 
     createInvoice(client_details=client_details, txn_details=txn_details, products=products)
 
-    orderCount = Order.objects.filter(user=user).count()
+    orderCount = Order.objects.filter(user=user).count()+1
 
     # order = OrderPlaced(user=user, customer=customer, product=product, quantity=quantity, txn_id=txn_id)
     # order.invoice.name = f"invoice/{txn_id}.pdf"
