@@ -14,11 +14,13 @@ from django.core.mail import send_mail, BadHeaderError
 
 import os
 from itertools import chain
+from datetime import datetime
 
-from .models import Cart, Customer, OrderPlaced, Product, CATEGORY_CHOICES
+from .models import Cart, Customer, Product, Order, OrderDetail, CATEGORY_CHOICES
 from .forms import CustomerRegistrationForm, CustomerProfileForm, MyPasswordResetForm
 
 from .custom_logger import logger
+from .invoice import createInvoice
 
 ########################### Helper Functions #######################
 
@@ -47,12 +49,76 @@ def calculateAmounts(cart):
         return
 
 
+def generateOrderId(userId:int, orderCount:int):
+    """
+    Generates Order ID of format ODYYYYMMDDUUUUUOOOOO.
+    
+    Annotations:
+        Consider order datetime -> 25 May, 2022, 18:45:56
+
+        YYYY - complete year. Ex- 2022
+        MM  - month. Ex- 05
+        DD - date. Ex- 25
+        UUUUU - 5 char long user id
+        OOOOO - 5 char long order count of the user
+
+    Parameters:
+        userId (int): User id of orderer
+        orderCount (int): Number of orders placed by current user at present
+    """
+
+    formatted_datetime = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+    dateStr, timeStr = formatted_datetime.split()
+    date, month, year = dateStr.split('-')
+    # hh, mm, ss = timeStr.split(':')
+
+    order_count = str(orderCount).zfill(5)
+    user_id = str(userId).zfill(5)
+    # order_id = f"OD{year}{month}{date}{hh}{mm}{ss}{user_id}{order_count}"
+    order_id = f"OD{year}{month}{date}{user_id}{order_count}"
+
+    return order_id
+
+
+
+def generateInvoiceId(userId:int, orderCount:int, invoiceCount:int):
+    """
+    Generates Invoice ID of format INUUUUUOOOOOXX.
+    
+    Annotations:
+        UUUUU - 5 char long user id
+        OOOOO - 5 char long order count of the user
+        XX - 2 char long invoice count of the user
+
+    Parameters:
+        userId (int): User id of orderer
+        orderCount (int): Number of orders placed by current user at present
+        invoiceCount (int): Number of invoices to be generated at incoming order
+    """
+
+    order_count = str(orderCount).zfill(5)
+    user_id = str(userId).zfill(5)
+    invoice_count = str(invoiceCount).zfill(2)
+    invoice_id = f"IN{user_id}{order_count}{invoice_count}"
+
+    return invoice_id
+
+
+
 ################### Basic Page Renderers #########################
 @login_required
 def orders(request):
-    orders = OrderPlaced.objects.filter(
-        user=request.user).order_by('-ordered_date')
-    return render(request, 'app/orders.html', {'order_placed': orders})
+    # orders = OrderPlaced.objects.filter(
+    #     user=request.user).order_by('-ordered_date')
+
+    orders = Order.objects.filter(user=request.user).order_by('-ordered_date')
+    orderDetails = []
+
+    for order in orders:
+        orderDetailSet = OrderDetail.objects.filter(order__id=order.id)
+        orderDetails.append(orderDetailSet)
+
+    return render(request, 'app/orders.html', {'order_details': orderDetails})
 
 
 @method_decorator(login_required, name='dispatch')
@@ -446,10 +512,42 @@ def payment_done(request):
     customer = Customer.objects.get(id=custid)
     cart = Cart.objects.filter(user=user)
     txn_id = request.GET.get('txn_id')
+    
+    tax = 0
+    amount = calculateAmounts(cart)
 
+    orderCount = Order.objects.filter(user=user).count()+1
+
+    # Create a Order object
+    order = Order(user=user, customer=customer, txn_id=txn_id)
+    order.order_id = generateOrderId(user.id, orderCount)
+    order.save()
+
+    counter = 0
     for c in cart:
-        OrderPlaced(user=user, customer=customer,
-                    product=c.product, quantity=c.quantity, txn_id=txn_id).save()
+        counter+=1
+
+        invoice_id = generateInvoiceId(user.id, orderCount, counter)
+        client_details = [customer.name, customer.user.email]
+        txn_details =  (txn_id, datetime.now(), amount['totalamount'], tax, invoice_id)
+        products = [
+            (c.product.title, c.quantity, c.product.discounted_price),
+        ]
+        
+        createInvoice(client_details=client_details, txn_details=txn_details, products=products)
+
+        # order = OrderPlaced(user=user, customer=customer,
+        #             product=c.product, quantity=c.quantity, txn_id=txn_id)
+        # order.invoice.name = f"invoice/{txn_id}.pdf"
+        # order.order_id = generateOrderId(user.id, c.product.id)
+        # order.save()
+
+        # Create an OrderDetail object and link it to Order object
+        order_detail = OrderDetail(order=order, product=c.product, quantity=c.quantity)
+        order_detail.invoice.name = f"invoice/{invoice_id}.pdf"
+        order_detail.invoice_id = invoice_id
+        order_detail.save()
+
         c.delete()
 
         stock = c.product.stock - c.quantity
@@ -527,8 +625,36 @@ def buy_now_payment_done(request):
     customer = Customer.objects.get(id=custid)
     product = Product.objects.get(id=product_id)
 
-    OrderPlaced(user=user, customer=customer, product=product,
-                quantity=quantity, txn_id=txn_id).save()
+    amount = quantity * product.discounted_price
+    tax = 0
+
+    orderCount = Order.objects.filter(user=user).count()+1
+    invoice_id = generateInvoiceId(user.id, orderCount, 1)
+
+    client_details = [customer.name, customer.user.email]
+    txn_details =  (txn_id, datetime.now(), amount, tax, invoice_id)
+    products = [
+        (product.title, quantity, product.discounted_price),
+    ]
+
+    createInvoice(client_details=client_details, txn_details=txn_details, products=products)
+
+
+    # order = OrderPlaced(user=user, customer=customer, product=product, quantity=quantity, txn_id=txn_id)
+    # order.invoice.name = f"invoice/{txn_id}.pdf"
+    # order.order_id = generateOrderId(user.id, orderCount)
+    # order.save()
+
+    # Create a Order object
+    order = Order(user=user, customer=customer, txn_id=txn_id)
+    order.order_id = generateOrderId(user.id, orderCount)
+    order.save()
+
+    # Create an OrderDetail object and link it to Order object
+    order_detail = OrderDetail(order=order, product=product, quantity=quantity)
+    order_detail.invoice.name = f"invoice/{invoice_id}.pdf"
+    order_detail.invoice_id = invoice_id
+    order_detail.save()
 
     stock = product.stock - quantity
     Product.objects.filter(id=product.id).update(stock=stock)
