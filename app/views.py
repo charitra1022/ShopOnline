@@ -49,9 +49,9 @@ def calculateAmounts(cart):
         return
 
 
-def generateOrderId(userId, productId):
+def generateOrderId(userId:int, orderCount:int):
     """
-    Generates Order ID of format ODYYYYMMDDhhmmssPPPPPUUUUU.
+    Generates Order ID of format ODYYYYMMDDUUUUUOOOOO.
     
     Annotations:
         Consider order datetime -> 25 May, 2022, 18:45:56
@@ -59,25 +59,23 @@ def generateOrderId(userId, productId):
         YYYY - complete year. Ex- 2022
         MM  - month. Ex- 05
         DD - date. Ex- 25
-        hh - hour in 24H format. Ex- 18
-        mm - minute. Ex- 45
-        ss - second. Ex- 56
-        PPPPP - 5 char long product id
         UUUUU - 5 char long user id
+        OOOOO - 5 char long order count of the user
 
     Parameters:
         userId (int): User id of orderer
-        productId (int): Product id of the ordered product
+        orderCount (int): Number of orders placed by current user at present
     """
 
     formatted_datetime = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
     dateStr, timeStr = formatted_datetime.split()
     date, month, year = dateStr.split('-')
-    hh, mm, ss = timeStr.split(':')
+    # hh, mm, ss = timeStr.split(':')
 
-    product_id = str(productId).zfill(5)
+    order_count = str(orderCount+1).zfill(5)
     user_id = str(userId).zfill(5)
-    order_id = f"OD{year}{month}{date}{hh}{mm}{ss}{product_id}{user_id}"
+    # order_id = f"OD{year}{month}{date}{hh}{mm}{ss}{user_id}{order_count}"
+    order_id = f"OD{year}{month}{date}{user_id}{order_count}"
 
     return order_id
 
@@ -487,6 +485,11 @@ def payment_done(request):
     
     tax = 0
     amount = calculateAmounts(cart)
+
+    # # Create a Order object
+    # order = Order(user=user, customer=customer, txn_id=txn_id)
+    # order.order_id = generateOrderId(user.id, product.id)
+    # order.save()
 
     for c in cart:
         client_details = [customer.name, customer.user.email]
