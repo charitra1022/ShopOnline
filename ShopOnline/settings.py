@@ -143,3 +143,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 LOGIN_REDIRECT_URL = '/profile/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SESSION_ENGINE = "django.contrib.sessions.backends.db"
+
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # expire session on browser close
+SESSION_COOKIE_AGE = 7200   # expire session after 2 hours of inactivity
+SESSION_SAVE_EVERY_REQUEST = True   # update session at every request
