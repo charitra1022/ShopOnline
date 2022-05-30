@@ -1,4 +1,4 @@
-from ..models import Product, Customer, OrderPlaced, Cart
+from ..models import Product, Customer, Cart
 from django.contrib.auth.models import User
 
 import random
@@ -71,17 +71,17 @@ def createCart():
 
 
 # create and return orderplaced object
-def createOrder():
-    user = createUser()
-    customer = createCustomer()
-    product = createProduct()
-    quantity = 10
-    txn_id = "DEMOTRANSACTIONID"
+# def createOrder():
+#     user = createUser()
+#     customer = createCustomer()
+#     product = createProduct()
+#     quantity = 10
+#     txn_id = "DEMOTRANSACTIONID"
 
-    return OrderPlaced.objects.create(
-        user=user,
-        customer=customer,
-        product=product,
-        quantity=quantity,
-        txn_id=txn_id
-    )
+#     return OrderPlaced.objects.create(
+#         user=user,
+#         customer=customer,
+#         product=product,
+#         quantity=quantity,
+#         txn_id=txn_id
+#     )

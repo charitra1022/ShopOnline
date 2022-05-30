@@ -13,52 +13,56 @@
         <hr>
           <div class="my-2 row pt-2">
 
-            {% for order in order_placed %}
-              <div class="col-sm-2">
-                <img src="{{order.product.product_image.url}}" alt="" class="img-fluid" height="150" width="150">
-              </div>
-              <div class="col-sm-7">
-                <h6 class="fw-light">
-                  <a href="{% url 'product-detail' order.product.id %}">{{order.product.title}}</a>
-                </h6>
-                <span><span class="fw-bold">Quantity:</span> {{order.quantity}}</span><br>
-                <span><span class="fw-bold">Order Date:</span> {{order.ordered_date}}</span><br>
-                <span><span class="fw-bold">Ordered By:</span> {{order.customer.name}}</span><br>
-                <span><span class="fw-bold">Status:</span> {{order.status}}</span><br>
-                <span><span class="fw-bold">Price:</span> {{order.total_cost}}</span><br>
-                <span><span class="fw-bold">Txn ID:</span> {{order.txn_id}}</span><br>
-              </div>
-              
-              <div class="col-sm-3 pt-5">
-                <p>Order Status: <span class="fw-bold">{{order.status}}</span></p>
-                <div class="progress">
-                    {% if order.status == 'Pending' %}
-                      <div style="width: 1%;" class="progress-bar bg-secondary" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
-                    {% endif %}
+            {% for order_detail in order_details %}
+              {% for order in order_detail %}
+                <div class="col-sm-2">
+                  <img src="{{order.product.product_image.url}}" alt="" class="img-fluid" height="150" width="150">
+                </div>
+                <div class="col-sm-7">
+                  <h6 class="fw-light">
+                    <a href="{% url 'product-detail' order.product.id %}">{{order.product.title}}</a>
+                  </h6>
+                  <span><span class="fw-bold">Quantity:</span> {{order.quantity}}</span><br>
+                  <span><span class="fw-bold">Order Date:</span> {{order.order.ordered_date}}</span><br>
+                  <span><span class="fw-bold">Ordered By:</span> {{order.order.customer.name}}</span><br>
+                  <span><span class="fw-bold">Status:</span> {{order.order.status}}</span><br>
+                  {% comment %} <span><span class="fw-bold">Price:</span> {{order.total_cost}}</span><br> {% endcomment %}
+                  <span><span class="fw-bold">Txn ID:</span> {{order.order.txn_id}}</span><br>
+                  <span><span class="fw-bold">Order ID:</span> {{order.order.order_id}}</span><br>
+                  <span><a href="{{order.invoice.url}}" target="_blank">Download Invoice</a></span><br>
+                </div>
+                
+                <div class="col-sm-3 pt-5">
+                  <p>Order Status: <span class="fw-bold">{{order.order.status}}</span></p>
+                  <div class="progress">
+                      {% if order.order.status == 'Pending' %}
+                        <div style="width: 1%;" class="progress-bar bg-secondary" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                      {% endif %}
 
-                    {% if order.status == 'Accepted' %}
-                      <div style="width: 10%;" class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                    {% endif %}
+                      {% if order.order.status == 'Accepted' %}
+                        <div style="width: 10%;" class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                      {% endif %}
 
-                    {% if order.status == 'Packed' %}
-                      <div style="width: 30%;" class="progress-bar bg-info" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                    {% endif %}
+                      {% if order.order.status == 'Packed' %}
+                        <div style="width: 30%;" class="progress-bar bg-info" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                      {% endif %}
 
-                    {% if order.status == 'On The Way' %}
-                      <div style="width: 70%;" class="progress-bar bg-warning" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                    {% endif %}
+                      {% if order.order.status == 'On The Way' %}
+                        <div style="width: 70%;" class="progress-bar bg-warning" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                      {% endif %}
 
-                    {% if order.status == 'Delivered' %}
-                      <div style="width: 100%;" class="progress-bar bg-success" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                    {% endif %}
+                      {% if order.order.status == 'Delivered' %}
+                        <div style="width: 100%;" class="progress-bar bg-success" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                      {% endif %}
 
-                    {% if order.status == 'Cancel' %}
-                      <div style="width: 100%;" class="progress-bar bg-danger" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                    {% endif %}
-                  </div>
-              </div>
+                      {% if order.order.status == 'Cancel' %}
+                        <div style="width: 100%;" class="progress-bar bg-danger" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                      {% endif %}
+                    </div>
+                </div>
 
-              <hr class="my-5">
+                <hr class="my-5">
+              {% endfor %}
             {% endfor %}
           </div>
       </div>

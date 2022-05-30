@@ -10,3 +10,5 @@
 6. Django debug error custom page
 8. Django custom error page
 9. Mobile size UI enhancements
+10. Separate prices for all invoices in an Order id.
+11. Prevent anonymous/different user to access any invoice file except the original owner.
