@@ -518,9 +518,13 @@ def payment_done(request):
     order.order_id = generateOrderId(user.id, orderCount)
     order.save()
 
+    counter = 0
     for c in cart:
+        counter+=1
+
+        invoice_id = generateInvoiceId(user.id, orderCount, counter)
         client_details = [customer.name, customer.user.email]
-        txn_details =  (txn_id, datetime.now(), amount['totalamount'], tax)
+        txn_details =  (txn_id, datetime.now(), amount['totalamount'], tax, invoice_id)
         products = [
             (c.product.title, c.quantity, c.product.discounted_price),
         ]
@@ -535,7 +539,8 @@ def payment_done(request):
 
         # Create an OrderDetail object and link it to Order object
         order_detail = OrderDetail(order=order, product=c.product, quantity=c.quantity)
-        order_detail.invoice.name = f"invoice/{txn_id}.pdf"
+        order_detail.invoice.name = f"invoice/{invoice_id}.pdf"
+        order_detail.invoice_id = invoice_id
         order_detail.save()
 
         c.delete()
@@ -620,7 +625,7 @@ def buy_now_payment_done(request):
 
     orderCount = Order.objects.filter(user=user).count()+1
     invoice_id = generateInvoiceId(user.id, orderCount, 1)
-    
+
     client_details = [customer.name, customer.user.email]
     txn_details =  (txn_id, datetime.now(), amount, tax, invoice_id)
     products = [
