@@ -64,7 +64,7 @@ class OrderModelAdmin(admin.ModelAdmin):
 
 @admin.register(OrderDetail)
 class OrderDetailModelAdmin(admin.ModelAdmin):
-    list_display = ['id', 'order_info', 'product', 'product_info', 'quantity',]
+    list_display = ['id', 'order_info', 'product', 'product_info', 'quantity', 'invoice']
     
     def order_info(self, obj):
         link = reverse("admin:app_order_change", args=[obj.order.pk])
