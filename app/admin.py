@@ -64,7 +64,7 @@ class OrderModelAdmin(admin.ModelAdmin):
 
 @admin.register(OrderDetail)
 class OrderDetailModelAdmin(admin.ModelAdmin):
-    list_display = ['id', 'order_info', 'product', 'product_info', 'quantity', 'invoice']
+    list_display = ['id', 'order_info', 'product', 'product_info', 'quantity', 'invoice_']
     
     def order_info(self, obj):
         link = reverse("admin:app_order_change", args=[obj.order.pk])
@@ -73,3 +73,7 @@ class OrderDetailModelAdmin(admin.ModelAdmin):
     def product_info(self, obj):
         link = reverse("admin:app_product_change", args=[obj.product.pk])
         return format_html('<a href="{}">{}</a>', link, obj.product.title)
+
+    def invoice_(self, obj):
+        link = obj.invoice.url
+        return format_html('<a href="{}" target="_blank">{}</a>', link, obj.invoice_id)
