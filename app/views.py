@@ -488,10 +488,10 @@ def payment_done(request):
 
     orderCount = Order.objects.filter(user=user).count()
 
-    # # Create a Order object
-    # order = Order(user=user, customer=customer, txn_id=txn_id)
-    # order.order_id = generateOrderId(user.id, orderCount)
-    # order.save()
+    # Create a Order object
+    order = Order(user=user, customer=customer, txn_id=txn_id)
+    order.order_id = generateOrderId(user.id, orderCount)
+    order.save()
 
     for c in cart:
         client_details = [customer.name, customer.user.email]
@@ -502,11 +502,17 @@ def payment_done(request):
         
         createInvoice(client_details=client_details, txn_details=txn_details, products=products)
 
-        order = OrderPlaced(user=user, customer=customer,
-                    product=c.product, quantity=c.quantity, txn_id=txn_id)
-        order.invoice.name = f"invoice/{txn_id}.pdf"
-        order.order_id = generateOrderId(user.id, c.product.id)
-        order.save()
+        # order = OrderPlaced(user=user, customer=customer,
+        #             product=c.product, quantity=c.quantity, txn_id=txn_id)
+        # order.invoice.name = f"invoice/{txn_id}.pdf"
+        # order.order_id = generateOrderId(user.id, c.product.id)
+        # order.save()
+
+        # Create an OrderDetail object and link it to Order object
+        order_detail = OrderDetail(order=order, product=c.product, quantity=c.quantity)
+        order_detail.invoice.name = f"invoice/{txn_id}.pdf"
+        order_detail.save()
+
         c.delete()
 
         stock = c.product.stock - c.quantity
