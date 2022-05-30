@@ -80,6 +80,31 @@ def generateOrderId(userId:int, orderCount:int):
     return order_id
 
 
+
+def generateInvoiceId(userId:int, orderCount:int, invoiceCount:int):
+    """
+    Generates Invoice ID of format INUUUUUOOOOOXX.
+    
+    Annotations:
+        UUUUU - 5 char long user id
+        OOOOO - 5 char long order count of the user
+        XX - 2 char long invoice count of the user
+
+    Parameters:
+        userId (int): User id of orderer
+        orderCount (int): Number of orders placed by current user at present
+        invoiceCount (int): Number of invoices to be generated at incoming order
+    """
+
+    order_count = str(orderCount).zfill(5)
+    user_id = str(userId).zfill(5)
+    invoice_count = str(invoiceCount).zfill(2)
+    invoice_id = f"OD{user_id}{order_count}{invoice_count}"
+
+    return invoice_id
+
+
+
 ################### Basic Page Renderers #########################
 @login_required
 def orders(request):
