@@ -618,15 +618,17 @@ def buy_now_payment_done(request):
     amount = quantity * product.discounted_price
     tax = 0
 
+    orderCount = Order.objects.filter(user=user).count()+1
+    invoice_id = generateInvoiceId(user.id, orderCount, 1)
+    
     client_details = [customer.name, customer.user.email]
-    txn_details =  (txn_id, datetime.now(), amount, tax)
+    txn_details =  (txn_id, datetime.now(), amount, tax, invoice_id)
     products = [
         (product.title, quantity, product.discounted_price),
     ]
 
     createInvoice(client_details=client_details, txn_details=txn_details, products=products)
 
-    orderCount = Order.objects.filter(user=user).count()+1
 
     # order = OrderPlaced(user=user, customer=customer, product=product, quantity=quantity, txn_id=txn_id)
     # order.invoice.name = f"invoice/{txn_id}.pdf"
@@ -640,7 +642,8 @@ def buy_now_payment_done(request):
 
     # Create an OrderDetail object and link it to Order object
     order_detail = OrderDetail(order=order, product=product, quantity=quantity)
-    order_detail.invoice.name = f"invoice/{txn_id}.pdf"
+    order_detail.invoice.name = f"invoice/{invoice_id}.pdf"
+    order_detail.invoice_id = invoice_id
     order_detail.save()
 
     stock = product.stock - quantity
