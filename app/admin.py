@@ -3,7 +3,7 @@ from django.utils.html import format_html
 from django.urls import reverse
 
 from .models import (
-    Customer, Product, Cart, OrderPlaced
+    Customer, Product, Cart, OrderPlaced, Order, OrderDetail
 )
 
 
@@ -36,6 +36,34 @@ class OrderPlacedModelAdmin(admin.ModelAdmin):
     def customer_info(self, obj):
         link = reverse("admin:app_customer_change", args=[obj.customer.pk])
         return format_html('<a href="{}">{}</a>', link, obj.customer.name)
+
+    def product_info(self, obj):
+        link = reverse("admin:app_product_change", args=[obj.product.pk])
+        return format_html('<a href="{}">{}</a>', link, obj.product.title)
+
+
+@admin.register(Order)
+class OrderModelAdmin(admin.ModelAdmin):
+    list_display = ['id', 'order_id', 'user', 'customer', 'customer_info',
+                    'ordered_date', 'status', 'txn_id']
+    
+    def customer_info(self, obj):
+        link = reverse("admin:app_customer_change", args=[obj.customer.pk])
+        return format_html('<a href="{}">{}</a>', link, obj.customer.name)
+
+    def product_info(self, obj):
+        link = reverse("admin:app_product_change", args=[obj.product.pk])
+        return format_html('<a href="{}">{}</a>', link, obj.product.title)
+
+
+
+@admin.register(OrderDetail)
+class OrderDetailModelAdmin(admin.ModelAdmin):
+    list_display = ['id', 'order_info', 'product', 'product_info', 'quantity',]
+    
+    def order_info(self, obj):
+        link = reverse("admin:app_order_change", args=[obj.order.pk])
+        return format_html('<a href="{}">{}</a>', link, obj.order.order_id)
 
     def product_info(self, obj):
         link = reverse("admin:app_product_change", args=[obj.product.pk])

@@ -154,3 +154,29 @@ class OrderPlaced(models.Model):
     @property
     def total_cost(self):
         return self.quantity * self.product.discounted_price
+
+
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    ordered_date = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(choices=STATUS_CHOICES, max_length=50, default='Pending')
+    txn_id = models.CharField(max_length=20)
+    order_id = models.CharField(blank=True, null=True, max_length=24)
+
+    def __str__(self):
+        return str(self.id)
+
+    @property
+    def total_cost(self):
+        return self.quantity * self.product.discounted_price
+
+
+class OrderDetail(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    invoice = models.FileField(upload_to='invoice', null=True)
+
+    def __str__(self):
+        return str(self.order.order_id)
