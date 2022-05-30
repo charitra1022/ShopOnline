@@ -486,9 +486,11 @@ def payment_done(request):
     tax = 0
     amount = calculateAmounts(cart)
 
+    orderCount = Order.objects.filter(user=user).count()
+
     # # Create a Order object
     # order = Order(user=user, customer=customer, txn_id=txn_id)
-    # order.order_id = generateOrderId(user.id, product.id)
+    # order.order_id = generateOrderId(user.id, orderCount)
     # order.save()
 
     for c in cart:
@@ -593,14 +595,16 @@ def buy_now_payment_done(request):
 
     createInvoice(client_details=client_details, txn_details=txn_details, products=products)
 
+    orderCount = Order.objects.filter(user=user).count()
+
     # order = OrderPlaced(user=user, customer=customer, product=product, quantity=quantity, txn_id=txn_id)
     # order.invoice.name = f"invoice/{txn_id}.pdf"
-    # order.order_id = generateOrderId(user.id, product.id)
+    # order.order_id = generateOrderId(user.id, orderCount)
     # order.save()
 
     # Create a Order object
     order = Order(user=user, customer=customer, txn_id=txn_id)
-    order.order_id = generateOrderId(user.id, product.id)
+    order.order_id = generateOrderId(user.id, orderCount)
     order.save()
 
     # Create an OrderDetail object and link it to Order object
