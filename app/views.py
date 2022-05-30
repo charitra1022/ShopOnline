@@ -16,7 +16,7 @@ import os
 from itertools import chain
 from datetime import datetime
 
-from .models import Cart, Customer, OrderPlaced, Product, CATEGORY_CHOICES
+from .models import Cart, Customer, OrderPlaced, Product, Order, OrderDetail, CATEGORY_CHOICES
 from .forms import CustomerRegistrationForm, CustomerProfileForm, MyPasswordResetForm
 
 from .custom_logger import logger
@@ -85,9 +85,17 @@ def generateOrderId(userId, productId):
 ################### Basic Page Renderers #########################
 @login_required
 def orders(request):
-    orders = OrderPlaced.objects.filter(
-        user=request.user).order_by('-ordered_date')
-    return render(request, 'app/orders.html', {'order_placed': orders})
+    # orders = OrderPlaced.objects.filter(
+    #     user=request.user).order_by('-ordered_date')
+
+    orders = Order.objects.filter(user=request.user).order_by('-ordered_date')
+    orderDetails = []
+
+    for order in orders:
+        orderDetailSet = OrderDetail.objects.filter(order__id=order.id)
+        orderDetails.append(orderDetailSet)
+
+    return render(request, 'app/orders.html', {'order_details': orderDetails})
 
 
 @method_decorator(login_required, name='dispatch')
