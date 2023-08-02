@@ -1,7 +1,7 @@
 databases:
   - name: ShopOnline
-    databaseName: ShopOnline
-    user: ShopOnline
+    databaseName: shoponline-db
+    user: shoponline-admin
 
 services:
   - type: web

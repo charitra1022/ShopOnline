@@ -97,7 +97,7 @@ WSGI_APPLICATION = 'ShopOnline.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config (   
-        default='postgresql://postgres:postgres@localhost:5432/ShopOnline',        
+        default='postgresql://postgres:postgres@localhost:5432/shoponline-db',        
         conn_max_age=600    
     )
 }
