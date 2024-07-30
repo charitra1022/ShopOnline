@@ -11,3 +11,5 @@ tzdata==2021.5
 waitress==2.1.2
 whitenoise==6.0.0
 wincertstore==0.2
+dj-database-url==2.2.0
+psycopg2==2.9.9
