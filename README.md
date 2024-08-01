@@ -56,6 +56,18 @@ Run the following command in the terminal with __project__ folder as the working
 
 <br/><hr/><br/>
 
+## Environment Variables required
+1. `ALLOWED_HOSTS` : Space separated domain names in **settings.py**.<br> Ex: `localhost 127.0.0.1 .onrender.com`
+2. `SECRET_KEY` : Django app secret key in **settings.py**.
+3. `DEBUG` : App debug mode in **settings.py**. set `true` for debug mode (optional).
+4. `PAYPAL-CLIENTID` : for paypal integration.
+5. `ADMIN_EMAIL` : admin email for sending mails to customer
+6. `DATABASE_URL` : db url for externally connected databases (optional).
+
+<br/><hr/><br/>
+
+
+
 ## Running Tests
 
 To run tests, run the following command into the terminal:
