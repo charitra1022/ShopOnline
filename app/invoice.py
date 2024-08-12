@@ -5,11 +5,11 @@ from pyinvoice.templates import SimpleInvoice
 # Business Provider details
 providerEmail = 'shoponline@gmail.com'
 providerName = "ShopOnline Pvt. Ltd."
-providerAddress = 'Arka Jain University'
-providerCity = 'Jamshedpur'
-providerState = 'Jharkhand'
+providerAddress = '1234, MG Road'
+providerCity = 'Koramangala, Bangalore'
+providerState = 'Karnataka'
 providerCountry = 'India'
-providerZip = "832108"
+providerZip = "560034"
 
 
 # pdf Info
