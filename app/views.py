@@ -559,7 +559,7 @@ def payment_done(request):
 
         stock = c.product.stock - c.quantity
         Product.objects.filter(id=c.product.id).update(stock=stock)
-    return redirect('orders')
+    return redirect('order_placed')
 
 
 ############################ Buy Now Related #########################
@@ -667,7 +667,7 @@ def buy_now_payment_done(request):
     stock = product.stock - quantity
     Product.objects.filter(id=product.id).update(stock=stock)
 
-    return redirect('orders')
+    return redirect('order_placed')
 
 
 ########################### Address and Customer Related ############################
