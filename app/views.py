@@ -24,6 +24,11 @@ from .invoice import createInvoice
 
 ########################### Helper Functions #######################
 
+def generate_transaction_id(length=12):
+    import random
+    import string
+    characters = string.ascii_letters + string.digits
+    return ''.join(random.choice(characters) for _ in range(length))
 
 def calculateAmounts(cart):
     # Calculate total amounts based on cart objects
@@ -506,8 +511,9 @@ def payment_done(request):
     custid = request.GET.get('custid')
     customer = Customer.objects.get(id=custid)
     cart = Cart.objects.filter(user=user)
-    txn_id = request.GET.get('txn_id')
-    
+    # txn_id = request.GET.get('txn_id')      # get txn id from the PayPal txn
+    txn_id = generate_transaction_id()      # PayPal stopped working so use random string as txn id
+
     tax = 0
     amount = calculateAmounts(cart)
 
@@ -615,7 +621,8 @@ def buy_now_payment_done(request):
     custid = request.GET.get('custid')
     product_id = request.GET.get('prod_id')
     quantity = int(request.GET.get('prod_quant'))
-    txn_id = request.GET.get('txn_id')
+    # txn_id = request.GET.get('txn_id')    # PayPal txn id
+    txn_id = generate_transaction_id()      # PayPal stopped working to use random txn id
 
     customer = Customer.objects.get(id=custid)
     product = Product.objects.get(id=product_id)
