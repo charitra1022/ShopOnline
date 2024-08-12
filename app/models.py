@@ -80,7 +80,7 @@ def validate_zipcode_length(value):
 class Customer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    phone = models.IntegerField(validators=[validate_phone_length])
+    phone = models.BigIntegerField(validators=[validate_phone_length])
     locality_address = models.CharField(max_length=200)
     city = models.CharField(max_length=50)
     state = models.CharField(choices=STATE_CHOICES, max_length=50)
