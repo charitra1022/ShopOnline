@@ -75,6 +75,7 @@ urlpatterns = [
     
 
     path('orders/', views.orders, name='orders'),
+    path('order_placed/', views.order_placed_page, name='order_placed'),
 
     # url for delete address record
     path('address/<int:id>', views.delete_customer, name='delete_customer'),

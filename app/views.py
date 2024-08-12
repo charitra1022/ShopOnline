@@ -485,6 +485,12 @@ def remove_cart_item(request):
             return JsonResponse({'empty': True})
 
 
+
+@login_required
+def order_placed_page(request):
+    return render(request, 'app/thankyou.html')
+
+
 @login_required
 def checkout(request):
     user = request.user

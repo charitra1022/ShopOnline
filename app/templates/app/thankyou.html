@@ -1,0 +1,26 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block custom_css %}
+  <!-- Custom CSS -->
+{% endblock custom_css %}
+{% block title %}Orders{% endblock title %}
+
+{% block main-content %}
+  <div class="container text-center">
+    <div class="mt-5 ">
+      <div class="mt-5 py-5">
+        <h3 class="font-bold">Hurray!!</h3>
+        <h5>Your order has been placed!</h5>
+        <h5>You can view your orders in the Orders Page here ↓</h5>
+
+        <a href="{% url 'orders' %}" class="btn btn-warning my-3 px-5 fw-bold">Orders</a><br>
+        <span>Redirecting in 3 seconds</span>
+        <script>
+          setTimeout(() => {
+            window.location.href="{% url 'orders' %}";
+          }, 3000);
+        </script>
+      </div>
+    </div>
+  </div>
+{% endblock main-content %}
