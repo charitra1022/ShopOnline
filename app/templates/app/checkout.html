@@ -83,12 +83,16 @@
             <div>There are no Customer addresses added! Go to <strong>Profile</strong> and create a new address</div>
           {% endfor %}
             
-            <div class="text-end my-4">
-              <button type="submit" class="btn btn-warning my-3 px-5 fw-bold">Continue</button>
-
-              <!-- PayPal Integration -->
-              <!-- Set up a container element for the button -->
-              <div id="paypal-button-container"></div>
+          <div class="text-end my-4">
+              {% if addresses %}
+                <button type="submit" class="btn btn-warning my-3 px-5 fw-bold">Checkout</button>
+                
+                <!-- PayPal Integration -->
+                <!-- Set up a container element for the button -->
+                <div id="paypal-button-container"></div>
+              {% else %}
+                <a href="{% url 'address' %}" class="btn btn-warning my-3 px-5 fw-bold">Add Address</a>
+              {% endif %}
             </div>
           </form>
         </div>
