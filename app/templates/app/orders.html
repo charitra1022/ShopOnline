@@ -22,7 +22,10 @@
                   <h6 class="fw-light">
                     <a href="{% url 'product-detail' order.product.id %}">{{order.product.title}}</a>
                   </h6>
-                  <span><span class="fw-bold">Quantity:</span> {{order.quantity}}</span><br>
+                  <span><span class="fw-bold">Quantity:</span> {{order.quantity}}
+                    (<span style="font-weight: bolder;">₹ {% widthratio order.product.discounted_price 1 order.quantity %}</span>)
+                  </span><br>
+
                   <span><span class="fw-bold">Order Date:</span> {{order.order.ordered_date}}</span><br>
                   <span><span class="fw-bold">Ordered By:</span> {{order.order.customer.name}}</span><br>
                   <span><span class="fw-bold">Status:</span> {{order.order.status}}</span><br>
