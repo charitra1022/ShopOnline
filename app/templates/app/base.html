@@ -198,7 +198,10 @@
                       <a class="dropdown-item" href="{% url 'changepassword' %}">Change Password</a>
                     </li> -->
                     <li>
-                      <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                      <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button style="font-size: smaller;" class="dropdown-item" type="submit">Log Out</button>
+                      </form>
                     </li>
                     
                   {% else %}
