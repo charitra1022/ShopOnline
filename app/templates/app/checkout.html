@@ -79,11 +79,11 @@
               </div>
             </div>
 
-          {% empty %}
-            <div>There are no Customer addresses added! Go to <strong>Profile</strong> and create a new address</div>
-          {% endfor %}
+            {% empty %}
+              <div>There are no Customer addresses added! Go to <strong>Profile</strong> and create a new address</div>
+            {% endfor %}
             
-          <div class="text-end my-4">
+            <div class="text-end my-4">
               {% if addresses %}
                 <button type="submit" class="btn btn-warning my-3 px-5 fw-bold">Checkout</button>
                 
