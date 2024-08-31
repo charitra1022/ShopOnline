@@ -95,6 +95,11 @@ Refer to [BUGS.md](/BUGS.md) for better view on Active Bugs
 
 _**Note: Stay away if you don't know what is happening!**_
 
+### Current admin details
+route: `/admin`
+username: `admin`
+password: `admin`
+
 ### Changed any field in Database?
 
 ```
