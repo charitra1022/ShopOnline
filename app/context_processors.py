@@ -4,7 +4,7 @@ def cart_count(request):
   from app.models import Cart
   try:
     counter = Cart.objects.filter(user=request.user).count()
-    print(counter)
+    print("Inside cart_count():", counter)
   except:
     counter = 0
   return {'cart_counter': counter}

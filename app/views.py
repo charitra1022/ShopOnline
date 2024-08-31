@@ -768,3 +768,16 @@ def search(request):
     products = list(set(list(chain(product_by_titles, product_by_brand))))
     return render(request, "app/search.html", {"products": products, "query": queryStr})
 
+
+
+@login_required
+def cancel_order(request, id):
+    """
+    :param id: id of the order to be cancelled
+
+    for cancelling an order
+    """
+    order = Order.objects.get(id=id)
+    order.status = "Cancel"
+    order.save()
+    return redirect("orders")

@@ -61,7 +61,22 @@
                       {% if order.order.status == 'Cancel' %}
                         <div style="width: 100%;" class="progress-bar bg-danger" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                       {% endif %}
-                    </div>
+                  </div>
+                  <div class="mt-2">
+                    {% if order.order.status != 'Delivered' and order.order.status != 'Cancel' %}
+                      
+
+
+                      <form
+                        onsubmit="return confirm('Do you really want to cancel order?\nThis action is irreversible!')"
+                        action="{% url 'cancel_order' id=order.order.id %}" 
+                        method="post"
+                      >
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger my-3 px-2 fw-bold">Cancel Order &nbsp; <i class="fas fa-times"></i></button>
+                      </form>
+                    {% endif %}
+                  </div>
                 </div>
 
                 <hr class="my-5">
