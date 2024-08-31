@@ -17,8 +17,7 @@ author = "ShopOnline"
 subject = "invoice/receipt"
 
 
-
-def createInvoice(client_details, txn_details, products):
+def createInvoice(client_details, txn_details, products, payment_mode):
     """
     :param client_details: Client details (name, email)
     :type client_details: list or tuple
@@ -33,8 +32,6 @@ def createInvoice(client_details, txn_details, products):
     # Customer details come here
     clientName = client_details[0]
     clientEmail = client_details[1]
-
-    gateway = "PayPal"
 
     # Transaction Details
     txnId = txn_details[0]
@@ -51,17 +48,18 @@ def createInvoice(client_details, txn_details, products):
         prodPrice = product[2]
 
         n = 30
-        chunks = '\n'.join([prodTitle[i:i+n] for i in range(0, len(prodTitle), n)])
+        chunks = '\n'.join([prodTitle[i:i+n]
+                           for i in range(0, len(prodTitle), n)])
         items.append(Item(chunks, prodTitle, prodQuan, prodPrice))
 
     pdfTitle = str(invoiceId)
     pdfInfo = PDFInfo(title=pdfTitle, author=author, subject=subject)
     doc = SimpleInvoice(f'media/invoice/{invoiceId}.pdf', pdf_info=pdfInfo)
-    
+
     # Paid stamp
     doc.is_paid = True
     doc.client_info = ClientInfo(
-        email=clientEmail, 
+        email=clientEmail,
         name=clientName,
     )
     doc.service_provider_info = ServiceProviderInfo(
@@ -75,12 +73,14 @@ def createInvoice(client_details, txn_details, products):
     [doc.add_item(i) for i in items]
 
     # Invoice info
-    doc.invoice_info = InvoiceInfo(invoiceId, txnDate, txnDate) 
+    doc.invoice_info = InvoiceInfo(invoiceId, txnDate, txnDate)
 
     # Tax rate
     doc.set_item_tax_rate(tax)
 
     # Transactions detail
-    doc.add_transaction(Transaction(gateway, txnId, txnDate, amountPaid))
-    doc.set_bottom_tip(f"Email: {providerEmail}<br />Contact us for any queries.")
+    doc.add_transaction(Transaction(
+        payment_mode.value, txnId, txnDate, amountPaid))
+    doc.set_bottom_tip(
+        f"Email: {providerEmail}<br />Contact us for any queries.")
     doc.finish()

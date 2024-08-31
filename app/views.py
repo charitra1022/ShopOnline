@@ -15,6 +15,7 @@ from django.core.mail import send_mail, BadHeaderError
 import os
 from itertools import chain
 from datetime import datetime
+from enum import Enum
 
 from .models import Cart, Customer, Product, Order, OrderDetail, CATEGORY_CHOICES
 from .forms import CustomerRegistrationForm, CustomerProfileForm, MyPasswordResetForm
@@ -23,6 +24,13 @@ from .custom_logger import logger
 from .invoice import createInvoice
 
 ########################### Helper Functions #######################
+
+class Payment_Modes(Enum):
+    """Define the various payment options we have"""
+    COD = "Cash on Delivery"
+    PAYPAL = "PayPal"
+    ONLINE = "Online"
+
 
 def generate_transaction_id(length=12):
     import random
@@ -518,7 +526,9 @@ def payment_done(request):
     customer = Customer.objects.get(id=custid)
     cart = Cart.objects.filter(user=user)
     # txn_id = request.GET.get('txn_id')      # get txn id from the PayPal txn
-    txn_id = generate_transaction_id()      # PayPal stopped working so use random string as txn id
+    # txn_id = generate_transaction_id()      # PayPal stopped working so use random string as txn id
+    txn_id = "-"                              # set to NULL as using Cash On Delivery
+    payment_mode = Payment_Modes.COD
 
     tax = 0
     amount = calculateAmounts(cart)
@@ -540,8 +550,8 @@ def payment_done(request):
         products = [
             (c.product.title, c.quantity, c.product.discounted_price),
         ]
-        
-        createInvoice(client_details=client_details, txn_details=txn_details, products=products)
+
+        createInvoice(client_details=client_details, txn_details=txn_details, products=products, payment_mode=payment_mode)
 
         # order = OrderPlaced(user=user, customer=customer,
         #             product=c.product, quantity=c.quantity, txn_id=txn_id)
@@ -628,7 +638,9 @@ def buy_now_payment_done(request):
     product_id = request.GET.get('prod_id')
     quantity = int(request.GET.get('prod_quant'))
     # txn_id = request.GET.get('txn_id')    # PayPal txn id
-    txn_id = generate_transaction_id()      # PayPal stopped working to use random txn id
+    # txn_id = generate_transaction_id()      # PayPal stopped working to use random txn id
+    txn_id = "-"                              # set to NULL as using Cash On Delivery
+    payment_mode = Payment_Modes.COD
 
     customer = Customer.objects.get(id=custid)
     product = Product.objects.get(id=product_id)
@@ -645,7 +657,7 @@ def buy_now_payment_done(request):
         (product.title, quantity, product.discounted_price),
     ]
 
-    createInvoice(client_details=client_details, txn_details=txn_details, products=products)
+    createInvoice(client_details=client_details, txn_details=txn_details, products=products, payment_mode=payment_mode)
 
 
     # order = OrderPlaced(user=user, customer=customer, product=product, quantity=quantity, txn_id=txn_id)
